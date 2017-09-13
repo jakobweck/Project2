@@ -4,11 +4,14 @@ import 'can-route-pushstate';
 
 const AppViewModel = DefineMap.extend({
   message: {
-    value: 'Hello World!',
+    value: 'Welcome to our easy event planner!',
     serialize: false
   },
+  Name () {
+    eventName = promt("Please enter the name of your event", "Event name...");
+  }
   title: {
-    value: 'plan-ez',
+    value: 'Plan-EZ',
     serialize: false
   }
 });
