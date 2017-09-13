@@ -15,6 +15,41 @@ const AppViewModel = DefineMap.extend({
     value: 'Plan-EZ',
     serialize: false
   }
+  
+class event(){
+  constructor(name, attendees, time, availability){
+    this.name = name;
+    this.attendees = attendees;
+    this.time = time;
+    this.availability = availability;
+  }
+  getName(){
+    return this.name;
+  }
+  getAttendees(){
+    return this.attendees;
+  }
+  getTime(){
+    return this.time;
+  }
+  getAvailability(){
+    return this.availability;
+  }
+  setName(){
+    name = Name();
+  }
+  setAttendees(){
+    attendees = Attendees();
+  }
+  setTime(){
+    time = Time();
+  }
+  setAvailability(){
+    availability = Availability();
+  }
+
+}
+
 });
 
 export default AppViewModel;
