@@ -9,6 +9,7 @@ const AppViewModel = DefineMap.extend({
   },
   Name () {
     eventName = promt("Please enter the name of your event", "Event name...");
+    return (eventName);
   }
   title: {
     value: 'Plan-EZ',
