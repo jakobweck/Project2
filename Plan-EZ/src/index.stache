@@ -7,7 +7,8 @@
     <can-import from="plan-ez/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
-    <button onclick="Name()">Let's get started</button>
+    <button ($click)="name">Let's get started</button>
+    <p>{{eventName}}</p>
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
