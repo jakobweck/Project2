@@ -22,6 +22,49 @@ const AppViewModel = DefineMap.extend({
       },
     });
 
+      var timeSet = (function() {
+
+        // private variables
+        var month, day, time;
+
+        // class "constructor"
+        function time(eventMonth,eventDay,eventTimes) {
+          month = eventMonth;
+          day = eventDay;
+          time = eventTimes;
+        };
+
+        // member methods
+        // TODO: match preference with setting function? not sure how the
+        //       UI handles the interaction
+        time.prototype.getMonth = function() {
+          return this.month;
+        };
+
+        time.prototype.setMonth = function(newMonth) {
+          this.month = newMonth;
+        };
+
+        time.prototype.getDay = function() {
+          return this.day;
+        };
+
+        time.prototype.setDay = function(newDay) {
+          this.day = newDay;
+        };
+
+        time.prototype.getTime = function() {
+          return this.time;
+        };
+
+        time.prototype.setTime = function(newTime) {
+          this.time = newTime;
+        };
+
+        return timeSet;
+
+      })();
+
       //Event Class Definition
       //TODO: UI for:
        //                     Name(), Time(), Availability()
