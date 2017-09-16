@@ -3,7 +3,6 @@ import route from 'can-route';
 import 'can-route-pushstate';
 import 'can-stache-bindings';
 
-var newName = "";
 const AppViewModel = DefineMap.extend({
       message: {
         value: 'Welcome to our easy event planner!',
