@@ -7,8 +7,25 @@
     <can-import from="plan-ez/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
-    <button ($click)="name">Let's get started</button>
-    <p>{{eventName}}</p>
+
+    <!-- Input fields to get variables from the user -->
+    <h3>Name</h3>
+    <input type="text" id="eventName" >
+    <h3>Month</h3>
+    <input type="text" id="eventMonth" >
+    <h3>Day</h3>
+    <input type="text" id="eventDay" >
+    <h3>Start time</h3>
+    <input type="text" id="eventStart" >
+    <h3>End time</h3>
+    <input type="text" id="eventEnd" >
+    <br>
+
+    <!-- sets the user inputs to global variables -->
+    <button ($click)="newEvent">Let's get started</button><br>
+
+    <!-- prints variables to the console to test if they were received as gloabl -->
+    <button ($click)="printItems">Print</button>
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
