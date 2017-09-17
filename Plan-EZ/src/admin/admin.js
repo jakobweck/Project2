@@ -21,12 +21,6 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
   }
-  event.prototype.getName = function(){
-    return this.eventName;
-  }
-  event.prototype.getTime = function(){
-    return this.eventTime;
-  };
 
 export const ViewModel = DefineMap.extend({
   page: 'adminList',
