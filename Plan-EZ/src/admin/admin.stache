@@ -113,7 +113,7 @@
   <div class="wrapper">
     <!-- sets the user inputs to global variables -->
     <!--<button ($click)="newEvent" disabled>Let's Get Started!</button><br>-->
-    <input id="eventButton" type="button" value="Let's Get Started" onclick="newEvent" disabled>
+    <input id="eventButton" type="button" value="Let's Get Started" ($click)="newEvent" disabled>
 
     <!-- checks if the current configs are valid
     TODO: make sure the name is not blank -->
