@@ -6,10 +6,10 @@ import view from './events.stache';
 
 
 export const ViewModel = DefineMap.extend({
-  page: 'Event List'
-  title: {
+  page: 'eventList',
+  message: {
     value: 'Event Page'
-  }
+  },
   name: {
     value: 'Event name here'
   },
@@ -22,7 +22,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-  tag: 'eventComponent',
+  tag: 'eventComponent-',
   ViewModel,
   view
 });
