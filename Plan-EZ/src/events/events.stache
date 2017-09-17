@@ -1,6 +1,3 @@
-<h3>{{message}}</h3>
-<p>
-  {{name}}
-  {{date}}
-  {{time}}
-</p>
+<can-import from="can-stache/helpers/route" />
+<h5><a href="{{routeUrl page='homepage'}}">Home</a></h5>
+<p>{{message}}</p>

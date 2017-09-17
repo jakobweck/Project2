@@ -11,12 +11,23 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-        <h1 class="page-header text-center">
-            <img src="https://i.pinimg.com/originals/8b/ff/29/8bff2927e739b011cbadafd217f2b3cc.jpg"
-                alt="logo" style="width: 50%;" />
-            <br>Plan-EZ
-          </h1>
+      {{#eq page 'Event Page'}}
+                  <can-import from="plan-ez/events/">
+                    {{#if isPending}}
+                      Loading...
+                    {{else}}
+                      <plan-ez-events/>
+                    {{/if}}
+                  </can-import>
+                {{else}}
+                  <can-import from="plan-ez/homepage.component">
+                    {{#if isPending}}
+                      Loading...
+                    {{else}}
+                      <plan-ez-homepage/>
+                    {{/if}}
+                  </can-import>
+                {{/eq}}
       </div>
     </div>
   </div>
