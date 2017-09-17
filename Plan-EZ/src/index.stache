@@ -40,21 +40,8 @@
     </div>
   </div>
 
-  <br>
-
-  <div class="container">
-    <div class="column">
-      <div class="col-sm-4 col-sm-offset-6">
-        <h3.b>Name</h3.b>
-        <input style="text-align:right" ; type="text" id="userName">
-        <h3.b>Times Available</h3.b>
-        <input style="text-align:right" ; type="text" id="userAvailability">
-      </div>
-    </div>
-  </div>
-
         <!-- sets the user inputs to global variables -->
-        <button ($click)="createEventObject">Let's Get Started!</button><br>
+        <button ($click)="newEvent">Let's Get Started!</button><br>
 
         <!-- prints variables to the console to test if they were received as gloabl -->
         <button ($click)="printItems">Print</button>

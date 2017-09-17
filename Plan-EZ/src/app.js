@@ -6,16 +6,11 @@ import 'can-stache-bindings';
 
 function event(name, month, day, timeStart, timeEnd) {
   //"private variables" for new event objects
-  //var eventName, m_eventAttendees, m_eventAvailability, m_eventTime;
-  // class "constructor"
-  debugger;
     const m_name = name;
     const m_month = month;
     const m_day = day;
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
-    // console.log(m_name);
-    console.log(m_name+m_month+m_day+m_timeStart+m_timeEnd);
   }
   event.prototype.getName = function(){
     return this.eventName;
@@ -46,11 +41,6 @@ const AppViewModel = DefineMap.extend({
         console.log(day);
         console.log(timeStart);
         console.log(timeEnd);
-      },
-      //Function for taking event data and creating a new event object with that data
-      createEventObject(){
-        //var myEvent = new event(name,(timeStart-timeEnd));
-        console.log("message");
       },
 
       title: {
@@ -100,24 +90,6 @@ const AppViewModel = DefineMap.extend({
             return timeSet;
 
           })();
-      // //Event Class Definition
-      // //TODO: UI for:
-      //  //                     Name(), Time(), Availability()
-      //  //
-      // class event {
-      //   //"private variables" for new event objects
-      //   //var eventName, m_eventAttendees, m_eventAvailability, m_eventTime;
-      //   // class "constructor"
-      //   constructor(newEventName,newEventTime) {
-      //     this.eventName = newEventName;
-      //     this.eventTime = newEventTime;
-      //   };
-      //   get name(){
-      //     return this.eventName;
-      //   }
-      //   get time(){
-      //     return this.eventTime;
-      //   }
-      // };
+      // TODO: UI for: Name(), Time(), Availability()
 
       export default AppViewModel;
