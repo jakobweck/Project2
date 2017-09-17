@@ -48,7 +48,8 @@
         <h3>Month</h3>
         <!-- creates month dropdown menu -->
           <select id="eventMonth" onchange="addDay('dayInput')">
-            <option value="jan" selected>January</option>
+            <option value="null" selected>Select Month</option>
+            <option value="jan">January</option>
             <option value="feb">February</option>
             <option value="mar">March</option>
             <option value="apr">April</option>
