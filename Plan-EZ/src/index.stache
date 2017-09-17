@@ -9,6 +9,15 @@
   <can-import from="plan-ez/app" export-as="viewModel" />
   <can-import from="bootstrap/less/bootstrap.less" />
 
+  <can-import from = "bit-tabs/unstyled"/>
+  <h1 class="page-header text-center">
+    <img src="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date//calendar1600.png"
+         alt="Calendar View" style="width: 25%;" />
+    <br>Plan-EZ
+  </h1>
+  <div class="container">
+    <h1 class="text-center">{{message}}</h1>
+  </div>
   <div class="container">
     <div class="row">
       {{#eq page 'adminList'}}
@@ -30,143 +39,6 @@
       {{/eq}}
       </div>
     </div>
-
-  <div class="container">
-    <h1 class="text-center">{{message}}</h1>
-  </div>
-
-<!-- two centered columns side by side -->
-  <div class="container">
-    <div class="row">
-      <!-- left column spacer -->
-      <div class="col-lg-3"></div>
-
-      <!-- left column info -->
-      <div class="col-lg-4">
-        <h3>Name</h3>
-        <input type="text" id="eventName">
-        <h3>Month</h3>
-        <!-- creates month dropdown menu -->
-          <select id="eventMonth" onchange="addDay('dayInput');check()">
-            <option value="null" selected></option>
-            <option value="jan">January</option>
-            <option value="feb">February</option>
-            <option value="mar">March</option>
-            <option value="apr">April</option>
-            <option value="may">May</option>
-            <option value="jun">June</option>
-            <option value="jul">July</option>
-            <option value="aug">August</option>
-            <option value="sep">September</option>
-            <option value="oct">October</option>
-            <option value="nov">November</option>
-            <option value="dec">December</option>
-          </select>
-        <h3>Day</h3>
-        <div id="dayInput"></div>
-          <select id="eventDay"></select>
-          <!-- script to dynamically alot the correct amount of days per month -->
-          <script>
-          var monthDict = {
-        	   "jan" : 31,
-             "feb" : 28,
-             "mar" : 31,
-             "apr" : 30,
-             "may" : 31,
-             "jun" : 30,
-             "jul" : 31,
-             "aug" : 31,
-             "sep" : 30,
-             "oct" : 31,
-             "nov" : 30,
-             "dec" : 31
-              };
-
-          // adds HTML based on month input
-          function addDay(divName) {
-            document.getElementById("eventDay").remove();
-            var newDiv = document.createElement('div');
-            var mon = document.getElementById("eventMonth").value;
-            var numDay = monthDict[mon];
-
-            var selectHTML="<select id='eventDay' onchange='check()'><option value='null' selected></option>";
-            for(i = 1; i <= numDay; i += 1) {
-                selectHTML += "<option value='" + i + "'>" + i + "</option>";
-            }
-            selectHTML += "</select><input ";
-            newDiv.innerHTML = selectHTML;
-            document.getElementById(divName).appendChild(newDiv);
-          }
-          </script>
-      </div>
-
-      <!-- right column info -->
-      <div class="col-lg-3">
-        <h3>Hour Scheme</h3>
-        <!-- TODO: update hour scheme ID name -->
-        <select id="eventHour" onchange="addStartTimes();check()">
-          <option value="null" selected></option>
-          <option value="24">24 Hour</option>
-          <option value="am">12 Hour, AM</option>
-          <option value="pm">12 Hour, PM</option>
-        </select>
-        <h3>Start time</h3>
-        <div id="startInput"></div>
-        <select id="eventStart"></select>
-        <script>
-          function addStartTimes() {
-            document.getElementById("eventStart").remove();
-
-            var newDiv = document.createElement('div');
-            var innerHtml = "<select id='eventStart' onchange='check()'><option value='null' selected></option>";
-            if (document.getElementById("eventHour").value != "24") {
-              for (i = 1; i <= 12; i += 1) {
-                innerHtml += "<option value='" + i + "'>" + i + "</option>";
-                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
-              }
-              innerHtml += "</select><input ";
-              newDiv.innerHTML = innerHtml;
-              document.getElementById("startInput").appendChild(newDiv);
-            }
-            else {
-              //stuff
-            }
-          }
-        </script>
-        <h3>End time</h3>
-        <input type="text" id="eventEnd">
-      </div>
-      <!-- right column spacer -->
-      <div class="col-lg-3"></div>
-    </div>
-  </div>
-
-  <div class="wrapper">
-    <!-- sets the user inputs to global variables -->
-    <!--<button ($click)="newEvent" disabled>Let's Get Started!</button><br>-->
-    <input id="eventButton" type="button" value="Let's Get Started" onclick="newEvent" disabled>
-
-    <!-- checks if the current configs are valid
-    TODO: make sure the name is not blank -->
-
-    <script>
-      function check() {
-        var one = document.getElementById("eventMonth").value != "null";
-        var two = document.getElementById("eventDay").value != "null";
-        var three = document.getElementById("eventHour").value != "null";
-        var four = document.getElementById("eventStart").value != "null";
-      if (one && two && three && four) {
-        document.getElementById("eventButton").disabled = false;
-        }
-      else {
-        document.getElementById("eventButton").disabled = true;
-        }
-      }
-      </script>
-
-    <!-- prints variables to the console to test if they were received as gloabl -->
-    <button ($click)="printItems">Print</button>
-  </div>
 
   {{#switch env.NODE_ENV}}
     {{#case "production"}}
