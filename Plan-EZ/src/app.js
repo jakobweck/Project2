@@ -8,8 +8,8 @@ function event(name, time) {
   //"private variables" for new event objects
   //var eventName, m_eventAttendees, m_eventAvailability, m_eventTime;
   // class "constructor"
-    this.name = name;
-    this.time = time;
+    this.name = m_name;
+    this.time = m_time;
   }
   event.prototype.getName = function(){
     return this.eventName;

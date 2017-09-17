@@ -1,39 +1,72 @@
 <html>
-  <head>
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <can-import from="plan-ez/styles.less" />
-    <can-import from="plan-ez/app" export-as="viewModel" />
 
-    <h1>{{message}}</h1>
+<head>
+  <title>{{title}}</title>
+</head>
 
-    <!-- Input fields to get variables from the user -->
-    <h3>Name</h3>
-    <input type="text" id="eventName" >
-    <h3>Month</h3>
-    <input type="text" id="eventMonth" >
-    <h3>Day</h3>
-    <input type="text" id="eventDay" >
-    <h3>Start time</h3>
-    <input type="text" id="eventStart" >
-    <h3>End time</h3>
-    <input type="text" id="eventEnd" >
-    <br>
+<body>
+  <can-import from="plan-ez/styles.less" />
+  <can-import from="plan-ez/app" export-as="viewModel" />
+  <can-import from="bootstrap/less/bootstrap.less" />
 
-    <!-- sets the user inputs to global variables -->
-    <button ($click)="createEventObject">Let's Get Started!</button><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h1 class="page-header text-center">
+            <img src="https://i.pinimg.com/originals/8b/ff/29/8bff2927e739b011cbadafd217f2b3cc.jpg"
+                alt="logo" style="width: 50%;" />
+            <br>Plan-EZ
+          </h1>
+      </div>
+    </div>
+  </div>
 
-    <!-- prints variables to the console to test if they were received as gloabl -->
-    <button ($click)="printItems">Print</button>
+  <div class="container">
+    <div class="column">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h1 class="text-center">{{message}}</h1>
+        <!-- Input fields to get variables from the user -->
+        <h3>Name</h3>
+        <input type="text" id="eventName">
+        <h3>Month</h3>
+        <input type="text" id="eventMonth">
+        <h3>Day</h3>
+        <input type="text" id="eventDay">
+        <h3>Start time</h3>
+        <input type="text" id="eventStart">
+        <h3>End time</h3>
+        <input type="text" id="eventEnd">
+      </div>
+    </div>
+  </div>
 
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="{{joinBase 'steal.production.js'}}"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
-  </body>
+  <br>
+
+  <div class="container">
+    <div class="column">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h3.b>Name</h3.b>
+        <input style="text-align:right" ; type="text" id="userName">
+        <h3.b>Times Available</h3.b>
+        <input style="text-align:right" ; type="text" id="userAvailability">
+      </div>
+    </div>
+  </div>
+
+        <!-- sets the user inputs to global variables -->
+        <button ($click)="createEventObject">Let's Get Started!</button><br>
+
+        <!-- prints variables to the console to test if they were received as gloabl -->
+        <button ($click)="printItems">Print</button>
+
+        {{#switch env.NODE_ENV}}
+          {{#case "production"}}
+            <script src="{{joinBase 'steal.production.js'}}"></script>
+          {{/case}}
+          {{#default}}
+            <script src="/node_modules/steal/steal.js"></script>
+          {{/default}}
+        {{/switch}}
+</body>
+
 </html>
