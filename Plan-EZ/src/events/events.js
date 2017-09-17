@@ -5,8 +5,17 @@ import view from './events.stache';
 
 export const ViewModel = DefineMap.extend({
   message: {
-    value: 'This is the eventComponent component'
+    value: 'Please select your availability for the event below:'
   }
+  name: {
+    value: 'Event name here'
+  },
+  date: {
+    value: 'Date here'
+  },
+  time: {
+    value: 'Time here'
+  },
 });
 
 export default Component.extend({

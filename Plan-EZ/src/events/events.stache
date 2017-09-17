@@ -1,1 +1,6 @@
-<p>{{message}}</p>
+<h3>{{message}}</h3>
+<p>
+  {{name}}
+  {{date}}
+  {{time}}
+</p>
