@@ -24,7 +24,7 @@ bit-panel p {
           </bit-panel>
         </bit-tabs>
 
-    <a href="{{routeUrl page='eventList' }}"
+    <a href="{{routeUrl page='adminList' }}"
        class="btn btn-primary btn-block btn-lg">
       View Events
     </a>

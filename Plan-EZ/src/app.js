@@ -93,5 +93,5 @@ const AppViewModel = DefineMap.extend({
           })();
       // TODO: UI for: Name(), Time(), Availability()
 
-      route('/{page}', { page: 'homepage-' });
+      route('/{page}', { page: 'adminList-' });
       export default AppViewModel;
