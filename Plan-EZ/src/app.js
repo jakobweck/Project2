@@ -3,7 +3,6 @@ import route from 'can-route';
 import 'can-route-pushstate';
 import 'can-stache-bindings';
 
-
 const AppViewModel = DefineMap.extend({
       page: 'Event List',
       message: {

@@ -51,7 +51,12 @@
              "dec" : 31
               };
 
-          // adds HTML based on month input
+          /**
+          * Adds HTML based on month input
+          * @method addDay
+          * @param {} divName
+          * @return
+          */
           function addDay(divName) {
             document.getElementById("eventDay").remove();
             var newDiv = document.createElement('div');
@@ -83,6 +88,11 @@
         <div id="startInput"></div>
         <select id="eventStart"></select>
         <script>
+        /**
+         * Fills in time based off user input
+         * @method addStartTimes
+         * @return
+         */
           function addStartTimes() {
             document.getElementById("eventStart").remove();
 
@@ -115,10 +125,13 @@
     <!--<button ($click)="newEvent" disabled>Let's Get Started!</button><br>-->
     <input id="eventButton" type="button" value="Let's Get Started" ($click)="newEvent" disabled>
 
-    <!-- checks if the current configs are valid
-    TODO: make sure the name is not blank -->
-
+    <!-- TODO: make sure the name is not blank -->
     <script>
+      /**
+      * Checks if the current configs are valid
+      * @method check
+      * @return
+      */
       function check() {
         var one = document.getElementById("eventMonth").value != "null";
         var two = document.getElementById("eventDay").value != "null";
