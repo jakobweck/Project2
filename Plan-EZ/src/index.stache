@@ -12,30 +12,37 @@
   <div class="container">
     <div class="row">
       {{#eq page 'Event Page'}}
-                  <can-import from="plan-ez/events/">
-                    {{#if isPending}}
-                      Loading...
-                    {{else}}
-                      <eventComponent/>
-                    {{/if}}
-                  </can-import>
-                {{else}}
-                  <can-import from="plan-ez/homepage.component">
-                    {{#if isPending}}
-                      Loading...
-                    {{else}}
-                      <homepage-/>
-                    {{/if}}
-                  </can-import>
-                {{/eq}}
+        <can-import from="plan-ez/events/">
+          {{#if isPending}}
+            Loading...
+          {{else}}
+            <eventComponent/>
+          {{/if}}
+        </can-import>
+      {{else}}
+        <can-import from="plan-ez/homepage.component">
+          {{#if isPending}}
+            Loading...
+          {{else}}
+            <homepage-/>
+          {{/if}}
+        </can-import>
+      {{/eq}}
       </div>
     </div>
 
   <div class="container">
-    <div class="column">
-      <div class="col-sm-4 col-sm-offset-1">
-        <h1 class="text-center">{{message}}</h1>
-        <!-- Input fields to get variables from the user -->
+    <h1 class="text-center">{{message}}</h1>
+  </div>
+
+<!-- two centered columns side by side -->
+  <div class="container">
+    <div class="row">
+      <!-- left column spacer -->
+      <div class="col-lg-3"></div>
+
+      <!-- left column info -->
+      <div class="col-lg-4">
         <h3>Name</h3>
         <input type="text" id="eventName">
         <h3>Month</h3>
@@ -91,7 +98,10 @@
             document.getElementById(divName).appendChild(newDiv);
         }
         </script>
+      </div>
 
+      <!-- right column info -->
+      <div class="col-lg-3">
         <h3>Hour Scheme</h3>
         <!-- TODO: update hour scheme ID name -->
         <select id="eventHours?">
@@ -104,23 +114,27 @@
         <h3>End time</h3>
         <input type="text" id="eventEnd">
       </div>
+      <!-- right column spacer -->
+      <div class="col-lg-3"></div>
     </div>
   </div>
 
-        <!-- sets the user inputs to global variables -->
-        <button ($click)="newEvent">Let's Get Started!</button><br>
+  <div class="wrapper">
+    <!-- sets the user inputs to global variables -->
+    <button ($click)="newEvent">Let's Get Started!</button><br>
 
-        <!-- prints variables to the console to test if they were received as gloabl -->
-        <button ($click)="printItems">Print</button>
+    <!-- prints variables to the console to test if they were received as gloabl -->
+    <button ($click)="printItems">Print</button>
+  </div>
 
-        {{#switch env.NODE_ENV}}
-          {{#case "production"}}
-            <script src="{{joinBase 'steal.production.js'}}"></script>
-          {{/case}}
-          {{#default}}
-            <script src="/node_modules/steal/steal.js"></script>
-          {{/default}}
-        {{/switch}}
+  {{#switch env.NODE_ENV}}
+    {{#case "production"}}
+      <script src="{{joinBase 'steal.production.js'}}"></script>
+    {{/case}}
+    {{#default}}
+      <script src="/node_modules/steal/steal.js"></script>
+    {{/default}}
+  {{/switch}}
 </body>
 
 </html>
