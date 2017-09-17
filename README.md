@@ -10,6 +10,7 @@ You'll then need to `cd` into `Plan-EZ` directory. Once in the directory, you'll
 `npm install`
 
 This might take awhile so be patient.
+
 In order to run the project, you'll need to run this while in the `Plan-EZ` directory:
 
 `donejs develop`
