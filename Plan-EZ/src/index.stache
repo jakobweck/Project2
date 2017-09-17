@@ -105,7 +105,7 @@
       <div class="col-lg-3">
         <h3>Hour Scheme</h3>
         <!-- TODO: update hour scheme ID name -->
-        <select id="eventHour" onchange="check()">
+        <select id="eventHour" onchange="addStartTimes();check()">
           <option value="null" selected></option>
           <option value="24">24 Hour</option>
           <option value="am">12 Hour, AM</option>
@@ -114,17 +114,23 @@
         <h3>Start time</h3>
         <select id="eventStart"></select>
         <script>
-          var newDiv = document.createElement('div');
-          var innerHtml = "<select id='eventStart'>";
-          if (document.getElementById("eventHour").value != "24") {
-            for (i = 1; i <= 12; i += 1) {
-              innerHtml += "<option value='" + i + "'>" + i + "</option>";
-              innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+          function addStartTimes() {
+            //document.getElementById("eventStart").remove();
+
+            var newDiv = document.createElement('div');
+            var innerHtml = "<select id='eventStart' onchange='check()'><option value='null' selected></option>";
+            if (document.getElementById("eventHour").value != "24") {
+              for (i = 1; i <= 12; i += 1) {
+                innerHtml += "<option value='" + i + "'>" + i + "</option>";
+                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+              }
+              innerHtml += "</select><input ";
+              newDiv.innerHTML = innerHtml;
+              document.getElementById("eventStart").appendChild(newDiv);
             }
-            innerHtml += "</select>";
-          }
-          else {
-            //stuff
+            else {
+              //stuff
+            }
           }
         </script>
         <h3>End time</h3>
@@ -148,7 +154,8 @@
         var one = document.getElementById("eventMonth").value != "null";
         var two = document.getElementById("eventDay").value != "null";
         var three = document.getElementById("eventHour").value != "null";
-      if (one && two && three) {
+        var four = document.getElementById("eventStart").value != "null";
+      if (one && two && three && four) {
         document.getElementById("eventButton").disabled = false;
         }
       else {
@@ -156,7 +163,7 @@
         }
       }
       </script>
-      
+
     <!-- prints variables to the console to test if they were received as gloabl -->
     <button ($click)="printItems">Print</button>
   </div>
