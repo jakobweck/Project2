@@ -1,0 +1,31 @@
+<can-component tag="homepage">
+  <style type="less">
+    display: block;
+
+    h1.page-header{ margin-top: 0;}
+  </style>
+  <view>
+    <can-import from="can-stache/helpers/route" />
+    <h1 class="page-header text-center">
+      <img src="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date//calendar1600.png"
+           alt="Calendar View" style="width: 25%;" />
+      <br>Plan-EZ
+    </h1>
+
+    <a href="{{routeUrl page='Event List' }}"
+       class="btn btn-primary btn-block btn-lg">
+      View Events
+    </a>
+
+    <p>{{message}}</p>
+  </view>
+  <!-- <script type="view-model">
+    import DefineMap from 'can-define/map/';
+
+    export default DefineMap.extend({
+      message: {
+        value: 'This is the event component'
+      }
+    });
+  </script> -->
+</can-component>

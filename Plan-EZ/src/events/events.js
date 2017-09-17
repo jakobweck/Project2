@@ -3,9 +3,12 @@ import DefineMap from 'can-define/map/';
 import './events.less';
 import view from './events.stache';
 
+
+
 export const ViewModel = DefineMap.extend({
-  message: {
-    value: 'Please select your availability for the event below:'
+  page: 'Event List'
+  title: {
+    value: 'Event Page'
   }
   name: {
     value: 'Event name here'
