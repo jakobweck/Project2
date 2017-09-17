@@ -58,46 +58,47 @@
 
         <h3>Day</h3>
         <div id="dayInput"></div>
-        <div id="eventDay"></div>
-        <!-- script to dynamically alot the correct amount of days per month -->
-        <script>
-        var monthDict = {
-      	   "jan" : 31,
-           "feb" : 28,
-           "mar" : 31,
-           "apr" : 30,
-           "may" : 31,
-           "jun" : 30,
-           "jul" : 31,
-           "aug" : 31,
-           "sep" : 30,
-           "oct" : 31,
-           "nov" : 30,
-           "dec" : 31
-            };
+          <select id="eventDay"></select>
+          <!-- script to dynamically alot the correct amount of days per month -->
+          <script>
+          var monthDict = {
+        	   "jan" : 31,
+             "feb" : 28,
+             "mar" : 31,
+             "apr" : 30,
+             "may" : 31,
+             "jun" : 30,
+             "jul" : 31,
+             "aug" : 31,
+             "sep" : 30,
+             "oct" : 31,
+             "nov" : 30,
+             "dec" : 31
+              };
 
-        // adds HTML based on month input
-        function addDay(divName) {
-            var newDiv = document.createElement('div');
-            var mon = document.getElementById("eventMonth").value;
-            var numDay = monthDict[mon];
+          // adds HTML based on month input
+          function addDay(divName) {
+              document.getElementById("eventDay").remove();
+              var newDiv = document.createElement('div');
+              var mon = document.getElementById("eventMonth").value;
+              var numDay = monthDict[mon];
 
-            var selectHTML="<select id='eventDay'>";
-            for(i = 1; i <= numDay; i = i + 1) {
-                selectHTML += "<option value='" + i + "'>" + i + "</option>";
-            }
-            selectHTML += "</select><input ";
-            newDiv.innerHTML = selectHTML;
-            document.getElementById(divName).appendChild(newDiv);
-        }
-        </script>
+              var selectHTML="<select id='eventDay'>";
+              for(i = 1; i <= numDay; i = i + 1) {
+                  selectHTML += "<option value='" + i + "'>" + i + "</option>";
+              }
+              selectHTML += "</select><input ";
+              newDiv.innerHTML = selectHTML;
+              document.getElementById(divName).appendChild(newDiv);
+          }
+          </script>
 
         <h3>Hour Scheme</h3>
         <!-- TODO: update hour scheme ID name -->
         <select id="eventHours?">
           <option value="24" selected>24 Hour</option>
-          <option value="am" selected>12 Hour, AM</option>
-          <option value="pm" selected>12 Hour, PM</option>
+          <option value="am">12 Hour, AM</option>
+          <option value="pm">12 Hour, PM</option>
         </select>
         <h3>Start time</h3>
         <input type="text" id="eventStart">
