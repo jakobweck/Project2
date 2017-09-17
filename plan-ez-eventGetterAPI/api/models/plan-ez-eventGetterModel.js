@@ -17,11 +17,11 @@ var eventSchema = new Schema({
     type: String,
     required: 'Enter Day'
   },
-  startTime{
+  startTime: {
     type: Date,
     required: 'Enter Start Time'
   },
-  endTime{
+  endTime: {
     type: Date,
     required: 'Enter End Time'
   },

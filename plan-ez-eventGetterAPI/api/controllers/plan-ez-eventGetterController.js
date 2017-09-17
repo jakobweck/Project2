@@ -1,56 +1,63 @@
+///This is the Controller File for the API
+//This is where you can define new methods for the API
+
 'use strict';
-
-
 var mongoose = require('mongoose'),
-  Task = mongoose.model('Tasks');
+  event = mongoose.model('Events');
 
-exports.list_all_tasks = function(req, res) {
-  Task.find({}, function(err, task) {
+exports.list_all_events = function(req, res) {
+  Event.find({}, function(err, Event) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(Event);
   });
 };
 
 
 
 
-exports.create_a_task = function(req, res) {
-  var new_task = new Task(req.body);
-  new_task.save(function(err, task) {
+exports.create_a_event = function(req, res) {
+  var new_Event = new Event(req.body);
+  new_Event.save(function(err, Event) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(Event);
   });
 };
 
 
-exports.read_a_task = function(req, res) {
-  Task.findById(req.params.taskId, function(err, task) {
+exports.read_an_event = function(req, res) {
+  Event.findById(req.params.EventId, function(err, Event) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(Event);
   });
 };
 
 
-exports.update_a_task = function(req, res) {
-  Task.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
+exports.update_event_availability = function(req, res) {
+  Event.findOneAndUpdate({
+    _id: req.params.EventId
+  }, req.body, {
+    new: true
+  }, function(err, Event) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(Event);
   });
 };
 
 
-exports.delete_a_task = function(req, res) {
+exports.delete_an_event = function(req, res) {
 
 
-  Task.remove({
-    _id: req.params.taskId
-  }, function(err, task) {
+  Event.remove({
+    _id: req.params.EventId
+  }, function(err, Event) {
     if (err)
       res.send(err);
-    res.json({ message: 'Task successfully deleted' });
+    res.json({
+      message: 'Event successfully deleted'
+    });
   });
 };
