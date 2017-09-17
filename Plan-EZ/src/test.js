@@ -5,6 +5,8 @@ import 'plan-ez/models/test';
 
 import 'plan-ez/events/events-test';
 
+import 'plan-ez/admin/admin-test';
+
 F.attach(QUnit);
 
 QUnit.module('plan-ez functional smoke test', {
