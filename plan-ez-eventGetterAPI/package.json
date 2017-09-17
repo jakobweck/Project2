@@ -1,0 +1,27 @@
+{
+  "name": "plan-ez-eventgetterapi",
+  "version": "1.0.0",
+  "description": "RESTFUL Api for saving and accessing events in plan-ez",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThoseMeddlingKids/Project1.git"
+  },
+  "author": "patrick canny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThoseMeddlingKids/Project1/issues"
+  },
+  "homepage": "https://github.com/ThoseMeddlingKids/Project1#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongoose": "^4.11.11"
+  }
+}
