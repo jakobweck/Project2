@@ -47,7 +47,7 @@
         <input type="text" id="eventName">
         <h3>Month</h3>
         <!-- creates month dropdown menu -->
-          <select id="eventMonth">
+          <select id="eventMonth" onchange="addDay('dayInput')">
             <option value="jan" selected>January</option>
             <option value="feb">February</option>
             <option value="mar">March</option>
@@ -61,7 +61,6 @@
             <option value="nov">November</option>
             <option value="dec">December</option>
           </select>
-          <input type="button" value="Submit" onclick="addDay('dayInput');" />
 
         <h3>Day</h3>
         <div id="dayInput"></div>
@@ -105,13 +104,20 @@
       <div class="col-lg-3">
         <h3>Hour Scheme</h3>
         <!-- TODO: update hour scheme ID name -->
-        <select id="eventHours?">
+        <select id="eventHours">
           <option value="24" selected>24 Hour</option>
           <option value="am">12 Hour, AM</option>
           <option value="pm">12 Hour, PM</option>
         </select>
         <h3>Start time</h3>
-        <input type="text" id="eventStart">
+        <select id="eventStart"></select>
+        <script>
+          var newDiv = document.createElement('div');
+          newDiv += "<select id='eventStart'>"
+          if (document.getElementById("eventHours").value != "24") {
+
+          }
+        </script>
         <h3>End time</h3>
         <input type="text" id="eventEnd">
       </div>
