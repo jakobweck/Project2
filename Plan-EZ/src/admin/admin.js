@@ -4,8 +4,17 @@ import './admin.less';
 import view from './admin.stache';
 import 'can-stache-bindings';
 
+/**
+ * Sets "private variables" for new event objects
+ * @method event
+ * @param {} name
+ * @param {} month
+ * @param {} day
+ * @param {} timeStart
+ * @param {} timeEnd
+ * @return
+ */
 function event(name, month, day, timeStart, timeEnd) {
-  //"private variables" for new event objects
     const m_name = name;
     const m_month = month;
     const m_day = day;
@@ -25,7 +34,11 @@ export const ViewModel = DefineMap.extend({
     value: 'This is the admin component'
   },
 
-  // initializing variables as global variables
+/**
+ * Initializing variables as global variables
+ * @method newEvent
+ * @return
+ */
   newEvent() {
     window.name = document.getElementById("eventName").value;
     window.month = document.getElementById("eventMonth").value;
@@ -35,7 +48,11 @@ export const ViewModel = DefineMap.extend({
 
     event(name, month, day, timeStart, timeEnd);
   },
-  // test function for global variables
+/**
+ * test function for global variables
+ * @method printItems
+ * @return
+ */
   printItems () {
     console.log(name);
     console.log(month);

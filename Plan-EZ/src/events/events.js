@@ -3,8 +3,6 @@ import DefineMap from 'can-define/map/';
 import './events.less';
 import view from './events.stache';
 
-
-
 export const ViewModel = DefineMap.extend({
   page: 'eventList',
   message: {

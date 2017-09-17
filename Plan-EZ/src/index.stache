@@ -1,53 +1,48 @@
 <html>
-
-<head>
+  <head>
   <title>{{title}}</title>
-</head>
-
-<body>
-  <can-import from="plan-ez/styles.less" />
-  <can-import from="plan-ez/app" export-as="viewModel" />
-  <can-import from="bootstrap/less/bootstrap.less" />
-
-  <can-import from = "bit-tabs/unstyled"/>
-  <h1 class="page-header text-center">
-    <img src="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date//calendar1600.png"
-         alt="Calendar View" style="width: 25%;" />
-    <br>Plan-EZ
-  </h1>
-  <div class="container">
-    <h1 class="text-center">{{message}}</h1>
-  </div>
-  <div class="container">
-    <div class="row">
-      {{#eq page 'adminList'}}
-        <can-import from="plan-ez/admin/">
-          {{#if isPending}}
-            Loading...
-          {{else}}
-            <adminComponent-/>
-          {{/if}}
-        </can-import>
-      {{else}}
-        <can-import from="plan-ez/events/">
-          {{#if isPending}}
-            Loading...
-          {{else}}
-            <eventComponent-/>
-          {{/if}}
-        </can-import>
-      {{/eq}}
-      </div>
+  </head>
+  <body>
+    <can-import from="plan-ez/styles.less" />
+    <can-import from="plan-ez/app" export-as="viewModel" />
+    <can-import from="bootstrap/less/bootstrap.less" />
+    <can-import from = "bit-tabs/unstyled"/>
+    <h1 class="page-header text-center">
+      <img src="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date//calendar1600.png"
+           alt="Calendar View" style="width: 25%;" />
+      <br>Plan-EZ
+    </h1>
+    <div class="container">
+      <h1 class="text-center">{{message}}</h1>
     </div>
-
-  {{#switch env.NODE_ENV}}
-    {{#case "production"}}
-      <script src="{{joinBase 'steal.production.js'}}"></script>
-    {{/case}}
-    {{#default}}
-      <script src="/node_modules/steal/steal.js"></script>
-    {{/default}}
-  {{/switch}}
-</body>
-
+    <div class="container">
+      <div class="row">
+        {{#eq page 'adminList'}}
+          <can-import from="plan-ez/admin/">
+            {{#if isPending}}
+              Loading...
+            {{else}}
+              <adminComponent-/>
+            {{/if}}
+          </can-import>
+        {{else}}
+          <can-import from="plan-ez/events/">
+            {{#if isPending}}
+              Loading...
+            {{else}}
+              <eventComponent-/>
+            {{/if}}
+          </can-import>
+        {{/eq}}
+        </div>
+      </div>
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase 'steal.production.js'}}"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
 </html>
