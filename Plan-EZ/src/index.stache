@@ -11,12 +11,12 @@
 
   <div class="container">
     <div class="row">
-      {{#eq page 'Event Page'}}
+      {{#eq page 'eventList'}}
         <can-import from="plan-ez/events/">
           {{#if isPending}}
             Loading...
           {{else}}
-            <eventComponent/>
+            <eventComponent-/>
           {{/if}}
         </can-import>
       {{else}}

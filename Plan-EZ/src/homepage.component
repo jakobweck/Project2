@@ -23,8 +23,8 @@ bit-panel p {
             <p>Users Can Input their Availability and See Created Events</p>
           </bit-panel>
         </bit-tabs>
-        
-    <a href="{{routeUrl page='Event List' }}"
+
+    <a href="{{routeUrl page='eventList' }}"
        class="btn btn-primary btn-block btn-lg">
       View Events
     </a>
