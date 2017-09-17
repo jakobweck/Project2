@@ -47,7 +47,7 @@
         <input type="text" id="eventName">
         <h3>Month</h3>
         <!-- creates month dropdown menu -->
-          <select id="eventMonth" onchange="addDay('dayInput')">
+          <select id="eventMonth" onchange="addDay('dayInput');check()">
             <option value="null" selected></option>
             <option value="jan">January</option>
             <option value="feb">February</option>
@@ -85,27 +85,27 @@
 
           // adds HTML based on month input
           function addDay(divName) {
-              document.getElementById("eventDay").remove();
-              var newDiv = document.createElement('div');
-              var mon = document.getElementById("eventMonth").value;
-              var numDay = monthDict[mon];
+            document.getElementById("eventDay").remove();
+            var newDiv = document.createElement('div');
+            var mon = document.getElementById("eventMonth").value;
+            var numDay = monthDict[mon];
 
-            var selectHTML="<select id='eventDay'><option value='null' selected></option>";
+            var selectHTML="<select id='eventDay' onchange='check()'><option value='null' selected></option>";
             for(i = 1; i <= numDay; i += 1) {
                 selectHTML += "<option value='" + i + "'>" + i + "</option>";
             }
             selectHTML += "</select><input ";
             newDiv.innerHTML = selectHTML;
             document.getElementById(divName).appendChild(newDiv);
-        }
-        </script>
+          }
+          </script>
       </div>
 
       <!-- right column info -->
       <div class="col-lg-3">
         <h3>Hour Scheme</h3>
         <!-- TODO: update hour scheme ID name -->
-        <select id="eventHours">
+        <select id="eventHour" onchange="check()">
           <option value="null" selected></option>
           <option value="24">24 Hour</option>
           <option value="am">12 Hour, AM</option>
@@ -116,7 +116,7 @@
         <script>
           var newDiv = document.createElement('div');
           var innerHtml = "<select id='eventStart'>";
-          if (document.getElementById("eventHours").value != "24") {
+          if (document.getElementById("eventHour").value != "24") {
             for (i = 1; i <= 12; i += 1) {
               innerHtml += "<option value='" + i + "'>" + i + "</option>";
               innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
@@ -137,8 +137,26 @@
 
   <div class="wrapper">
     <!-- sets the user inputs to global variables -->
-    <button ($click)="newEvent;check()" disabled>Let's Get Started!</button><br>
-    <script
+    <button ($click)="newEvent" disabled>Let's Get Started!</button><br>
+    <input type="button" value="Let's Get Started" onclick"newEvent" disabled>
+
+    <!-- checks if the current configs are valid
+    TODO: make sure the name is not blank -->
+
+    <script>
+      function check() {
+        var one = document.getElementById("eventMonth").value != "null";
+        var two = document.getElementById("eventDay").value != "null";
+        var three = document.getElementById("eventHour").value != "null";
+      if (one && two && three) {
+        document.getElementById("eventButton").disabled = false;
+        }
+      else {
+        document.getElementById("eventButton").disabled = true;
+        }
+      }
+      </script>
+      
     <!-- prints variables to the console to test if they were received as gloabl -->
     <button ($click)="printItems">Print</button>
   </div>
