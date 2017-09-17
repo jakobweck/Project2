@@ -23,7 +23,7 @@
 
   <div class="container">
     <div class="column">
-      <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-sm-4 col-sm-offset-1">
         <h1 class="text-center">{{message}}</h1>
         <!-- Input fields to get variables from the user -->
         <h3>Name</h3>
@@ -44,7 +44,7 @@
 
   <div class="container">
     <div class="column">
-      <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-sm-4 col-sm-offset-6">
         <h3.b>Name</h3.b>
         <input style="text-align:right" ; type="text" id="userName">
         <h3.b>Times Available</h3.b>
