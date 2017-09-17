@@ -55,8 +55,10 @@
             <option value="dec">December</option>
           </select>
           <input type="button" value="Submit" onclick="addDay('dayInput');" />
-        <div id="dayInput"></div>
 
+        <h3>Day</h3>
+        <div id="dayInput"></div>
+        <div id="eventDay"></div>
         <!-- script to dynamically alot the correct amount of days per month -->
         <script>
         var monthDict = {
@@ -80,7 +82,7 @@
             var mon = document.getElementById("eventMonth").value;
             var numDay = monthDict[mon];
 
-            var selectHTML="<h3>Day</h3><select>";
+            var selectHTML="<select id='eventDay'>";
             for(i = 1; i <= numDay; i = i + 1) {
                 selectHTML += "<option value='" + i + "'>" + i + "</option>";
             }
@@ -90,6 +92,13 @@
         }
         </script>
 
+        <h3>Hour Scheme</h3>
+        <!-- TODO: update hour scheme ID name -->
+        <select id="eventHours?">
+          <option value="24" selected>24 Hour</option>
+          <option value="am" selected>12 Hour, AM</option>
+          <option value="pm" selected>12 Hour, PM</option>
+        </select>
         <h3>Start time</h3>
         <input type="text" id="eventStart">
         <h3>End time</h3>
