@@ -62,7 +62,6 @@
             <option value="nov">November</option>
             <option value="dec">December</option>
           </select>
-          <script>addDay("dayInput")</script>
         <h3>Day</h3>
         <div id="dayInput"></div>
           <select id="eventDay"></select>
@@ -112,10 +111,11 @@
           <option value="pm">12 Hour, PM</option>
         </select>
         <h3>Start time</h3>
+        <div id="startInput"></div>
         <select id="eventStart"></select>
         <script>
           function addStartTimes() {
-            //document.getElementById("eventStart").remove();
+            document.getElementById("eventStart").remove();
 
             var newDiv = document.createElement('div');
             var innerHtml = "<select id='eventStart' onchange='check()'><option value='null' selected></option>";
@@ -126,7 +126,7 @@
               }
               innerHtml += "</select><input ";
               newDiv.innerHTML = innerHtml;
-              document.getElementById("eventStart").appendChild(newDiv);
+              document.getElementById("startInput").appendChild(newDiv);
             }
             else {
               //stuff
@@ -143,8 +143,8 @@
 
   <div class="wrapper">
     <!-- sets the user inputs to global variables -->
-    <button ($click)="newEvent" disabled>Let's Get Started!</button><br>
-    <input type="button" value="Let's Get Started" onclick"newEvent" disabled>
+    <!--<button ($click)="newEvent" disabled>Let's Get Started!</button><br>-->
+    <input id="eventButton" type="button" value="Let's Get Started" onclick="newEvent" disabled>
 
     <!-- checks if the current configs are valid
     TODO: make sure the name is not blank -->
