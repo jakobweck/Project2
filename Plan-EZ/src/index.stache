@@ -8,22 +8,26 @@
   <can-import from="plan-ez/styles.less" />
   <can-import from="plan-ez/app" export-as="viewModel" />
   <can-import from="bootstrap/less/bootstrap.less" />
-  <can-import from = "plan-ez/loading.component"/>
 
   <div class="container">
     <div class="row">
-      {{# switch page }}
-        {{#case "Event List"}}
-        <can-import from="plan-ez/events/" can-tag="plan-ez-loader">
+      {{#eq page 'Event Page'}}
+        <can-import from="plan-ez/events/">
+          {{#if isPending}}
+            Loading...
+          {{else}}
             <eventComponent/>
+          {{/if}}
         </can-import>
-        {{/case}}
-        {{#case "homepage"}}
-        <can-import from="plan-ez/homepage.component" can-tag="plan-ez-loader">
-            <homepage/>
+      {{else}}
+        <can-import from="plan-ez/homepage.component">
+          {{#if isPending}}
+            Loading...
+          {{else}}
+            <homepage-/>
+          {{/if}}
         </can-import>
-        {{/case}}
-      {{/switch}}
+      {{/eq}}
       </div>
     </div>
 

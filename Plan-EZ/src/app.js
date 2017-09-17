@@ -20,7 +20,7 @@ function event(name, month, day, timeStart, timeEnd) {
   };
 
 const AppViewModel = DefineMap.extend({
-      page: 'string',
+      page: 'Event List',
       message: {
         value: 'Welcome to our easy event planner!',
         serialize: false
