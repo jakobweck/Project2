@@ -24,13 +24,12 @@
                     {{#if isPending}}
                       Loading...
                     {{else}}
-                      <homepage/>
+                      <homepage-/>
                     {{/if}}
                   </can-import>
                 {{/eq}}
       </div>
     </div>
-  </div>
 
   <!-- Drop down menu - Months -->
 

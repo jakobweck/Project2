@@ -1,4 +1,4 @@
-<can-component tag="homepage">
+<can-component tag="homepage-">
   <style type="less">
     display: block;
 
@@ -19,4 +19,5 @@
 
     <p>{{message}}</p>
   </view>
+
 </can-component>
