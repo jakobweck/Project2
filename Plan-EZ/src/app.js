@@ -3,6 +3,21 @@ import route from 'can-route';
 import 'can-route-pushstate';
 import 'can-stache-bindings';
 
+
+function event(name, time) {
+  //"private variables" for new event objects
+  //var eventName, m_eventAttendees, m_eventAvailability, m_eventTime;
+  // class "constructor"
+    this.name = name;
+    this.time = time;
+  }
+  event.prototype.getName = function(){
+    return this.eventName;
+  }
+  event.prototype.getTime = function(){
+    return this.eventTime;
+  };
+
 const AppViewModel = DefineMap.extend({
       message: {
         value: 'Welcome to our easy event planner!',
@@ -24,6 +39,12 @@ const AppViewModel = DefineMap.extend({
         console.log(timeStart);
         console.log(timeEnd);
       },
+      //Function for taking event data and creating a new event object with that data
+      createEventObject(){
+        //var myEvent = new event(name,(timeStart-timeEnd));
+        console.log("message");
+      },
+
       title: {
         value: 'Plan-EZ',
         serialize: false
@@ -71,52 +92,24 @@ const AppViewModel = DefineMap.extend({
             return timeSet;
 
           })();
-      //Event Class Definition
-      //TODO: UI for:
-       //                     Name(), Time(), Availability()
-       //
-      var event = (function() {
-        //"private variables" for new event objects
-        var eventName, eventAttendees, eventAvailability, eventTime;
-
-        // class "constructor"
-        function event(newEventName) {
-          eventName = newEventName;
-        };
-
-        //adding methods to prototype so all event instances access
-        //private methods
-        event.prototype.getName = function() {
-          return this.eventName;
-        };
-        event.prototype.getAttendees = function() {
-          return this.eventAttendees;
-        };
-
-        event.prototype.getTime = function() {
-          return this.eventTime;
-        };
-
-        event.prototype.getAvailability = function() {
-          return this.eventAvailability;
-        };
-
-        event.prototype.setName = function() {
-          this.eventName = name();
-        };
-
-        event.prototype.setAttendees = function() {
-          this.eventAttendees = Attendees();
-        };
-
-        event.prototype.setTime = function() {
-          this.eventTime = Time();
-        };
-
-        event.prototype.setAvailability = function() {
-          this.eventAvailability = Availability();
-        };
-        return event;
-      })();
+      // //Event Class Definition
+      // //TODO: UI for:
+      //  //                     Name(), Time(), Availability()
+      //  //
+      // class event {
+      //   //"private variables" for new event objects
+      //   //var eventName, m_eventAttendees, m_eventAvailability, m_eventTime;
+      //   // class "constructor"
+      //   constructor(newEventName,newEventTime) {
+      //     this.eventName = newEventName;
+      //     this.eventTime = newEventTime;
+      //   };
+      //   get name(){
+      //     return this.eventName;
+      //   }
+      //   get time(){
+      //     return this.eventTime;
+      //   }
+      // };
 
       export default AppViewModel;
