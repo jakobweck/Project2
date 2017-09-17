@@ -4,12 +4,18 @@ import 'can-route-pushstate';
 import 'can-stache-bindings';
 
 
-function event(name, time) {
+function event(name, month, day, timeStart, timeEnd) {
   //"private variables" for new event objects
   //var eventName, m_eventAttendees, m_eventAvailability, m_eventTime;
   // class "constructor"
-    this.name = name;
-    this.time = time;
+  debugger;
+    const m_name = name;
+    const m_month = month;
+    const m_day = day;
+    const m_timeStart = timeStart;
+    const m_timeEnd = timeEnd;
+    // console.log(m_name);
+    console.log(m_name+m_month+m_day+m_timeStart+m_timeEnd);
   }
   event.prototype.getName = function(){
     return this.eventName;
@@ -30,6 +36,8 @@ const AppViewModel = DefineMap.extend({
         window.day = document.getElementById("eventDay").value;
         window.timeStart = document.getElementById("eventStart").value;
         window.timeEnd = document.getElementById("eventEnd").value;
+
+        event(name, month, day, timeStart, timeEnd);
       },
       // test function for global variables
       printItems () {

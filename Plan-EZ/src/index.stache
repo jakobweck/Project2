@@ -22,7 +22,7 @@
     <br>
 
     <!-- sets the user inputs to global variables -->
-    <button ($click)="createEventObject">Let's Get Started!</button><br>
+    <button ($click)="newEvent">Let's Get Started!</button><br>
 
     <!-- prints variables to the console to test if they were received as gloabl -->
     <button ($click)="printItems">Print</button>
