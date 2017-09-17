@@ -39,6 +39,7 @@
         <h3>Name</h3>
         <input type="text" id="eventName">
         <h3>Month</h3>
+        <!-- creates month dropdown menu -->
           <select id="eventMonth">
             <option value="jan" selected>January</option>
             <option value="feb">February</option>
@@ -53,8 +54,42 @@
             <option value="nov">November</option>
             <option value="dec">December</option>
           </select>
-        <h3>Day</h3>
-        <input type="text" id="eventDay">
+          <input type="button" value="Submit" onclick="addDay('dayInput');" />
+        <div id="dayInput"></div>
+
+        <!-- script to dynamically alot the correct amount of days per month -->
+        <script>
+        var monthDict = {
+      	   "jan" : 31,
+           "feb" : 28,
+           "mar" : 31,
+           "apr" : 30,
+           "may" : 31,
+           "jun" : 30,
+           "jul" : 31,
+           "aug" : 31,
+           "sep" : 30,
+           "oct" : 31,
+           "nov" : 30,
+           "dec" : 31
+            };
+
+        // adds HTML based on month input
+        function addDay(divName) {
+            var newDiv = document.createElement('div');
+            var mon = document.getElementById("eventMonth").value;
+            var numDay = monthDict[mon];
+
+            var selectHTML="<h3>Day</h3><select>";
+            for(i = 1; i <= numDay; i = i + 1) {
+                selectHTML += "<option value='" + i + "'>" + i + "</option>";
+            }
+            selectHTML += "</select><input ";
+            newDiv.innerHTML = selectHTML;
+            document.getElementById(divName).appendChild(newDiv);
+        }
+        </script>
+
         <h3>Start time</h3>
         <input type="text" id="eventStart">
         <h3>End time</h3>
