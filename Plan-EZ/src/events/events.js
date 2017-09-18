@@ -7,7 +7,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './events.less';
 import view from './events.stache';
-import m_event from 'src/admin/admin.js'
 
 export const ViewModel = DefineMap.extend({
 
@@ -34,16 +33,8 @@ export const ViewModel = DefineMap.extend({
   get event_end() {
     return window.timeEnd;
   },
-
-  avail_submit: {
-    get avail_submit() {
-      const a_name = document.getElementById("avail_name");
-      const a_avail = document.getElementById("avail_time");
-
-      return (a_name+"is available at "+a_avail)
-      console.log(a_name);
-      console.log(a_avail);
-    },
+  get attendee(){
+    return window.a_name;
   },
 });
 
