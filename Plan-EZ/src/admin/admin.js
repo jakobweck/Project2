@@ -65,6 +65,11 @@ export const ViewModel = DefineMap.extend({
     var EVENT_OBJECT = JSON.parse(text);
 
   },
+  m_event: {
+    m_name: window.name,
+    m_month: window.month,
+    m_day: window.day,
+  },
 /**
  * test function for global variables
  * @method printItems

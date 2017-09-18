@@ -1,3 +1,3 @@
 <can-import from="can-stache/helpers/route" />
 <h5><a href="{{routeUrl page='adminList'}}">Admin</a></h5>
-<p>{{message}}</p>
+<p>{{event_name}}<br>{{event_month}}<br>{{event_day}}<br>{{event_hour}}<br>{{event_start}}<br>{{event_end}}</p>
