@@ -133,7 +133,7 @@
             var innerHtml = "<select id='eventEnd' onchange='check()'><option value='null' selected></option>";
             if (document.getElementById("eventHour").value != "24") {
               var start_time = document.getElementById("eventStart").value;
-              var new_start = 12 - parseInt(start_time);
+              var new_start = parseInt(start_time);
               if (start_time.indexOf(":") == -1) {
                 innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
               }
@@ -145,7 +145,7 @@
             }
             else {
               var start_time = document.getElementById("eventStart").value;
-              var new_start = 24 - parseInt(start_time);
+              var new_start = parseInt(start_time);
               if (start_time.indexOf(":") == -1) {
                 innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
               }
