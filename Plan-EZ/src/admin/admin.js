@@ -1,3 +1,8 @@
+//Admin Mode Component
+//This is all the scripting behind the admin mode page.
+//We Utilized doneJS and canJS frameworks in order to make
+//individual, modular components for our application
+
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './admin.less';
@@ -22,13 +27,11 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeEnd = timeEnd;
   }
 
+//Entering The View Mode of the App
 export const ViewModel = DefineMap.extend({
   page: 'adminList',
   message: {
     value: 'This is the admin component'
-  },
-  EVENT_OBJECT: {
-
   },
 
 /**
@@ -43,29 +46,10 @@ export const ViewModel = DefineMap.extend({
     window.hour = document.getElementById("eventHour").value;
     window.timeStart = document.getElementById("eventStart").value;
     window.timeEnd = document.getElementById("eventEnd").value;
-    //
-    // var text = "{ 'event' : [ " +
-    //             "'eventName'  : '" + window.name + "', " +
-    //             "'eventMonth' : '" + window.month + "', " +
-    //             "'eventDay'   : '" + window.day + "', " +
-    //             "'eventHour'  : '" + window.hour + "', " +
-    //             "'eventStart' : '" + window.timeStart + "', " +
-    //             "'eventEnd'   : '" + window.timeEnd + "' ]}";
-    //
-    // var EVENT_OBJECT = JSON.parse(text);
 
-    var text = '{ "event" : [ ' +
-                '"eventName"  : "' + window.name + '", ' +
-                '"eventMonth" : "' + window.month + '", ' +
-                '"eventDay"   : "' + window.day + '", ' +
-                '"eventHour"  : "' + window.hour + '", ' +
-                '"eventStart" : "' + window.timeStart + '", ' +
-                '"eventEnd"   : "' + window.timeEnd + '" ]}';
-
-    var EVENT_OBJECT = JSON.parse(text);
-
+    console.log("New event Created with Name: "+ name);
   },
-  m_event: {
+    m_event: {
     m_name: window.name,
     m_month: window.month,
     m_day: window.day,
