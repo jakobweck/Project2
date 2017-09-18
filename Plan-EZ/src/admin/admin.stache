@@ -78,7 +78,7 @@
       <div class="col-lg-3">
         <h3>Hour Scheme</h3>
         <!-- TODO: update hour scheme ID name -->
-        <select id="eventHour" onchange="addStartTimes();addEndTimes();check()">
+        <select id="eventHour" onchange="addStartTimes();check()">
           <option value="null" selected></option>
           <option value="24">24 Hour</option>
           <option value="am">12 Hour, AM</option>
@@ -97,7 +97,7 @@
             document.getElementById("eventStart").remove();
 
             var newDiv = document.createElement('div');
-            var innerHtml = "<select id='eventStart' onchange='check()'><option value='null' selected></option>";
+            var innerHtml = "<select id='eventStart' onchange='addEndTimes();check()'><option value='null' selected></option>";
             if (document.getElementById("eventHour").value != "24") {
               for (i = 1; i <= 12; i += 1) {
                 innerHtml += "<option value='" + i + "'>" + i + "</option>";
@@ -132,14 +132,24 @@
             var newDiv = document.createElement('div');
             var innerHtml = "<select id='eventEnd' onchange='check()'><option value='null' selected></option>";
             if (document.getElementById("eventHour").value != "24") {
-              for (i = 1; i <= 12; i += 1) {
+              var start_time = document.getElementById("eventStart").value;
+              var new_start = 12 - parseInt(start_time);
+              if (start_time.indexOf(":") == -1) {
+                innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
+              }
+              for (i = new_start + 1; i <= 12; i += 1) {
                 innerHtml += "<option value='" + i + "'>" + i + "</option>";
                 innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
               }
               innerHtml += "</select><input ";
             }
             else {
-              for (i = 0; i < 24; i += 1) {
+              var start_time = document.getElementById("eventStart").value;
+              var new_start = 24 - parseInt(start_time);
+              if (start_time.indexOf(":") == -1) {
+                innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
+              }
+              for (i = new_start + 1; i < 24; i += 1) {
                 innerHtml += "<option value='" + i + "'>" + i + "</option>";
                 innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
               }
