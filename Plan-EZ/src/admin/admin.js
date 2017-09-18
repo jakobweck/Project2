@@ -19,6 +19,8 @@ import 'can-stache-bindings';
  * @param {} timeEnd
  * @return
  */
+
+// sets input event variables to constants
 function event(name, month, day, timeStart, timeEnd) {
     const m_name = name;
     const m_month = month;
