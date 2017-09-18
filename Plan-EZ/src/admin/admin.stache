@@ -116,8 +116,39 @@
             document.getElementById("startInput").appendChild(newDiv);
           }
         </script>
+
         <h3>End time</h3>
-        <input type="text" id="eventEnd">
+        <div id="endInput"></div>
+        <select id="eventEnd"></select>
+        <script>
+        /**
+         * Fills in time based off user input
+         * @method addEndTimes
+         * @return
+         */
+          function addEndTimes() {
+            document.getElementById("eventEnd").remove();
+
+            var newDiv = document.createElement('div');
+            var innerHtml = "<select id='eventEnd' onchange='check()'><option value='null' selected></option>";
+            if (document.getElementById("eventHour").value != "24") {
+              for (i = 1; i <= 12; i += 1) {
+                innerHtml += "<option value='" + i + "'>" + i + "</option>";
+                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+              }
+              innerHtml += "</select><input ";
+            }
+            else {
+              for (i = 1; i <= 24; i += 1) {
+                innerHtml += "<option value='" + i + "'>" + i + "</option>";
+                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+              }
+              innerHtml += "</select><input ";
+            }
+            newDiv.innerHTML = innerHtml;
+            document.getElementById("endInput").appendChild(newDiv);
+          }
+        </script>
       </div>
       <!-- right column spacer -->
       <div class="col-lg-3"></div>
