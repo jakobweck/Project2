@@ -104,12 +104,16 @@
                 innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
               }
               innerHtml += "</select><input ";
-              newDiv.innerHTML = innerHtml;
-              document.getElementById("startInput").appendChild(newDiv);
             }
             else {
-              //stuff
+              for (i = 1; i <= 24; i += 1) {
+                innerHtml += "<option value='" + i + "'>" + i + "</option>";
+                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+              }
+              innerHtml += "</select><input ";
             }
+            newDiv.innerHTML = innerHtml;
+            document.getElementById("startInput").appendChild(newDiv);
           }
         </script>
         <h3>End time</h3>
