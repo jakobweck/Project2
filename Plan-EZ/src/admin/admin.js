@@ -29,7 +29,7 @@ export const ViewModel = DefineMap.extend({
   },
   EVENT_OBJECT: {
 
-  }
+  },
 
 /**
  * Initializing variables as global variables
@@ -43,18 +43,28 @@ export const ViewModel = DefineMap.extend({
     window.hour = document.getElementById("eventHour").value;
     window.timeStart = document.getElementById("eventStart").value;
     window.timeEnd = document.getElementById("eventEnd").value;
+    //
+    // var text = "{ 'event' : [ " +
+    //             "'eventName'  : '" + window.name + "', " +
+    //             "'eventMonth' : '" + window.month + "', " +
+    //             "'eventDay'   : '" + window.day + "', " +
+    //             "'eventHour'  : '" + window.hour + "', " +
+    //             "'eventStart' : '" + window.timeStart + "', " +
+    //             "'eventEnd'   : '" + window.timeEnd + "' ]}";
+    //
+    // var EVENT_OBJECT = JSON.parse(text);
 
-    var text = "{ 'event' : [ " +
+    event(name, month, day, timeStart, timeEnd);
+    console.log("Created event "+ name);
+    window.text = "{ 'event' : [ " +
                 "'eventName'  : '" + window.name + "', " +
                 "'eventMonth' : '" + window.month + "', " +
                 "'eventDay'   : '" + window.day + "', " +
                 "'eventHour'  : '" + window.hour + "', " +
                 "'eventStart' : '" + window.timeStart + "', " +
                 "'eventEnd'   : '" + window.timeEnd + "' ]}";
-                
-    var EVENT_OBJECT = JSON.parse(text);
 
-    event(name, month, day, timeStart, timeEnd);
+    var EVENT_OBJECT = JSON.parse(text);
   },
 /**
  * test function for global variables
