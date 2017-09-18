@@ -18,6 +18,7 @@ This Component is linked to admin.js -->
         <input type="text" id="eventName">
         <h3>Month</h3>
         <!-- creates month dropdown menu -->
+        <!-- when month selected, also starts function to generate days -->
           <select id="eventMonth" onchange="addDay('dayInput');check()">
             <option value="null" selected></option>
             <option value="jan">January</option>
@@ -60,17 +61,20 @@ This Component is linked to admin.js -->
           * @return
           */
           function addDay(divName) {
+            // if there is already an eventDay var, remove it and make new. this avoids stacking
             document.getElementById("eventDay").remove();
             var newDiv = document.createElement('div');
             var mon = document.getElementById("eventMonth").value;
             var numDay = monthDict[mon];
-
+            // creates the selection HTML framework
             var selectHTML="<select id='eventDay' onchange='check()'><option value='null' selected></option>";
+            // for each day, adds a new option
             for(i = 1; i <= numDay; i += 1) {
                 selectHTML += "<option value='" + i + "'>" + i + "</option>";
             }
             selectHTML += "</select><input ";
             newDiv.innerHTML = selectHTML;
+            // adds to script
             document.getElementById(divName).appendChild(newDiv);
           }
           </script>
@@ -78,17 +82,22 @@ This Component is linked to admin.js -->
 
       <!-- right column info -->
       <div class="col-lg-3">
+
         <h3>Hour Scheme</h3>
-        <!-- TODO: update hour scheme ID name -->
+        <!-- dropdown created to gauge 12 or 24 hour setting -->
+        <!-- when time selected, runs script to generate possible starting and ending times -->
         <select id="eventHour" onchange="addStartTimes();check()">
           <option value="null" selected></option>
           <option value="24">24 Hour</option>
           <option value="am">12 Hour, AM</option>
           <option value="pm">12 Hour, PM</option>
         </select>
+
         <h3>Start time</h3>
         <div id="startInput"></div>
         <select id="eventStart"></select>
+        <!-- script to dynamically fill in time drop down -->
+        <!-- when starting choice is made, runs script to fill in end times -->
         <script>
         /**
          * Fills in time based off user input
@@ -96,11 +105,15 @@ This Component is linked to admin.js -->
          * @return
          */
           function addStartTimes() {
+            // if there is already an eventStart var, remove it and make new. this avoids stacking
             document.getElementById("eventStart").remove();
 
             var newDiv = document.createElement('div');
+            // start the selection framework
             var innerHtml = "<select id='eventStart' onchange='addEndTimes();check()'><option value='null' selected></option>";
+            // if the hour scheme is 12 hours
             if (document.getElementById("eventHour").value != "24") {
+              // preface with 12 and 12:30 first because of weird naming structure
               innerHtml += "<option value='12'>12</option>";
               innerHtml += "<option value='12:30'>12:30</option>";
               for (i = 1; i <= 11; i += 1) {
@@ -109,6 +122,7 @@ This Component is linked to admin.js -->
               }
               innerHtml += "</select><input ";
             }
+            // if hour scheme is 24 hours
             else {
               for (i = 0; i < 24; i += 1) {
                 innerHtml += "<option value='" + i + "'>" + i + "</option>";
@@ -116,14 +130,17 @@ This Component is linked to admin.js -->
               }
               innerHtml += "</select><input ";
             }
+            // assign new script to file
             newDiv.innerHTML = innerHtml;
             document.getElementById("startInput").appendChild(newDiv);
           }
         </script>
 
+
         <h3>End time</h3>
         <div id="endInput"></div>
         <select id="eventEnd"></select>
+        <!-- script to fill in the end time drop down -->
         <script>
         /**
          * Fills in time based off user input
@@ -131,15 +148,20 @@ This Component is linked to admin.js -->
          * @return
          */
           function addEndTimes() {
+            // if there is already an eventEnd var, remove it and make new. this avoids stacking
             document.getElementById("eventEnd").remove();
-
+            // create drop down menu framework
             var newDiv = document.createElement('div');
             var innerHtml = "<select id='eventEnd' onchange='check()'><option value='null' selected></option>";
+            // if the hour scheme is 12
             if (document.getElementById("eventHour").value != "24") {
+              // get the start value and make it into a number
               var start_time = document.getElementById("eventStart").value;
               var new_start = parseInt(start_time);
+              // if necessary, make some additions
               if (start_time.indexOf(":") == -1) {
                 innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
+                // anticipate weird US time naming conventions 12AM-12:30AM-1AM
                 if (new_start == 12) {
                   new_start = 0;
                 }
@@ -150,9 +172,12 @@ This Component is linked to admin.js -->
               }
               innerHtml += "</select><input ";
             }
+            // if the hour scheme is 24
             else {
+              // get the previous start value
               var start_time = document.getElementById("eventStart").value;
               var new_start = parseInt(start_time);
+              // if necessary, make additions
               if (start_time.indexOf(":") == -1) {
                 innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
               }
@@ -162,6 +187,7 @@ This Component is linked to admin.js -->
               }
               innerHtml += "</select><input ";
             }
+            // add script to file
             newDiv.innerHTML = innerHtml;
             document.getElementById("endInput").appendChild(newDiv);
           }
@@ -174,10 +200,9 @@ This Component is linked to admin.js -->
 
   <div class="wrapper">
     <!-- sets the user inputs to global variables -->
-    <!--<button ($click)="newEvent" disabled>Let's Get Started!</button><br>-->
+    <!-- creates event obj -->
     <input id="eventButton" type="button" value="Let's Get Started" ($click)="newEvent" disabled>
 
-    <!-- TODO: make sure the name is not blank -->
     <script>
       /**
       * Checks if the current configs are valid
@@ -185,12 +210,20 @@ This Component is linked to admin.js -->
       * @return
       */
       function check() {
+        // checks if name is not blank
+        var zero = document.getElementById("eventName").value != "";
+        // checks if month is selected
         var one = document.getElementById("eventMonth").value != "null";
+        // checks if day is selected
         var two = document.getElementById("eventDay").value != "null";
+        // checks if hour scheme is selected
         var three = document.getElementById("eventHour").value != "null";
+        // checks if start time is selected
         var four = document.getElementById("eventStart").value != "null";
+        // checks if end time is selected
         var five = document.getElementById("eventEnd").value != "null";
-      if (one && two && three && four&&five) {
+      // if all are ready to go, allow event creation
+      if (zero && one && two && three && four && five) {
         document.getElementById("eventButton").disabled = false;
         }
       else {
