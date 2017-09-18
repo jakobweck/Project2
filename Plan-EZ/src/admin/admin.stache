@@ -137,7 +137,8 @@
         var two = document.getElementById("eventDay").value != "null";
         var three = document.getElementById("eventHour").value != "null";
         var four = document.getElementById("eventStart").value != "null";
-      if (one && two && three && four) {
+        var five = document.getElementById("eventEnd").value != "null";
+      if (one && two && three && four&&five) {
         document.getElementById("eventButton").disabled = false;
         }
       else {

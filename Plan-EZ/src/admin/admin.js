@@ -37,6 +37,7 @@ export const ViewModel = DefineMap.extend({
     window.name = document.getElementById("eventName").value;
     window.month = document.getElementById("eventMonth").value;
     window.day = document.getElementById("eventDay").value;
+    window.hour = document.getElementById("eventHour").value;
     window.timeStart = document.getElementById("eventStart").value;
     window.timeEnd = document.getElementById("eventEnd").value;
 
@@ -51,6 +52,7 @@ export const ViewModel = DefineMap.extend({
     console.log(name);
     console.log(month);
     console.log(day);
+    console.log(hour);
     console.log(timeStart);
     console.log(timeEnd);
   },
