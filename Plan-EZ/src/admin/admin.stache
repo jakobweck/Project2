@@ -99,7 +99,9 @@
             var newDiv = document.createElement('div');
             var innerHtml = "<select id='eventStart' onchange='addEndTimes();check()'><option value='null' selected></option>";
             if (document.getElementById("eventHour").value != "24") {
-              for (i = 1; i <= 12; i += 1) {
+              innerHtml += "<option value='12'>12</option>";
+              innerHtml += "<option value='12:30'>12:30</option>";
+              for (i = 1; i <= 11; i += 1) {
                 innerHtml += "<option value='" + i + "'>" + i + "</option>";
                 innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
               }
@@ -136,8 +138,11 @@
               var new_start = parseInt(start_time);
               if (start_time.indexOf(":") == -1) {
                 innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
+                if (new_start == 12) {
+                  new_start = 0;
+                }
               }
-              for (i = new_start + 1; i <= 12; i += 1) {
+              for (i = new_start + 1; i <= 11; i += 1) {
                 innerHtml += "<option value='" + i + "'>" + i + "</option>";
                 innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
               }
