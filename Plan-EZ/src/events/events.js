@@ -16,29 +16,34 @@ export const ViewModel = DefineMap.extend({
   message: {
     value: 'Event Page'
   },
-  event_name: {
-    value: window.name
+  get event_month() {
+    return (window.month);
   },
-  event_month: {
-    value: window.month
+  get event_name() {
+    return window.name;
   },
-  event_day: {
-    value: window.day
+  get event_day() {
+    return window.day;
   },
-  event_hour: {
-    value: window.hour
+  get event_hour() {
+    return window.hour;
   },
-  event_start: {
-    value: window.timeStart
+  get event_start() {
+    return window.timeStart;
   },
-  event_end: {
-    value: window.timeEnd
+  get event_end() {
+    return window.timeEnd;
   },
-  date: {
-    value: 'Date here'
-  },
-  time: {
-    value: 'Time here'
+
+  avail_submit: {
+    get avail_submit() {
+      const a_name = document.getElementById("avail_name");
+      const a_avail = document.getElementById("avail_time");
+
+      return (a_name+"is available at "+a_avail)
+      console.log(a_name);
+      console.log(a_avail);
+    },
   },
 });
 

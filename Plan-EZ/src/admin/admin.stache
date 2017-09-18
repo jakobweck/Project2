@@ -5,7 +5,6 @@ This Component is linked to admin.js -->
    class="btn btn-primary btn-block btn-lg">
   View Events
 </a>
-
 <!-- two centered columns side by side -->
   <div class="container">
     <div class="row">
@@ -235,6 +234,3 @@ This Component is linked to admin.js -->
     <!-- prints variables to the console to test if they were received as gloabl -->
     <button ($click)="printItems">Print</button>
   </div>
-
-
-<p>{{message}}</p>

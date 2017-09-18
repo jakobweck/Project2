@@ -1,3 +1,12 @@
 <can-import from="can-stache/helpers/route" />
-<h5><a href="{{routeUrl page='adminList'}}">Admin</a></h5>
-<p>{{event_name}}<br>{{event_month}}<br>{{event_day}}<br>{{event_hour}}<br>{{event_start}}<br>{{event_end}}</p>
+<h3><a href="{{routeUrl page='adminList'}}">Admin</a></h3>
+<div>
+  <h2>{{event_name}}: {{event_month}}, {{event_day}}, {{event_start}}-{{event_end}} {{event_hour}}</h2>
+
+    <h3>Name</h3>
+    <input type="text" id="avail_name">
+    <h3>Availability</h3>
+    <input type="text" id="avail_time">
+    <br>
+    <br>
+    <button class="submit" onclick="avail_submit">Submit</button>
