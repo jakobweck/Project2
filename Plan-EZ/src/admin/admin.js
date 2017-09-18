@@ -54,17 +54,16 @@ export const ViewModel = DefineMap.extend({
     //
     // var EVENT_OBJECT = JSON.parse(text);
 
-    event(name, month, day, timeStart, timeEnd);
-    console.log("Created event "+ name);
-    window.text = "{ 'event' : [ " +
-                "'eventName'  : '" + window.name + "', " +
-                "'eventMonth' : '" + window.month + "', " +
-                "'eventDay'   : '" + window.day + "', " +
-                "'eventHour'  : '" + window.hour + "', " +
-                "'eventStart' : '" + window.timeStart + "', " +
-                "'eventEnd'   : '" + window.timeEnd + "' ]}";
+    var text = '{ "event" : [ ' +
+                '"eventName"  : "' + window.name + '", ' +
+                '"eventMonth" : "' + window.month + '", ' +
+                '"eventDay"   : "' + window.day + '", ' +
+                '"eventHour"  : "' + window.hour + '", ' +
+                '"eventStart" : "' + window.timeStart + '", ' +
+                '"eventEnd"   : "' + window.timeEnd + '" ]}';
 
     var EVENT_OBJECT = JSON.parse(text);
+
   },
 /**
  * test function for global variables
