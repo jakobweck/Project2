@@ -34,7 +34,7 @@ export const ViewModel = DefineMap.extend({
   get event_end() {
     return window.timeEnd;
   },
-
+  // submit an availability response
   avail_submit: {
     get avail_submit() {
       const a_name = document.getElementById("avail_name");
