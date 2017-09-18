@@ -14,6 +14,6 @@ const AppViewModel = DefineMap.extend({
         serialize: false
       },
     });
-
+window.people = "";
 route('/{page}', { page: 'adminList-' });
 export default AppViewModel;

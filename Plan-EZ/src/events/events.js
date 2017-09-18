@@ -15,6 +15,7 @@ export const ViewModel = DefineMap.extend({
   message: {
     value: 'Event Page'
   },
+  // Getters for the stache file
   get event_month() {
     return (window.month);
   },
@@ -33,9 +34,15 @@ export const ViewModel = DefineMap.extend({
   get event_end() {
     return window.timeEnd;
   },
-  get attendee(){
-    return window.a_name;
+  get attendees(){
+    return window.people;
   },
+  // TODO: fix only refreshes when navigating away
+  // add name to the attendees list
+  submit() {
+    window.a_name = document.getElementById("avail_name").value;
+    window.people = (window.people +", "+window.a_name);
+  }
 });
 
 export default Component.extend({
