@@ -1,5 +1,14 @@
 # Project1
-Designing a scheduling client that allows users to create events and designate times available for said events.
+Designing a scheduling client that allows users to create events and designate times available for said events.  We utilized a number of Javascript libraries and functionalities in development of this software. Some of the Libraries we used were:
+
+- DoneJS - https://donejs.com
+    DoneJS utilizes a number of embedded libraries such as:
+
+    - CanJS - https://canjs.com
+    - Moustache - https://mustache.github.io
+    - StealJS - https://stealjs.com
+
+Our choice of framework led us to a component-driven design that is modular and easy to modify. Need to change something only affiliated with the Admin mode? Just go to the admin component folder. In the future, this allows for scalable testing, as individual components can be modified independently.
 
 To get started with our project you'll need to download donejs to your home directory:
 
