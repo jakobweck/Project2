@@ -9,7 +9,9 @@ Designing a scheduling client that allows users to create events and designate t
     - StealJS - https://stealjs.com
 
 Our choice of framework led us to a component-driven design that is modular and easy to modify. Need to change something only affiliated with the Admin mode? Just go to the admin component folder. In the future, this allows for scalable testing, as individual components can be modified independently.
-
+NOTE FROM CARPET CO:
+To install this project you'll need to install Node.js.
+On a Mac, you can use Homebrew and run the command `brew install node`. On Windows, you can download an installer from http://nodejs.org/.
 To get started with our project you'll need to download donejs to your home directory:
 
 `npm install -g donejs`
