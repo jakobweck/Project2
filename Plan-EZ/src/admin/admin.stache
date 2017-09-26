@@ -93,7 +93,7 @@ This Component is linked to admin.js -->
         </select>
 
         <h3>Start time</h3>
-        <div id="startInput"></div>
+        <div id="startInput">
         <select id="eventStart"></select>
         <!-- script to dynamically fill in time drop down -->
         <!-- when starting choice is made, runs script to fill in end times -->
@@ -131,13 +131,15 @@ This Component is linked to admin.js -->
             }
             // assign new script to file
             newDiv.innerHTML = innerHtml;
+            newDiv.setAttribute("boxIndex", 0);
             document.getElementById("startInput").appendChild(newDiv);
           }
         </script>
+        </div>
 
 
         <h3>End time</h3>
-        <div id="endInput"></div>
+        <div id="endInput">
         <select id="eventEnd"></select>
         <!-- script to fill in the end time drop down -->
         <script>
@@ -188,9 +190,11 @@ This Component is linked to admin.js -->
             }
             // add script to file
             newDiv.innerHTML = innerHtml;
+            newDiv.setAttribute("boxIndex", 0);
             document.getElementById("endInput").appendChild(newDiv);
           }
         </script>
+        </div>
       </div>
       <!-- right column spacer -->
       <div class="col-lg-3"></div>
@@ -221,6 +225,13 @@ This Component is linked to admin.js -->
         var four = document.getElementById("eventStart").value != "null";
         // checks if end time is selected
         var five = document.getElementById("eventEnd").value != "null";
+        if (three) {
+            document.getElementById("addSlotsButton").disabled = false;
+            }
+          else {
+            document.getElementById("addSlotsButton").disabled = true;
+          }
+
       // if all are ready to go, allow event creation
       if (zero && one && two && three && four && five) {
         document.getElementById("eventButton").disabled = false;
@@ -233,4 +244,16 @@ This Component is linked to admin.js -->
 
     <!-- prints variables to the console to test if they were received as gloabl -->
     <button ($click)="printItems">Print</button>
+    <input id="addSlotsButton" type="button" value="Add Time Slot" ($click)="addTimeSlot" disabled>
+        <script>
+          /**
+          * Checks if the current configs are valid
+          * @method check
+          * @return
+          */
+          function checkAddSlot() {
+            // checks if hour scheme is selected
+
+          </script>
+
   </div>
