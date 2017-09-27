@@ -15,6 +15,9 @@ This Component is linked to admin.js -->
       <div class="col-lg-4">
         <h3>Name</h3>
         <input type="text" id="eventName">
+        <h3>Host</h3>
+        <input type="text" id="host">
+
         <h3>Month</h3>
         <!-- creates month dropdown menu -->
         <!-- when month selected, also starts function to generate days -->
@@ -109,7 +112,7 @@ This Component is linked to admin.js -->
 
             var newDiv = document.createElement('div');
             // start the selection framework
-            var innerHtml = "<select id='eventStart' onchange='addEndTimes();check()'><option value='null' selected></option>";
+            var innerHtml = "<select id='eventStart' onchange='addEndTimes();check()'><option value='null' selected disabled>Start Time 1</option>";
             // if the hour scheme is 12 hours
             if (document.getElementById("eventHour").value != "24") {
               // preface with 12 and 12:30 first because of weird naming structure
@@ -153,7 +156,7 @@ This Component is linked to admin.js -->
             document.getElementById("eventEnd").remove();
             // create drop down menu framework
             var newDiv = document.createElement('div');
-            var innerHtml = "<select id='eventEnd' onchange='check()'><option value='null' selected></option>";
+            var innerHtml = "<select id='eventEnd' onchange='check()'><option value='null' selected disabled>End Time 1</option>";
             // if the hour scheme is 12
             if (document.getElementById("eventHour").value != "24") {
               // get the start value and make it into a number

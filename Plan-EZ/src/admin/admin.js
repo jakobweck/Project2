@@ -38,7 +38,8 @@ function setupNewStartBox(){
     newDiv.setAttribute("boxIndex", numBoxes.toString());
     // start the selection framework
     //when this box is changed, fill in the corresponding end box.
-    var innerHtml = "<select onchange='setupNewEndBox(this);check()'><option value='null' selected></option>";
+    var uiIndex = numBoxes+1;
+    var innerHtml = "<select onchange='setupNewEndBox(this);check()'><option value='null' selected disabled>" + "Start Time " + uiIndex + "</option>";
     // if the hour scheme is 12 hours
     if (document.getElementById("eventHour").value != "24") {
         // preface with 12 and 12:30 first because of weird naming structure
@@ -71,9 +72,10 @@ window.setupNewEndBox = function(send) {
     var index = sender.getAttribute("boxindex");
     //var newDiv = document.getElementById("endBox" + index);
     var newDiv = endDiv.querySelector('[boxindex="'+index+'"]');
+    var uiIndex = parseInt(index) + 1;
 
 
-    var innerHtml = "<select onchange='check()'><option value='null' selected></option>";
+    var innerHtml = "<select onchange='check()'><option value='null' selected>" + "End Time " + uiIndex+ "</option>";
     // if the hour scheme is 12
 
     if (document.getElementById("eventHour").value != "24") {
@@ -133,15 +135,33 @@ export const ViewModel = DefineMap.extend({
     window.month = document.getElementById("eventMonth").value;
     window.day = document.getElementById("eventDay").value;
     window.hour = document.getElementById("eventHour").value;
+    window.host = document.getElementById("host").value;
+    window.startTimeArray = [];
+    window.endTimeArray = [];
+    window.attendeesArray = [window.host];
+
+    var allStartDivs = document.getElementById('startInput').getElementsByTagName('div');
+    var allEndDivs = document.getElementById('endInput').getElementsByTagName('div');
+    for(i = 0; i<allStartDivs.length; i++){
+      var startTime = allStartDivs[i].getElementsByTagName('select')[0].value;
+      var endTime = allEndDivs[i].getElementsByTagName('select')[0].value;
+      startTimeArray.push(startTime);
+      endTimeArray.push(endTime);
+    }
     window.timeStart = document.getElementById("eventStart").value;
     window.timeEnd = document.getElementById("eventEnd").value;
     var eventObj = {
         name: window.name,
         month: window.month,
-        day: window.day
+        day: window.day,
+        startTimes: window.startTimeArray,
+        endTimes: window.endTimeArray,
+        host: window.host,
+        attendees: window.attendeesArray
+
     };
     window.alert("New event Created with Name: "+ name);
-    window.alert(JSON.stringify(obj));
+    window.alert(JSON.stringify(eventObj));
   },
     m_event: {
     m_name: window.name,

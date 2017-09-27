@@ -1,7 +1,8 @@
 <can-import from="can-stache/helpers/route" />
 <h3><a href="{{routeUrl page='adminList'}}">Admin</a></h3>
 <div>
-  <h2>{{event_name}}: {{event_month}}, {{event_day}}, {{event_start}}-{{event_end}} {{event_hour}}</h2>
+  <h2 ($click)="printTimeSlots()">{{event_name}}: {{event_month}}, {{event_day}}, {{event_start}}-{{event_end}} {{event_hour}}</h2>
+  <h2 id="slots" >{{slots}}</h2>
 
   <h3>Attendees: {{event_name}} {{attendees}}</h3>
     <h3>Can you attend?</h3>
