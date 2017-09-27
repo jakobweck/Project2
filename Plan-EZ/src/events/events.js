@@ -12,7 +12,48 @@ function printTimeSlots(){
 
 }
 
-window.addEventListener('DOMContentLoaded', printTimeSlots());
+
+var populateEventBox = function populateEventBox(){
+  var eventBox = document.getElementById("eventSelect");
+  if (window.eventArray) {
+      for (i = 0; i < window.eventArray.length; i++) {
+          var name = window.eventArray[i].name;
+          option = document.createElement('option');
+          option.value = JSON.stringify(window.eventArray[i]);
+          option.text = name;
+          eventBox.add(option);
+      }
+  }
+}
+window.selectEvent = function(){
+    window.alert("Select");
+    var eventSelect = document.getElementById("eventSelect");
+    var selectedEvent = JSON.parse(eventSelect.options[eventSelect.selectedIndex].value);
+    if (selectedEvent) {
+        window.name = selectedEvent.name;
+        window.month = selectedEvent.month;
+        window.day = selectedEvent.day;
+        window.startTimeArray = selectedEvent.startTimes;
+        window.endTimeArray = selectedEvent.endTimes;
+        window.host = selectedEvent.host;
+        window.attendeesArray = selectedEvent.attendees;
+        var infoString = "Selected Event: " + window.name +" on " + window.month +" "+ window.day + ".<br> Host: " + window.host;
+        var eventInfo = document.getElementById("eventInfo");
+        eventInfo.innerHTML = infoString;
+        var timeSlotString = "";
+        for (i=0; i<window.startTimeArray.length; i++){
+          timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i];
+          if (i != window.startTimeArray.length - 1){
+            timeSlotString+= ", ";
+          }
+        }
+        document.getElementById("slots").innerHTML = timeSlotString;
+    }
+
+}
+
+window.addEventListener('load', populateEventBox, false);
+
 
 export const ViewModel = DefineMap.extend({
 
@@ -20,6 +61,8 @@ export const ViewModel = DefineMap.extend({
   page: 'eventList',
   message: {
     value: 'Event Page'
+  },
+  selectEvent(){
   },
 
   // Getters for the stache file

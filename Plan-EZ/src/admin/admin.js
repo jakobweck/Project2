@@ -130,7 +130,9 @@ export const ViewModel = DefineMap.extend({
  * @return
  */
   newEvent() {
-    window.eventArray = [];
+    if (!window.eventArray){
+        window.eventArray = [];
+    }
     window.name = document.getElementById("eventName").value;
     window.month = document.getElementById("eventMonth").value;
     window.day = document.getElementById("eventDay").value;
@@ -160,6 +162,7 @@ export const ViewModel = DefineMap.extend({
         attendees: window.attendeesArray
 
     };
+    window.eventArray.push(eventObj);
     window.alert("New event Created with Name: "+ name);
     window.alert(JSON.stringify(eventObj));
   },
