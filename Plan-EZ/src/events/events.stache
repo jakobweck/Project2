@@ -2,8 +2,8 @@
 <h3><a href="{{routeUrl page='adminList'}}">Admin</a></h3>
 <div>
   <select id="eventSelect" onchange='selectEvent()'><option value='null' selected disabled>Choose event...</option></select>
-  <h2 id ="eventInfo">{{event_name}}: {{event_month}}, {{event_day}}, {{event_start}}-{{event_end}} {{event_hour}}</h2>
-  <h2 id="slots" >{{slots}}</h2>
+  <h2 id ="eventInfo"></h2>
+  <h2 id="slots" ></h2>
   <div id = "eventSelectDiv">
   <script>
     function populateEventBox(){
@@ -21,10 +21,10 @@
     populateEventBox();
   </script>
   </div>
-  <h3>Attendees: {{event_name}} {{attendees}}</h3>
+  <h3 id="attendees"></h3>
     <h3>Can you attend?</h3>
     <h4>Name:</h4>
     <input type="text" id="avail_name">
     <br>
     <br>
-    <button class="submit" ($click)="submit">Ssubmit</button>
+    <button class="submit" ($click)="submit" id ="submitButton" disabled>Submit</button>

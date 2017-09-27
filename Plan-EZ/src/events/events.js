@@ -47,7 +47,17 @@ window.selectEvent = function(){
             timeSlotString+= ", ";
           }
         }
+        var attendeesString = "Attendees: ";
+        for(i=0; i<window.attendeesArray.length; i++){
+            attendeesString += window.attendeesArray[i];
+            if (i != window.attendeesArray.length - 1){
+                attendeesString+= ", ";
+            }
+        }
         document.getElementById("slots").innerHTML = timeSlotString;
+        document.getElementById("attendees").innerHTML = attendeesString;
+        document.getElementById("submitButton").disabled = false;
+
     }
 
 }
