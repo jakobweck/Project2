@@ -28,7 +28,8 @@ var populateEventBox = function populateEventBox(){
 window.selectEvent = function(){
     window.alert("Select");
     var eventSelect = document.getElementById("eventSelect");
-    var selectedEvent = JSON.parse(eventSelect.options[eventSelect.selectedIndex].value);
+    var selectedEvent = JSON.parse(eventSelect.options[eventSelect.selectedIndex].value)
+    window.checkboxes = [];
     if (selectedEvent) {
         window.name = selectedEvent.name;
         window.month = selectedEvent.month;
@@ -46,6 +47,16 @@ window.selectEvent = function(){
           if (i != window.startTimeArray.length - 1){
             timeSlotString+= ", ";
           }
+          var checkDiv = document.getElementById("checkBoxDiv");
+          var box = document.createElement("input");
+          box.setAttribute("id", "box"+i.toString());
+          var label = document.createElement("label");
+          label.htmlFor = "box"+i.toString();
+          label.innerHTML = window.startTimeArray[i] + "-" +window.endTimeArray[i];
+          box.setAttribute("type", "checkbox");
+          checkDiv.appendChild(box);
+          checkDiv.appendChild(label);
+          window.checkboxes.push(box);
         }
         var attendeesString = "Attendees: ";
         for(i=0; i<window.attendeesArray.length; i++){
@@ -125,6 +136,16 @@ export const ViewModel = DefineMap.extend({
   submit() {
     window.a_name = document.getElementById("avail_name").value;
     window.people = (window.people +", "+window.a_name);
+    var userObj = {
+        name: window.a_name,
+        timeslots: []
+      }
+    for(i = 0; i<window.checkboxes.length; i++){
+        if (window.checkboxes[i].checked){
+            userObj.timeslots.push(window.startTimeArray[i] + "-" +window.endTimeArray[i]);
+        }
+    }
+
   }
 });
 export default Component.extend({

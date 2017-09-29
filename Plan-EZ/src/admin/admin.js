@@ -133,38 +133,66 @@ export const ViewModel = DefineMap.extend({
     if (!window.eventArray){
         window.eventArray = [];
     }
-    window.name = document.getElementById("eventName").value;
-    window.month = document.getElementById("eventMonth").value;
-    window.day = document.getElementById("eventDay").value;
-    window.hour = document.getElementById("eventHour").value;
-    window.host = document.getElementById("host").value;
-    window.startTimeArray = [];
-    window.endTimeArray = [];
-    window.attendeesArray = [window.host];
-
     var allStartDivs = document.getElementById('startInput').getElementsByTagName('div');
     var allEndDivs = document.getElementById('endInput').getElementsByTagName('div');
-    for(i = 0; i<allStartDivs.length; i++){
-      var startTime = allStartDivs[i].getElementsByTagName('select')[0].value;
-      var endTime = allEndDivs[i].getElementsByTagName('select')[0].value;
-      startTimeArray.push(startTime);
-      endTimeArray.push(endTime);
-    }
-    window.timeStart = document.getElementById("eventStart").value;
-    window.timeEnd = document.getElementById("eventEnd").value;
-    var eventObj = {
-        name: window.name,
-        month: window.month,
-        day: window.day,
-        startTimes: window.startTimeArray,
-        endTimes: window.endTimeArray,
-        host: window.host,
-        attendees: window.attendeesArray
 
-    };
-    window.eventArray.push(eventObj);
-    window.alert("New event Created with Name: "+ name);
-    window.alert(JSON.stringify(eventObj));
+    var name = document.getElementById(("eventName")).value;
+    var nameConflict = false;
+    var unfilledSlot = false;
+    for (i =0; i<window.eventArray.length; i++){
+        if (window.eventArray[i].name === name){
+            nameConflict = true;
+        }
+    }
+    for (i=0; i<allStartDivs.length; i++){
+        if (allStartDivs[i].getElementsByTagName('select')[0].selectedIndex == 0 || allEndDivs[i].getElementsByTagName('select')[0].selectedIndex == 0){
+            unfilledSlot = true;
+        }
+    }
+    if (nameConflict){
+        window.alert("There is already an event with this name. Cancelling event creation.");
+    }
+    if (unfilledSlot){
+        window.alert("One of the time slots is not filled. Cancelling event creation.");
+    }
+    if(!nameConflict && !unfilledSlot) {
+        window.name = document.getElementById("eventName").value;
+        window.month = document.getElementById("eventMonth").value;
+        window.day = document.getElementById("eventDay").value;
+        window.hour = document.getElementById("eventHour").value;
+        window.host = document.getElementById("host").value;
+        window.startTimeArray = [];
+        window.endTimeArray = [];
+        var hostUser = {
+            name: window.host,
+            timeslots: []
+        }
+
+        window.attendeesArray = [hostUser];
+
+        for (i = 0; i < allStartDivs.length; i++) {
+            var startTime = allStartDivs[i].getElementsByTagName('select')[0].value;
+            var endTime = allEndDivs[i].getElementsByTagName('select')[0].value;
+            startTimeArray.push(startTime);
+            endTimeArray.push(endTime);
+            hostUser.timeslots.push(startTime + "-" + endTime);
+        }
+        window.timeStart = document.getElementById("eventStart").value;
+        window.timeEnd = document.getElementById("eventEnd").value;
+        var eventObj = {
+            name: window.name,
+            month: window.month,
+            day: window.day,
+            startTimes: window.startTimeArray,
+            endTimes: window.endTimeArray,
+            host: window.host,
+            attendees: window.attendeesArray
+
+        };
+        window.eventArray.push(eventObj);
+        window.alert("New event Created with Name: " + name);
+        window.alert(JSON.stringify(eventObj));
+    }
   },
     m_event: {
     m_name: window.name,
@@ -192,6 +220,7 @@ export const ViewModel = DefineMap.extend({
       var innerHtml = "<select onchange='check()'><option value='null' selected></option>";
       newDiv.innerHTML = innerHtml;
       endDiv.appendChild(newDiv);
+
   }
 });
 

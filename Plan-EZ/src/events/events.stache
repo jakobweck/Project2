@@ -1,30 +1,47 @@
 <can-import from="can-stache/helpers/route" />
-<h3><a href="{{routeUrl page='adminList'}}">Admin</a></h3>
 <div>
-  <select id="eventSelect" onchange='selectEvent()'><option value='null' selected disabled>Choose event...</option></select>
-  <h2 id ="eventInfo"></h2>
-  <h2 id="slots" ></h2>
-  <div id = "eventSelectDiv">
-  <script>
-    function populateEventBox(){
-        var eventBox = document.getElementById("eventSelect");
-        if(window.eventArray){
-            for(i = 0; i<window.eventArray.length; i++){
-                var name = window.eventArray[i].name;
-                option = document.createElement( 'option' );
-                    option.value = JSON.stringify(window.eventArray[i]);
-                option.text = name;
-                eventBox.add(option);
+  <div class="container">
+   <div class="row">
+  <!-- left column spacer -->
+  <div class="col-lg-3"></div>
+
+  <!-- left column info -->
+  <div class="col-lg-4">
+  <h3><a href="{{routeUrl page='adminList'}}">Admin</a></h3>
+
+      <select id="eventSelect" onchange='selectEvent()'><option value='null' selected disabled>Choose event...</option></select>
+      <h2 id ="eventInfo"></h2>
+      <h2 id="slots" ></h2>
+      <div id = "eventSelectDiv">
+      <script>
+        function populateEventBox(){
+            var eventBox = document.getElementById("eventSelect");
+            if(window.eventArray){
+                for(i = 0; i<window.eventArray.length; i++){
+                    var name = window.eventArray[i].name;
+                    option = document.createElement( 'option' );
+                        option.value = JSON.stringify(window.eventArray[i]);
+                    option.text = name;
+                    eventBox.add(option);
+                }
             }
         }
-    }
-    populateEventBox();
-  </script>
-  </div>
-  <h3 id="attendees"></h3>
-    <h3>Can you attend?</h3>
-    <h4>Name:</h4>
-    <input type="text" id="avail_name">
-    <br>
-    <br>
-    <button class="submit" ($click)="submit" id ="submitButton" disabled>Submit</button>
+        populateEventBox();
+      </script>
+      </div>
+            </div>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-4">
+
+      <h3 id="attendees"></h3>
+        <h3>Can you attend?</h3>
+        <h4>Name:</h4>
+        <input type="text" id="avail_name">
+        <br>
+        <div id="checkBoxDiv"></div>
+        <br>
+        <br>
+        <button class="submit" ($click)="submit" id ="submitButton" disabled>Submit</button>
+      </div>
+    </div>
+    </div>

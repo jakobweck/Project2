@@ -228,6 +228,7 @@ This Component is linked to admin.js -->
         var four = document.getElementById("eventStart").value != "null";
         // checks if end time is selected
         var five = document.getElementById("eventEnd").value != "null";
+
         if (three) {
             document.getElementById("addSlotsButton").disabled = false;
             }
