@@ -78,7 +78,7 @@ window.addEventListener('load', populateEventBox, false);
 
 export const ViewModel = DefineMap.extend({
 
-  //Defining Values For the Variables Referenced in events.stache
+  //Defining Values For the Variables Referenced in login.stache
   page: 'eventList',
   message: {
     value: 'Event Page'
@@ -131,13 +131,16 @@ export const ViewModel = DefineMap.extend({
   get attendees(){
     return window.people;
   },
+  get user(){
+      return window.currentUser;
+  },
+
   // TODO: fix only refreshes when navigating away
   // add name to the attendees list
   submit() {
-    window.a_name = document.getElementById("avail_name").value;
     window.people = (window.people +", "+window.a_name);
     var userObj = {
-        name: window.a_name,
+        name: window.currentUser,
         timeslots: []
       }
     for(i = 0; i<window.checkboxes.length; i++){

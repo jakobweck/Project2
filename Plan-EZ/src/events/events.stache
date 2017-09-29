@@ -35,8 +35,7 @@
 
       <h3 id="attendees"></h3>
         <h3>Can you attend?</h3>
-        <h4>Name:</h4>
-        <input type="text" id="avail_name">
+        <h4>Your Name: {{user}}</h4>
         <br>
         <div id="checkBoxDiv"></div>
         <br>

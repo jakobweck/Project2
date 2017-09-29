@@ -4,7 +4,7 @@ import 'can-route-pushstate';
 import 'can-stache-bindings';
 
 const AppViewModel = DefineMap.extend({
-      page: 'Event List',
+      page: 'Login',
       message: {
         value: 'Welcome to our easy event planner!',
         serialize: false

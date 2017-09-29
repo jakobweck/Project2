@@ -1,0 +1,19 @@
+<can-import from="can-stache/helpers/route" />
+<div>
+  <div class="container">
+   <div class="row">
+  <!-- left column spacer -->
+  <div class="col-lg-3"></div>
+
+  <!-- left column info -->
+      <div class="col-lg-4" align="center">
+      <h4>Enter your name:</h4>
+      <input type="text" id="loginName">
+      <br><br>
+        <a href="{{routeUrl page='eventList' }}"
+           class="btn btn-primary" ($click)="saveLogin" >Log In</a>
+
+      <br>
+      </div>
+      </div>
+      </div>

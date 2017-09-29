@@ -26,14 +26,24 @@
             {{/if}}
           </can-import>
         {{else}}
-          <can-import from="plan-ez/events/">
-            {{#if isPending}}
-              Loading...
+            {{#eq page 'eventList'}}
+              <can-import from="plan-ez/events/">
+                {{#if isPending}}
+                  Loading...
+                {{else}}
+                  <eventComponent-/>
+                {{/if}}
+              </can-import>
             {{else}}
-              <eventComponent-/>
-            {{/if}}
-          </can-import>
-        {{/eq}}
+              <can-import from="plan-ez/login/">
+                {{#if isPending}}
+                  Loading...
+                {{else}}
+                  <loginComponent-/>
+                {{/if}}
+              </can-import>
+            {{/eq}}
+         {{/eq}}
         </div>
       </div>
     {{#switch env.NODE_ENV}}
