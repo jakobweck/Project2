@@ -38,8 +38,11 @@ window.selectEvent = function(){
         var eventInfo = document.getElementById("eventInfo");
         eventInfo.innerHTML = infoString;
         var timeSlotString = "";
+        document.getElementById('checkBoxDiv').innerHTML="";
+
         for (i=0; i<window.startTimeArray.length; i++){
-          timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i];
+            window.checkboxes.splice(i, 1);
+            timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i];
           if (i != window.startTimeArray.length - 1){
             timeSlotString+= ", ";
           }
