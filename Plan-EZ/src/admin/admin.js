@@ -223,11 +223,11 @@ export const ViewModel = DefineMap.extend({
         window.month = document.getElementById("eventMonth").value;
         window.day = document.getElementById("eventDay").value;
         window.hour = document.getElementById("eventHour").value;
-        window.host = document.getElementById("host").value;
+        //window.currentUser = document.getElementById("host").value;
         window.startTimeArray = [];
         window.endTimeArray = [];
         var hostUser = {
-            name: window.host,
+            name: window.currentUser,
             timeslots: []
         }
 
@@ -249,7 +249,7 @@ export const ViewModel = DefineMap.extend({
             day: window.day,
             startTimes: window.startTimeArray,
             endTimes: window.endTimeArray,
-            host: window.host,
+            host: window.currentUser,
             attendees: window.attendeesArray
 
         };

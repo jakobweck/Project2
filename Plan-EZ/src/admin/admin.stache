@@ -15,8 +15,8 @@ This Component is linked to admin.js -->
       <div class="col-lg-4">
         <h3>Name</h3>
         <input type="text" id="eventName">
-        <h3>Host</h3>
-        <input type="text" id="host">
+        <!--<h3>Host</h3>
+        <input type="text" id="host">-->
 
         <h3>Month</h3>
         <!-- creates month dropdown menu -->
@@ -270,7 +270,7 @@ This Component is linked to admin.js -->
   <div class="wrapper">
     <!-- sets the user inputs to global variables -->
     <!-- creates event obj -->
-    <input id="eventButton" type="button" value="Let's Get Started" ($click)="newEvent" disabled>
+    <input id="eventButton" type="button" value="Create Event" ($click)="newEvent" disabled>
 
     <script>
       /**
@@ -310,7 +310,7 @@ This Component is linked to admin.js -->
       </script>
 
     <!-- prints variables to the console to test if they were received as gloabl -->
-    <button ($click)="printItems">Print</button>
+    <!-- <button ($click)="printItems">Print</button> -->
     <input id="addSlotsButton" type="button" value="Add Time Slot" ($click)="addTimeSlot" disabled>
         <script>
           /**
