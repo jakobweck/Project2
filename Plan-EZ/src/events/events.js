@@ -91,8 +91,6 @@ window.selectEvent = function(){
 
 }
 
-window.addEventListener('load', populateEventBox, false);
-
 
 export const ViewModel = DefineMap.extend({
 

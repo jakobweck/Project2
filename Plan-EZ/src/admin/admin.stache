@@ -91,8 +91,7 @@ This Component is linked to admin.js -->
         <select id="eventHour" onchange="addStartTimes();check()">
           <option value="null" selected></option>
           <option value="24">24 Hour</option>
-          <option value="am">12 Hour, AM</option>
-          <option value="pm">12 Hour, PM</option>
+          <option value="am">12 Hour</option>
         </select>
 
         <h3>Start time</h3>
@@ -115,12 +114,41 @@ This Component is linked to admin.js -->
             var innerHtml = "<select id='eventStart' onchange='addEndTimes();check()'><option value='null' selected disabled>Start Time 1</option>";
             // if the hour scheme is 12 hours
             if (document.getElementById("eventHour").value != "24") {
+
+            for (i=0; i<2; i++){
               // preface with 12 and 12:30 first because of weird naming structure
-              innerHtml += "<option value='12'>12</option>";
-              innerHtml += "<option value='12:30'>12:30</option>";
-              for (i = 1; i <= 11; i += 1) {
-                innerHtml += "<option value='" + i + "'>" + i + "</option>";
-                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+              innerHtml += "<option value='12'>12";
+                  if (i ==0){
+                      innerHtml += "AM</option>";
+                  }
+                  else{
+                      innerHtml += "PM</option>";
+                      }
+              innerHtml += "<option value='12:30'>12:30";
+                  if (i ==0){
+                      innerHtml += "AM</option>";
+                  }
+                  else{
+                      innerHtml += "PM</option>";
+                  }
+              var j;
+              for (j = 1; j <= 11; j += 1) {
+                innerHtml += "<option value='" + j + "'>" + j;
+                if (i ==0){
+                    innerHtml += "AM</option>";
+                }
+                else{
+                    innerHtml += "PM</option>";
+                }
+
+                innerHtml += "<option value='" + j + ":30'>" + j + ":30";
+                if (i ==0){
+                    innerHtml += "AM</option>";
+                }
+                else{
+                    innerHtml += "PM</option>";
+                }
+              }
               }
               innerHtml += "</select><input ";
             }
@@ -152,6 +180,7 @@ This Component is linked to admin.js -->
          * @return
          */
           function addEndTimes() {
+
             // if there is already an eventEnd var, remove it and make new. this avoids stacking
             document.getElementById("eventEnd").remove();
             // create drop down menu framework
@@ -160,19 +189,53 @@ This Component is linked to admin.js -->
             // if the hour scheme is 12
             if (document.getElementById("eventHour").value != "24") {
               // get the start value and make it into a number
-              var start_time = document.getElementById("eventStart").value;
+              var startBox = document.getElementById("eventStart");
+              var start_time = startBox.options[startBox.selectedIndex].text;
+              var startIndex = document.getElementById("eventStart").selectedIndex;
               var new_start = parseInt(start_time);
               // if necessary, make some additions
               if (start_time.indexOf(":") == -1) {
-                innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
+                innerHtml += "<option value='" + start_time.slice(0,-2) + ":30'>" + start_time.slice(0,-2) + ":30";
+                if(startIndex<11){
+                    innerHtml+= "AM"  + "</option>";
+                }
+                else{
+                    innerHtml+= "PM"  + "</option>";
+                }
                 // anticipate weird US time naming conventions 12AM-12:30AM-1AM
-                if (new_start == 12) {
+                if (new_start == 24) {
                   new_start = 0;
                 }
               }
-              for (i = new_start + 1; i <= 11; i += 1) {
-                innerHtml += "<option value='" + i + "'>" + i + "</option>";
-                innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+              if (start_time.indexOf("PM") !== -1 && start_time !== "12PM" && start_time !== "12:30PM"){
+
+                  new_start +=12;
+              }
+              if(startIndex == 0 || startIndex == 1){
+                new_start -= 12;
+              }
+              window.alert(new_start);
+              for (i = new_start + 1; i <= 23; i += 1) {
+
+                var time = i%12;
+                if (time == 0){
+                    time = 12;
+                }
+
+                innerHtml += "<option value='" + time + "'>" + time;
+                if (i<11){
+                    innerHtml += "AM"  + "</option>";
+                }
+                else{
+                    innerHtml += "PM"  + "</option>";
+                }
+                innerHtml += "<option value='" + time + ":30'>" + time + ":30";
+                if (i<11){
+                    innerHtml += "AM"  + "</option>";
+                }
+                else{
+                    innerHtml += "PM"  + "</option>";
+                }
               }
               innerHtml += "</select><input ";
             }

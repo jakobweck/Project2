@@ -42,14 +42,42 @@ function setupNewStartBox(){
     var innerHtml = "<select onchange='setupNewEndBox(this);check()'><option value='null' selected disabled>" + "Start Time " + uiIndex + "</option>";
     // if the hour scheme is 12 hours
     if (document.getElementById("eventHour").value != "24") {
-        // preface with 12 and 12:30 first because of weird naming structure
-        innerHtml += "<option value='12'>12</option>";
-        innerHtml += "<option value='12:30'>12:30</option>";
-        for (i = 1; i <= 11; i += 1) {
-            innerHtml += "<option value='" + i + "'>" + i + "</option>";
-            innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+        for (i=0; i<2; i++){
+            // preface with 12 and 12:30 first because of weird naming structure
+            innerHtml += "<option value='12'>12";
+            if (i ==0){
+                innerHtml += "AM</option>";
+            }
+            else{
+                innerHtml += "PM</option>";
+            }
+            innerHtml += "<option value='12:30'>12:30";
+            if (i ==0){
+                innerHtml += "AM</option>";
+            }
+            else{
+                innerHtml += "PM</option>";
+            }
+            var j;
+            for (j = 1; j <= 11; j += 1) {
+                innerHtml += "<option value='" + j + "'>" + j;
+                if (i ==0){
+                    innerHtml += "AM</option>";
+                }
+                else{
+                    innerHtml += "PM</option>";
+                }
+
+                innerHtml += "<option value='" + j + ":30'>" + j + ":30";
+                if (i ==0){
+                    innerHtml += "AM</option>";
+                }
+                else{
+                    innerHtml += "PM</option>";
+                }
+            }
         }
-        innerHtml += "</select><input ";
+
     }
     // if hour scheme is 24 hours
     else {
@@ -80,21 +108,56 @@ window.setupNewEndBox = function(send) {
 
     if (document.getElementById("eventHour").value != "24") {
         // get the start value and make it into a number
-        var start_time = send.value;
+        var startBox = send;
+        var start_time = startBox.options[startBox.selectedIndex].text;
+        var startIndex = startBox.selectedIndex;
         var new_start = parseInt(start_time);
+
         // if necessary, make some additions
         if (start_time.indexOf(":") == -1) {
-            innerHtml += "<option value='" + start_time + ":30'>" + start_time + ":30</option>";
+            innerHtml += "<option value='" + start_time.slice(0,-2) + ":30'>" + start_time.slice(0,-2) + ":30";
             // anticipate weird US time naming conventions 12AM-12:30AM-1AM
-            if (new_start == 12) {
+            if(startIndex<11){
+                innerHtml+= "AM"  + "</option>";
+            }
+            else{
+                innerHtml+= "PM"  + "</option>";
+            }
+            if (new_start == 24) {
                 new_start = 0;
             }
         }
-        for (i = new_start + 1; i <= 11; i += 1) {
-            innerHtml += "<option value='" + i + "'>" + i + "</option>";
-            innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
+        if (start_time.indexOf("PM") !== -1 && start_time !== "12PM" && start_time !== "12:30PM"){
+
+            new_start +=12;
+        }
+        if(startIndex == 0 || startIndex == 1){
+            new_start -= 12;
+        }
+
+        for (i = new_start + 1; i <= 23; i += 1) {
+            var time = i%12;
+            if (time == 0){
+                time = 12;
+            }
+
+            innerHtml += "<option value='" + time + "'>" + time;
+            if (i<11){
+                innerHtml += "AM"  + "</option>";
+            }
+            else{
+                innerHtml += "PM"  + "</option>";
+            }
+            innerHtml += "<option value='" + time + ":30'>" + time + ":30";
+            if (i<11){
+                innerHtml += "AM"  + "</option>";
+            }
+            else{
+                innerHtml += "PM"  + "</option>";
+            }
         }
         innerHtml += "</select><input ";
+
     }
     // if the hour scheme is 24
     else {
