@@ -67,7 +67,7 @@ window.selectEvent = function(){
             var j;
             for (j=0; j<window.attendeesArray[i].timeslots.length; j++){
                 attendeesString += window.attendeesArray[i].timeslots[j];
-                if (j != window.attendeesArray.timeslots.length - 1){
+                if (j != window.attendeesArray[i].timeslots.length - 1){
                     attendeesString+= ", ";
                 }
             }
@@ -84,7 +84,6 @@ window.selectEvent = function(){
         else{
             document.getElementById("submitButton").isDisabled = false;
         }
-
     }
 
 }
@@ -99,7 +98,8 @@ export const ViewModel = DefineMap.extend({
   message: {
     value: 'Event Page'
   },
-  selectEvent(){
+  callPopulate(){
+      populateEventBox();
   },
 
   // Getters for the stache file

@@ -16,16 +16,33 @@
       <script>
         var populateEventBox = function populateEventBox(){
           var eventBox = document.getElementById("eventSelect");
+          for(i = eventBox.options.length - 1 ; i >= 1 ; i--)
+          {
+              eventBox.remove(i);
+          }
           if (!window.eventArray){
               window.eventArray = JSON.parse(localStorage.getItem('events'));
           }
           if (window.eventArray) {
               for (i = 0; i < window.eventArray.length; i++) {
-                  var name = window.eventArray[i].name;
-                  option = document.createElement('option');
-                  option.value = JSON.stringify(window.eventArray[i]);
-                  option.text = name;
-                  eventBox.add(option);
+                  if (document.getElementById('showYoursBox').checked){
+                      if (window.eventArray[i].host == window.currentUser){
+                          var name = window.eventArray[i].name;
+                          option = document.createElement('option');
+                          option.value = JSON.stringify(window.eventArray[i]);
+                          option.text = name;
+                          eventBox.add(option);
+                      }
+                      document.getElementById('eventSelect').selectedIndex = 0;
+
+                  }
+                  else{
+                      var name = window.eventArray[i].name;
+                      option = document.createElement('option');
+                      option.value = JSON.stringify(window.eventArray[i]);
+                      option.text = name;
+                      eventBox.add(option);
+                  }
               }
           }
         }
@@ -43,7 +60,10 @@
         <div id="checkBoxDiv"></div>
         <br>
         <br>
+        <input type="checkbox" ($click)="callPopulate" id ="showYoursBox" > Show only your events</button><br>
         <button class="submit" ($click)="submit" id ="submitButton" disabled>Submit</button>
+
+
       </div>
     </div>
     </div>
