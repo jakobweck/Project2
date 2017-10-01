@@ -12,21 +12,8 @@ function printTimeSlots(){
 
 }
 
-
-var populateEventBox = function populateEventBox(){
-  var eventBox = document.getElementById("eventSelect");
-  if (window.eventArray) {
-      for (i = 0; i < window.eventArray.length; i++) {
-          var name = window.eventArray[i].name;
-          option = document.createElement('option');
-          option.value = JSON.stringify(window.eventArray[i]);
-          option.text = name;
-          eventBox.add(option);
-      }
-  }
-}
 window.selectEvent = function(){
-    window.alert("Select");
+    window.youHost = false;
     var eventSelect = document.getElementById("eventSelect");
     var selectedEvent = JSON.parse(eventSelect.options[eventSelect.selectedIndex].value)
     window.checkboxes = [];
@@ -38,6 +25,15 @@ window.selectEvent = function(){
         window.endTimeArray = selectedEvent.endTimes;
         window.host = selectedEvent.host;
         window.attendeesArray = selectedEvent.attendees;
+        if (window.host == window.currentUser){
+            document.getElementById("canAttend").innerText = "You are the host of this event!";
+            window.youHost = true;
+        }
+        else{
+            document.getElementById("canAttend").innerText = "Can you attend?";
+
+        }
+
         var infoString = "Selected Event: " + window.name +" on " + window.month +" "+ window.day + ".<br> Host: " + window.host;
         var eventInfo = document.getElementById("eventInfo");
         eventInfo.innerHTML = infoString;
@@ -47,27 +43,47 @@ window.selectEvent = function(){
           if (i != window.startTimeArray.length - 1){
             timeSlotString+= ", ";
           }
-          var checkDiv = document.getElementById("checkBoxDiv");
-          var box = document.createElement("input");
-          box.setAttribute("id", "box"+i.toString());
-          var label = document.createElement("label");
-          label.htmlFor = "box"+i.toString();
-          label.innerHTML = window.startTimeArray[i] + "-" +window.endTimeArray[i];
-          box.setAttribute("type", "checkbox");
-          checkDiv.appendChild(box);
-          checkDiv.appendChild(label);
-          window.checkboxes.push(box);
+          if(!youHost) {
+              document.getElementById("submitButton").disabled = false;
+              var checkDiv = document.getElementById("checkBoxDiv");
+              var box = document.createElement("input");
+              box.setAttribute("id", "box" + i.toString());
+              var label = document.createElement("label");
+              label.htmlFor = "box" + i.toString();
+              label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i];
+              box.setAttribute("type", "checkbox");
+              checkDiv.appendChild(box);
+              checkDiv.appendChild(label);
+              window.checkboxes.push(box);
+          }
+          else{
+              document.getElementById("submitButton").disabled = true;
+          }
         }
         var attendeesString = "Attendees: ";
         for(i=0; i<window.attendeesArray.length; i++){
-            attendeesString += window.attendeesArray[i];
+            attendeesString += window.attendeesArray[i].name;
+            attendeesString += "(";
+            var j;
+            for (j=0; j<window.attendeesArray[i].timeslots.length; j++){
+                attendeesString += window.attendeesArray[i].timeslots[j];
+                if (j != window.attendeesArray.timeslots.length - 1){
+                    attendeesString+= ", ";
+                }
+            }
+            attendeesString += ")";
             if (i != window.attendeesArray.length - 1){
                 attendeesString+= ", ";
             }
         }
         document.getElementById("slots").innerHTML = timeSlotString;
         document.getElementById("attendees").innerHTML = attendeesString;
-        document.getElementById("submitButton").disabled = false;
+        if (youHost) {
+            document.getElementById("submitButton").disabled = true;
+        }
+        else{
+            document.getElementById("submitButton").isDisabled = false;
+        }
 
     }
 

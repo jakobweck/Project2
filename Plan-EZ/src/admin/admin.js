@@ -168,7 +168,6 @@ export const ViewModel = DefineMap.extend({
             timeslots: []
         }
 
-        window.attendeesArray = [hostUser];
 
         for (i = 0; i < allStartDivs.length; i++) {
             var startTime = allStartDivs[i].getElementsByTagName('select')[0].value;
@@ -177,6 +176,8 @@ export const ViewModel = DefineMap.extend({
             endTimeArray.push(endTime);
             hostUser.timeslots.push(startTime + "-" + endTime);
         }
+        window.attendeesArray = [hostUser];
+
         window.timeStart = document.getElementById("eventStart").value;
         window.timeEnd = document.getElementById("eventEnd").value;
         var eventObj = {
@@ -190,6 +191,7 @@ export const ViewModel = DefineMap.extend({
 
         };
         window.eventArray.push(eventObj);
+        localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event Created with Name: " + name);
         window.alert(JSON.stringify(eventObj));
     }
