@@ -51,7 +51,7 @@
       </div>
             </div>
             <div class="col-lg-3"></div>
-            <div class="col-lg-4">
+            <div class="col-lg-4"></div>
 
       <h3 id="attendees"></h3>
         <h3 id = "canAttend"></h3>

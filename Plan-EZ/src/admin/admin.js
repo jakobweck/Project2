@@ -19,7 +19,7 @@ import 'can-stache-bindings';
  * @param {} timeEnd
  * @return
  */
-var numBoxes = 0;
+window.numBoxes = 0;
 
 // sets input event variables to constants
 function event(name, month, day, timeStart, timeEnd) {
@@ -32,13 +32,13 @@ function event(name, month, day, timeStart, timeEnd) {
 
 function setupNewStartBox(){
     //0 for the init. boxes, 1 for the first additional start box
-    numBoxes++;
+    window.numBoxes++;
     var startDiv = document.getElementById("startInput");
     var newDiv = document.createElement('div');
-    newDiv.setAttribute("boxIndex", numBoxes.toString());
+    newDiv.setAttribute("boxIndex", window.numBoxes.toString());
     // start the selection framework
     //when this box is changed, fill in the corresponding end box.
-    var uiIndex = numBoxes+1;
+    var uiIndex = window.numBoxes+1;
     var innerHtml = "<select onchange='setupNewEndBox(this);check()'><option value='null' selected disabled>" + "Start Time " + uiIndex + "</option>";
     // if the hour scheme is 12 hours
     if (document.getElementById("eventHour").value != "24") {
@@ -117,10 +117,12 @@ window.setupNewEndBox = function(send) {
         if (start_time.indexOf(":") == -1) {
             innerHtml += "<option value='" + start_time.slice(0,-2) + ":30'>" + start_time.slice(0,-2) + ":30";
             // anticipate weird US time naming conventions 12AM-12:30AM-1AM
-            if(startIndex<11){
+            if(startIndex<25){
+                window.alert(startIndex + "am");
                 innerHtml+= "AM"  + "</option>";
             }
             else{
+                window.alert(startIndex + "pm");
                 innerHtml+= "PM"  + "</option>";
             }
             if (new_start == 24) {
@@ -233,8 +235,11 @@ export const ViewModel = DefineMap.extend({
 
 
         for (i = 0; i < allStartDivs.length; i++) {
-            var startTime = allStartDivs[i].getElementsByTagName('select')[0].value;
-            var endTime = allEndDivs[i].getElementsByTagName('select')[0].value;
+            var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+            var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+            var startTime = startTimeBox.options[startTimeBox.selectedIndex].text;
+            var endTime = endTimeBox.options[endTimeBox.selectedIndex].text;
+
             startTimeArray.push(startTime);
             endTimeArray.push(endTime);
             hostUser.timeslots.push(startTime + "-" + endTime);
@@ -281,7 +286,7 @@ export const ViewModel = DefineMap.extend({
       setupNewStartBox();
       var endDiv = document.getElementById("endInput");
       var newDiv = document.createElement('div');
-      newDiv.setAttribute("boxindex", numBoxes.toString());
+      newDiv.setAttribute("boxindex", window.numBoxes.toString());
       var innerHtml = "<select onchange='check()'><option value='null' selected></option>";
       newDiv.innerHTML = innerHtml;
       endDiv.appendChild(newDiv);
