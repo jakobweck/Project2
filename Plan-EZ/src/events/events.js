@@ -103,48 +103,6 @@ export const ViewModel = DefineMap.extend({
       populateEventBox();
   },
 
-  // Getters for the stache file
-  get event_month() {
-    return (window.month);
-  },
-  get event_name() {
-    return window.name;
-  },
-  get slots(){
-      var slotString = "";
-      if (window.startTimeArray && window.endTimeArray) {
-          for (i = 0; i < window.startTimeArray.length; i++) {
-              slotString += window.startTimeArray[i];
-              if (window.hour != 24){
-                slotString += window.hour;
-              }
-              slotString += "-" + window.endTimeArray[i];
-              if (window.hour != 24){
-                  slotString += window.hour;
-              }
-              slotString += "    ";
-          }
-      }
-      return slotString;
-
-  },
-  get event_day() {
-    return window.day;
-  },
-  get event_hour() {
-    if (window.hour != 24) {
-        return window.hour;
-    }
-    else{
-      return "";
-    }
-  },
-  get event_start() {
-    return window.timeStart;
-  },
-  get event_end() {
-    return window.timeEnd;
-  },
   get attendees(){
     return window.people;
   },
