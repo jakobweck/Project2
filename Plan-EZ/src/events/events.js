@@ -15,7 +15,8 @@ function printTimeSlots(){
 window.selectEvent = function(){
     window.youHost = false;
     var eventSelect = document.getElementById("eventSelect");
-    var selectedEvent = JSON.parse(eventSelect.options[eventSelect.selectedIndex].value)
+    window.currentEvent = JSON.parse(eventSelect.options[eventSelect.selectedIndex].value)
+    var selectedEvent = window.currentEvent;
     window.checkboxes = [];
     if (selectedEvent) {
         window.name = selectedEvent.name;
@@ -88,6 +89,15 @@ window.selectEvent = function(){
             document.getElementById("submitButton").isDisabled = false;
         }
     }
+    else{
+        document.getElementById("eventInfo").innerHTML = "";
+        document.getElementById("attendees").innerHTML = "";
+        document.getElementById("slots").innerHTML = "";
+        document.getElementById("checkBoxDiv").innerHTML = "";
+        document.getElementById("submitButton").disabled = true;
+
+        infoString = "";
+    }
 
 }
 
@@ -123,6 +133,14 @@ export const ViewModel = DefineMap.extend({
             userObj.timeslots.push(window.startTimeArray[i] + "-" +window.endTimeArray[i]);
         }
     }
+    window.currentEvent.attendees.push(userObj);
+    var eventIndex = document.getElementById("eventSelect").selectedIndex -1;
+    window.eventArray.splice(eventIndex, 1);
+    window.eventArray.push(window.currentEvent);
+    localStorage.setItem("events", JSON.stringify(window.eventArray));
+    populateEventBox();
+    document.getElementById("eventSelect").selectedIndex = 0;
+    selectEvent();
 
   }
 });

@@ -51,7 +51,7 @@
       </div>
             </div>
             <div class="col-lg-3"></div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
 
       <h3 id="attendees"></h3>
         <h3 id = "canAttend"></h3>
@@ -62,7 +62,7 @@
         <br>
         <input type="checkbox" ($click)="callPopulate" id ="showYoursBox" > Show only your events</button><br>
         <button class="submit" ($click)="submit" id ="submitButton" disabled>Submit</button>
-
+        </div>
 
       </div>
     </div>
