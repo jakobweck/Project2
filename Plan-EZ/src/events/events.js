@@ -103,6 +103,7 @@ window.selectEvent = function(){
                 var taskDiv = document.createElement("div");
                 taskDiv.style.display = 'inline';
                 var taskP = document.createElement("p");
+                taskP.style.fontWeight = "bold";
                 var taskCheck = document.createElement("input");
                 taskCheck.type = "checkbox";
                 taskCheck.id = "taskBox" + i;

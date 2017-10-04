@@ -6,12 +6,14 @@
 
   <!-- left column info -->
   <div class="col-sm-4">
-  <h3><a href="{{routeUrl page='adminList'}}">Create Events</a></h3>
 
       <select id="eventSelect" onchange='selectEvent()'><option value='null' selected disabled>View events...</option></select>
+      <br>
+      <input type="checkbox" ($click)="callPopulate" id ="showYoursBox" > Show only events you're hosting</button><br>
       <h2 id ="eventInfo"></h2>
       <h2 id="slots" ></h2>
       <div id ="tasks"></div>
+
       <div id = "eventSelectDiv">
       <script>
         var populateEventBox = function populateEventBox(){
@@ -51,7 +53,7 @@
       </div>
       </div>
       <div id = "tasksDiv" class = "col-sm-4">
-        <h3>Tasks</h3>
+        <h3>Tasks & Volunteers</h3>
       </div>
 
       <div class="col-sm-4">
@@ -62,8 +64,8 @@
         <div id="checkBoxDiv"></div>
         <br>
         <br>
-        <input type="checkbox" ($click)="callPopulate" id ="showYoursBox" > Show only events you're hosting</button><br>
         <button class="submit" ($click)="submit" id ="submitButton">Submit Attendance and Tasks</button>
+        <a href="{{routeUrl page='adminList'}}"><button>Create Events</button></a>
         </div>
       </div>
     </div>
