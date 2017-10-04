@@ -255,7 +255,9 @@ export const ViewModel = DefineMap.extend({
             startTimes: window.startTimeArray,
             endTimes: window.endTimeArray,
             host: window.currentUser,
-            attendees: window.attendeesArray
+            attendees: window.attendeesArray,
+            tasks: window.tasksArray,
+            twentyFour: ((window.hour=="24"))
 
         };
         window.eventArray.push(eventObj);
@@ -264,6 +266,50 @@ export const ViewModel = DefineMap.extend({
         window.alert(JSON.stringify(eventObj));
     }
   },
+    addTask(){
+      var taskBox = document.getElementById("taskBox");
+      var taskTextArea = document.getElementById("tasksText");
+      var taskString = taskBox.value;
+        if (!window.tasksArray) {
+            window.tasksArray = [];
+        }
+        var task = {
+            name: taskString,
+            user: ""
+
+        };
+        var index = window.tasksArray.map(function(e) { return e.name; }).indexOf(taskString);
+        window.alert(index);
+      if (taskString != "" && (index == -1)){
+
+          window.tasksArray.push(task);
+          var newTaskDiv = document.createElement("div");
+          newTaskDiv.innerHTML += "<br>" + taskString + "   " ;
+          newTaskDiv.style.display = 'inline';
+          var removeButton = document.createElement("button");
+          removeButton.innerText = "Remove";
+          var removeTask = function(){
+              window.alert(window.tasksArray.indexOf(task));
+              window.tasksArray.splice(window.tasksArray.indexOf(task), 1);
+              this.parentNode.parentNode.removeChild(this.parentNode);
+              window.alert(window.tasksArray[i]);
+
+
+          }
+          removeButton.addEventListener("click", removeTask)
+          newTaskDiv.appendChild(removeButton);
+          taskTextArea.appendChild(newTaskDiv);
+          taskBox.value = "";
+      }
+      else{
+          window.alert("Task already exists");
+          for (i=0; i<window.tasksArray.length; i++){
+              window.alert(window.tasksArray[i]);
+          }
+          taskBox.value = "";
+      }
+
+    },
     m_event: {
     m_name: window.name,
     m_month: window.month,

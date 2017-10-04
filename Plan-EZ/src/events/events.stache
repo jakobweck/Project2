@@ -3,15 +3,15 @@
   <div class="container">
    <div class="row">
   <!-- left column spacer -->
-  <div class="col-lg-3"></div>
 
   <!-- left column info -->
-  <div class="col-lg-4">
+  <div class="col-sm-4">
   <h3><a href="{{routeUrl page='adminList'}}">Create Events</a></h3>
 
-      <select id="eventSelect" onchange='selectEvent()'><option value='null' selected disabled>Choose event...</option></select>
+      <select id="eventSelect" onchange='selectEvent()'><option value='null' selected disabled>View events...</option></select>
       <h2 id ="eventInfo"></h2>
       <h2 id="slots" ></h2>
+      <div id ="tasks"></div>
       <div id = "eventSelectDiv">
       <script>
         var populateEventBox = function populateEventBox(){
@@ -49,21 +49,22 @@
         populateEventBox();
       </script>
       </div>
-            </div>
-            <div class="col-lg-3"></div>
-            <div class="col-lg-4">
+      </div>
+      <div id = "tasksDiv" class = "col-sm-4">
+        <h3>Tasks</h3>
+      </div>
 
+      <div class="col-sm-4">
       <h3 id="attendees"></h3>
         <h3 id = "canAttend"></h3>
-        <h4>Your Name: {{user}}</h4>
+        <h4 id = "yourUserName">Your Name: {{user}}</h4>
         <br>
         <div id="checkBoxDiv"></div>
         <br>
         <br>
-        <input type="checkbox" ($click)="callPopulate" id ="showYoursBox" > Show only your events</button><br>
-        <button class="submit" ($click)="submit" id ="submitButton" disabled>Submit</button>
+        <input type="checkbox" ($click)="callPopulate" id ="showYoursBox" > Show only events you're hosting</button><br>
+        <button class="submit" ($click)="submit" id ="submitButton">Submit Attendance and Tasks</button>
         </div>
-
       </div>
     </div>
     </div>

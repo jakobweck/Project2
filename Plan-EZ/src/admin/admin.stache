@@ -12,10 +12,9 @@ This Component is linked to admin.js -->
   </script>
     <div class="row">
       <!-- left column spacer -->
-      <div class="col-lg-3"></div>
 
       <!-- left column info -->
-      <div class="col-lg-4">
+      <div class="col-sm-4">
         <h3>Name</h3>
         <input type="text" id="eventName">
         <!--<h3>Host</h3>
@@ -86,7 +85,7 @@ This Component is linked to admin.js -->
       </div>
 
       <!-- right column info -->
-      <div class="col-lg-3">
+      <div class="col-sm-3">
 
         <h3>Hour Scheme</h3>
         <!-- dropdown created to gauge 12 or 24 hour setting -->
@@ -266,10 +265,19 @@ This Component is linked to admin.js -->
         </div>
       </div>
       <!-- right column spacer -->
-      <div class="col-lg-3"></div>
+
+      <div class="col-sm-4" id = "tasksDiv">
+        <h3>Tasks</h3>
+      <input type="text" id = "taskBox" oninput='checkTask()' placeholder = "Task Name">
+      <button type="button" id = "addTask" ($click)="addTask" disabled>Add Task</button>
+      <div id = "tasksText"><br></div>
+      <script>
+        window.tasksArray = [];
+      </script>
+       </div>
     </div>
   </div>
-
+  <br>
   <div class="wrapper">
     <!-- sets the user inputs to global variables -->
     <!-- creates event obj -->
@@ -308,6 +316,14 @@ This Component is linked to admin.js -->
         }
       else {
         document.getElementById("eventButton").disabled = true;
+        }
+      }
+      function checkTask(){
+        if (document.getElementById("taskBox").value != ""){
+            document.getElementById("addTask").disabled = false;
+        }
+        else{
+            document.getElementById("addTask").disabled = true;
         }
       }
       </script>
