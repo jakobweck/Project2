@@ -118,11 +118,9 @@ window.setupNewEndBox = function(send) {
             innerHtml += "<option value='" + start_time.slice(0,-2) + ":30'>" + start_time.slice(0,-2) + ":30";
             // anticipate weird US time naming conventions 12AM-12:30AM-1AM
             if(startIndex<25){
-                window.alert(startIndex + "am");
                 innerHtml+= "AM"  + "</option>";
             }
             else{
-                window.alert(startIndex + "pm");
                 innerHtml+= "PM"  + "</option>";
             }
             if (new_start == 24) {
@@ -262,8 +260,8 @@ export const ViewModel = DefineMap.extend({
         };
         window.eventArray.push(eventObj);
         localStorage.setItem('events', JSON.stringify(window.eventArray));
-        window.alert("New event Created with Name: " + name);
-        window.alert(JSON.stringify(eventObj));
+        window.alert("New event created!");
+        window.location.href = '/eventList';
     }
   },
     addTask(){
@@ -279,7 +277,6 @@ export const ViewModel = DefineMap.extend({
 
         };
         var index = window.tasksArray.map(function(e) { return e.name; }).indexOf(taskString);
-        window.alert(index);
       if (taskString != "" && (index == -1)){
 
           window.tasksArray.push(task);
@@ -289,12 +286,8 @@ export const ViewModel = DefineMap.extend({
           var removeButton = document.createElement("button");
           removeButton.innerText = "Remove";
           var removeTask = function(){
-              window.alert(window.tasksArray.indexOf(task));
               window.tasksArray.splice(window.tasksArray.indexOf(task), 1);
               this.parentNode.parentNode.removeChild(this.parentNode);
-              window.alert(window.tasksArray[i]);
-
-
           }
           removeButton.addEventListener("click", removeTask)
           newTaskDiv.appendChild(removeButton);
@@ -303,9 +296,6 @@ export const ViewModel = DefineMap.extend({
       }
       else{
           window.alert("Task already exists");
-          for (i=0; i<window.tasksArray.length; i++){
-              window.alert(window.tasksArray[i]);
-          }
           taskBox.value = "";
       }
 
@@ -336,6 +326,7 @@ export const ViewModel = DefineMap.extend({
       var innerHtml = "<select onchange='check()'><option value='null' selected></option>";
       newDiv.innerHTML = innerHtml;
       endDiv.appendChild(newDiv);
+      document.getElementById("eventHour").disabled = true;
 
   }
 });
@@ -345,4 +336,3 @@ export default Component.extend({
   ViewModel,
   view
 });
-
