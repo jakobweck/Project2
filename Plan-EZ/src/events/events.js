@@ -181,8 +181,12 @@ export const ViewModel = DefineMap.extend({
             alreadyAttending = true;
         }
     }
+	//believe in Jakob
+	// but test
+	//on submit for events
     if ((youHost&&anyTasks) || ((!youHost)&&!alreadyAttending&&anyTimes) || ((!youHost)&&alreadyAttending&&anyTasks)) {
         if (anyTimes && !alreadyAttending) {
+			//TODO: double check this stops time changes
             window.currentEvent.attendees.push(userObj);
         }
 
@@ -201,9 +205,10 @@ export const ViewModel = DefineMap.extend({
         }
         else {
             if (alreadyAttending){
-                window.alert("You are already attending this event and have not selected any tasks.");
+                window.alert("You are already attending, you can only accept additional tasks at this time.");
             }
-            else {
+            else 
+			{
                 window.alert("You have not selected any times.");
             }
         }

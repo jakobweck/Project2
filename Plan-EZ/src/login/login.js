@@ -10,10 +10,21 @@ import view from './login.stache';
 
 
 export const ViewModel = DefineMap.extend({
-    saveLogin(){
-      window.currentUser = document.getElementById("loginName").value;
+    saveLogin()
+	{
+	  if(document.getElementById("loginName").value == "")
+	  {
+		  alert("no username!");
+		  window.location.href = "http://localhost:8080/";
+	  }
+	  else
+	  {
+		window.currentUser = document.getElementById("loginName").value;
+	  }
+		
     }
 });
+
 export default Component.extend({
   tag: 'loginComponent-',
   ViewModel,
