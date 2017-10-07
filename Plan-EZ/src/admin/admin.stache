@@ -279,6 +279,84 @@ This Component is linked to admin.js -->
         window.tasksArray = [];
       </script>
        </div>
+	   
+	   
+	   <div class="col-sm-5" id = "repeatDiv">
+	     <h3>Repeat Event</h3>
+		<!-- onchange="repeatAddDay('repeatDayInput')checkRepeat()" -->
+          <select id="repeatEventMonth" onchange="repeatAddDay('repeatDayInput')">
+            <option value="null" selected></option>
+            <option value="jan">January</option>
+            <option value="feb">February</option>
+            <option value="mar">March</option>
+            <option value="apr">April</option>
+            <option value="may">May</option>
+            <option value="jun">June</option>
+            <option value="jul">July</option>
+            <option value="aug">August</option>
+            <option value="sep">September</option>
+            <option value="oct">October</option>
+            <option value="nov">November</option>
+            <option value="dec">December</option>
+          </select>
+      <button type="button" id = "addRepeatDay" ($click)="addRepeater" disabled>Add Day</button>
+      
+	  <script>
+        window.repeatDayArray = [];
+      </script>
+	  
+        <div id="repeatDayInput"></div>
+          <select id="repeatEventDay"></select>
+
+          <!-- script to dynamically alot the correct amount of days per month -->
+          <script>
+		var monthDict = {
+			"jan" : 31,
+			"feb" : 28,
+			"mar" : 31,
+			"apr" : 30,
+			"may" : 31,
+			"jun" : 30,
+			"jul" : 31,
+			"aug" : 31,
+			"sep" : 30,
+			"oct" : 31,
+			"nov" : 30,
+			"dec" : 31
+		};
+
+		/**
+		* Adds HTML based on month input
+		* @method addDay
+		* @param {} divName
+		* @return
+		*/
+
+		function repeatAddDay(divName) {
+			// if there is already an eventDay var, remove it and make new. this avoids stacking
+			document.getElementById("repeatEventDay").remove();
+			var newDiv = document.createElement('div');
+			var mon = document.getElementById("repeatEventMonth").value;
+			var numDay = monthDict[mon];
+			// creates the selection HTML framework
+			var selectHTML="<select id='repeatEventDay' onchange='checkRepeat()'><option value='null' selected></option>";
+			// for each day, adds a new option
+			for(i = 1; i <= numDay; i += 1) {
+			selectHTML += "<option value='" + i + "'>" + i + "</option>";
+			}
+			selectHTML += "</select><input ";
+			newDiv.innerHTML = selectHTML;
+			// adds to script
+			document.getElementById(divName).appendChild(newDiv);
+		}
+          </script>
+		  
+	  <h3>Event Repeated On</h3>
+	  <div id = "dayText"><br></div>
+	  
+      </div>
+	  
+	  </div>
     </div>
   </div>
   <br>
@@ -328,6 +406,14 @@ This Component is linked to admin.js -->
         }
         else{
             document.getElementById("addTask").disabled = true;
+        }
+      }
+	  function checkRepeat(){
+        if (document.getElementById("repeatEventMonth").value != "null"){
+            document.getElementById("addRepeatDay").disabled = false;
+        }
+        else{
+            document.getElementById("addRepeatDay").disabled = true;
         }
       }
       </script>
