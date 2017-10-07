@@ -199,7 +199,7 @@ window.setupNewEndBox = function(send) {
     // if the hour scheme is 24
     else {
         // get the previous start value
-        var start_time = send.value;
+        var start_time = send.options[send.selectedIndex].text;
         var new_start = parseInt(start_time);
         // if necessary, make additions
         if (start_time.indexOf(":") == -1) {
@@ -215,21 +215,34 @@ window.setupNewEndBox = function(send) {
     newDiv.innerHTML = innerHtml;
     newDiv.setAttribute("boxindex", index.toString());
     var date = new Date();
-    if (start_time.indexOf(':') == -1){
-        date.setHours(parseInt(start_time.substr(0, start_time.length-2)));
-        date.setMinutes(0);
+    if (document.getElementById("eventHour").value != "24") {
+        if (start_time.indexOf(':') == -1){
+            date.setHours(parseInt(start_time.substr(0, start_time.length-2)));
+            date.setMinutes(0);
+        }
+        else{
+            date.setHours(parseInt(start_time.substr(0, start_time.indexOf(':'))));
+            date.setMinutes(parseInt(start_time.substr(start_time.indexOf(':')+1, start_time.length-4)));
+        }
+        date = new Date(date.getTime() + 30*60000);
     }
     else{
-        date.setHours(parseInt(start_time.substr(0, start_time.indexOf(':'))));
-        date.setMinutes(parseInt(start_time.substr(start_time.indexOf(':')+1, start_time.length-4)));
-
+        if (start_time.indexOf(':') == -1){
+            date.setHours(parseInt(start_time));
+            date.setMinutes(0);
+        }
+        else{
+            date.setHours(parseInt(start_time.substr(0, start_time.indexOf(':'))));
+            date.setMinutes(parseInt(start_time.substr(start_time.indexOf(':')+1, start_time.length)));
+        }
+        date = new Date(date.getTime() + 30*60000);
     }
-    date = new Date(date.getTime() + 30*60000);
 
     for(i = 1; i<newDiv.childNodes[0].options.length; i++){
         var option = newDiv.childNodes[0].options[i];
         option.value = date;
         date = new Date(date.getTime() + 30*60000);
+        var pulledDate = new Date(option.value);
     }
 
     endDiv.appendChild(newDiv);
