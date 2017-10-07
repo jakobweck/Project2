@@ -30,7 +30,7 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeEnd = timeEnd;
   }
   
- function checkIfOverlap(month, day, timeStart, timeEnd) {
+ function checkIfOverlap(timeStart, timeEnd) {
 	var m = month;
 	var d = day;
 	var ts = timeStart;
@@ -281,6 +281,24 @@ export const ViewModel = DefineMap.extend({
             unfilledSlot = true;
         }
     }
+	
+	var timeOverlap = false
+	
+    for (i = 0; i < allStartDivs.length; i++) {
+        var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+        var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+        var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
+        var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
+
+		if (timeOverlap == false){
+            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
+        }
+    }
+	
+	if (timeOverlap){
+        window.alert("Entered time slots overlap with each other! Canceling event creation.");
+       }
+	   
     if (nameConflict){
         window.alert("There is already an event with this name. Cancelling event creation.");
     }
@@ -324,13 +342,14 @@ export const ViewModel = DefineMap.extend({
             host: window.currentUser,
             attendees: window.attendeesArray,
             tasks: window.tasksArray,
+			repeat: window.repeatArray,
             twentyFour: ((window.hour=="24"))
 
         };
         window.eventArray.push(eventObj);
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");
-        //window.location.href = "{{routeUrl page='adminList'}}";
+		window.location.href = '/eventList';
     }
   },
     addTask(){
@@ -369,6 +388,109 @@ export const ViewModel = DefineMap.extend({
       }
 
     },
+	//repeation box shit
+	addRepeater(){
+      var repeatEventMonth = document.getElementById("repeatEventMonth");
+	  var repeatDay = document.getElementById("repeatEventDay");
+      var repeatTextArea = document.getElementById("dayText");
+	  //repeatEventMonth = ConvertMeToWords(repeatEventMonth);
+	  
+      var repeatString = repeatEventMonth.value + " " + repeatEventDay.value;
+        if (!window.repeatArray) {
+            window.repeatArray = [];
+        }
+        var repeat = {
+            name: repeatString,
+            user: ""
+
+        };
+        var index = window.repeatArray.map(function(e) { return e.name; }).indexOf(repeatString);
+      if (repeatString != "" && (index == -1)){
+
+          window.repeatArray.push(repeat);
+          var newRepeatDiv = document.createElement("div");
+          newRepeatDiv.innerHTML += "<br>" + repeatString + "   " ;
+          newRepeatDiv.style.display = 'inline';
+          var removeButton = document.createElement("button");
+          removeButton.innerText = "Remove";
+          var removeRepeat = function(){
+              window.repeatArray.splice(window.repeatArray.indexOf(repeat), 1);
+              this.parentNode.parentNode.removeChild(this.parentNode);
+          }
+          removeButton.addEventListener("click", removeRepeat)
+          newRepeatDiv.appendChild(removeButton);
+          repeatTextArea.appendChild(newRepeatDiv);
+          repeatDayBox.value = "";
+      }
+      else{
+          window.alert("Event Already On That Day!");
+          repeatDayBox.value = "";
+      }
+
+    },
+    m_event: {
+    m_name: window.name,
+    m_month: window.month,
+    m_day: window.day,
+  },
+/**
+ * test function for global variables
+ * @method printItems
+ * @return
+ */
+  ConvertMeToWords(taskBox)
+	{
+		if(taskBox == "jan")
+		{
+			taskBox = "January";
+		}
+		else if(taskBox == "feb")
+		{
+			taskBox = "February";
+		}
+		else if(taskBox == "mar")
+		{
+			taskBox = "March";
+		}
+		else if(taskBox == "apr")
+		{
+			taskBox = "April";
+		}
+		else if(taskBox == "may")
+		{
+			taskBox = "May";
+		}else if(taskBox == "jun")
+		{
+			taskBox = "June";
+		}else if(taskBox == "jul")
+		{
+			taskBox = "July";
+		}else if(taskBox == "aug")
+		{
+			taskBox = "August";
+		}else if(taskBox == "sep")
+		{
+			taskBox = "Septmber";
+		}else if(taskBox == "oct")
+		{
+			taskBox = "October";
+		}else if(taskBox == "nov")
+		{
+			taskBox = "November";
+		}else if(taskBox == "dec")
+		{
+			taskBox = "December";
+		}
+		return taskBox;
+	},
+  printItems () {
+    console.log(name);
+    console.log(month);
+    console.log(day);
+    console.log(hour);
+    console.log(timeStart);
+    console.log(timeEnd);
+  },
   addTimeSlot(){
       setupNewStartBox();
       var endDiv = document.getElementById("endInput");

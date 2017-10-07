@@ -20,6 +20,7 @@ export const ViewModel = DefineMap.extend({
 	  else
 	  {
 		window.currentUser = document.getElementById("loginName").value;
+		localStorage.setItem('username', window.currentUser);
 	  }
 		
     }
