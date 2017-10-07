@@ -118,6 +118,15 @@ function setupNewStartBox(){
     }
     // assign new script to file
     newDiv.innerHTML = innerHtml;
+    var date = new Date();
+    date.setHours(0,0,0,0);
+    for(i = 1; i<newDiv.childNodes[0].options.length; i++){
+        var option = newDiv.childNodes[0].options[i];
+        option.value = date;
+        date = new Date(date.getTime() + 30*60000);
+        var pulledDate = new Date(option.value);
+    }
+
     startDiv.appendChild(newDiv);
 
 }
@@ -186,7 +195,6 @@ window.setupNewEndBox = function(send) {
             }
         }
         innerHtml += "</select><input ";
-
     }
     // if the hour scheme is 24
     else {
@@ -206,7 +214,26 @@ window.setupNewEndBox = function(send) {
     // add script to file
     newDiv.innerHTML = innerHtml;
     newDiv.setAttribute("boxindex", index.toString());
+    var date = new Date();
+    if (start_time.indexOf(':') == -1){
+        date.setHours(parseInt(start_time.substr(0, start_time.length-2)));
+        date.setMinutes(0);
+    }
+    else{
+        date.setHours(parseInt(start_time.substr(0, start_time.indexOf(':'))));
+        date.setMinutes(parseInt(start_time.substr(start_time.indexOf(':')+1, start_time.length-4)));
+
+    }
+    date = new Date(date.getTime() + 30*60000);
+
+    for(i = 1; i<newDiv.childNodes[0].options.length; i++){
+        var option = newDiv.childNodes[0].options[i];
+        option.value = date;
+        date = new Date(date.getTime() + 30*60000);
+    }
+
     endDiv.appendChild(newDiv);
+
 }
 
 //Entering The View Mode of the App
@@ -290,7 +317,7 @@ export const ViewModel = DefineMap.extend({
         window.eventArray.push(eventObj);
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");
-        window.location.href = '/eventList';
+        //window.location.href = "{{routeUrl page='adminList'}}";
     }
   },
     addTask(){
@@ -329,24 +356,6 @@ export const ViewModel = DefineMap.extend({
       }
 
     },
-    m_event: {
-    m_name: window.name,
-    m_month: window.month,
-    m_day: window.day,
-  },
-/**
- * test function for global variables
- * @method printItems
- * @return
- */
-  printItems () {
-    console.log(name);
-    console.log(month);
-    console.log(day);
-    console.log(hour);
-    console.log(timeStart);
-    console.log(timeEnd);
-  },
   addTimeSlot(){
       setupNewStartBox();
       var endDiv = document.getElementById("endInput");
