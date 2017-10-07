@@ -29,6 +29,16 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
   }
+  
+ function checkIfOverlap(month, day, timeStart, timeEnd) {
+	var m = month;
+	var d = day;
+	var ts = timeStart;
+	var te = timeEnd;
+	
+	var eventsArray = [];
+  
+  }
 
 function setupNewStartBox(){
     //0 for the init. boxes, 1 for the first additional start box
