@@ -29,6 +29,35 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
   }
+  
+ function checkIfOverlap(timeStart, timeEnd) {
+	var m = month;
+	var d = day;
+	var ts = timeStart;
+	var te = timeEnd;
+	
+	var eventsArray = [];
+	
+	//Pass in month, day, timeStart, and timeEnd of new event when event is being created.
+	//Loop through existing events in event array, compare times, see if times conflict.
+	//Need datetimes first
+	
+	/*for(i=0,i<eventsArray.length, i++)
+	{
+		if(m == eventsArray[i].month)
+		{
+			if(d == eventsArray[i].day)
+			{
+				if( the times overlap )
+				{
+					stop the event from being created
+				}
+			}
+		}
+		
+	}*/
+  
+  }
 
 function setupNewStartBox(){
     //0 for the init. boxes, 1 for the first additional start box
@@ -89,6 +118,15 @@ function setupNewStartBox(){
     }
     // assign new script to file
     newDiv.innerHTML = innerHtml;
+    var date = new Date();
+    date.setHours(0,0,0,0);
+    for(i = 1; i<newDiv.childNodes[0].options.length; i++){
+        var option = newDiv.childNodes[0].options[i];
+        option.value = date;
+        date = new Date(date.getTime() + 30*60000);
+        var pulledDate = new Date(option.value);
+    }
+
     startDiv.appendChild(newDiv);
 
 }
@@ -157,7 +195,6 @@ window.setupNewEndBox = function(send) {
             }
         }
         innerHtml += "</select><input ";
-
     }
     // if the hour scheme is 24
     else {
@@ -177,7 +214,26 @@ window.setupNewEndBox = function(send) {
     // add script to file
     newDiv.innerHTML = innerHtml;
     newDiv.setAttribute("boxindex", index.toString());
+    var date = new Date();
+    if (start_time.indexOf(':') == -1){
+        date.setHours(parseInt(start_time.substr(0, start_time.length-2)));
+        date.setMinutes(0);
+    }
+    else{
+        date.setHours(parseInt(start_time.substr(0, start_time.indexOf(':'))));
+        date.setMinutes(parseInt(start_time.substr(start_time.indexOf(':')+1, start_time.length-4)));
+
+    }
+    date = new Date(date.getTime() + 30*60000);
+
+    for(i = 1; i<newDiv.childNodes[0].options.length; i++){
+        var option = newDiv.childNodes[0].options[i];
+        option.value = date;
+        date = new Date(date.getTime() + 30*60000);
+    }
+
     endDiv.appendChild(newDiv);
+
 }
 
 //Entering The View Mode of the App
@@ -212,6 +268,24 @@ export const ViewModel = DefineMap.extend({
             unfilledSlot = true;
         }
     }
+	
+	var timeOverlap = false
+	
+    for (i = 0; i < allStartDivs.length; i++) {
+        var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+        var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+        var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
+        var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
+
+		if (timeOverlap == false){
+            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
+        }
+    }
+	
+	if (timeOverlap){
+        window.alert("Entered time slots overlap with each other! Canceling event creation.");
+       }
+	   
     if (nameConflict){
         window.alert("There is already an event with this name. Cancelling event creation.");
     }
@@ -262,7 +336,7 @@ export const ViewModel = DefineMap.extend({
         window.eventArray.push(eventObj);
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");
-        window.location.href = '/eventList';
+		window.location.href = '/eventList';
     }
   },
     addTask(){

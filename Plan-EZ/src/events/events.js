@@ -31,6 +31,7 @@ window.selectEvent = function(){
         window.attendeesArray = selectedEvent.attendees;
         window.tasksArray = selectedEvent.tasks;
         window.twentyFour = selectedEvent.twentyFour;
+		
         if (window.host == window.currentUser){
             document.getElementById("canAttend").innerText = "";
             window.youHost = true;
@@ -150,6 +151,7 @@ export const ViewModel = DefineMap.extend({
     return window.people;
   },
   get user(){
+	  window.currentUser =  localStorage.getItem('username');
       return window.currentUser;
   },
 
@@ -181,12 +183,10 @@ export const ViewModel = DefineMap.extend({
             alreadyAttending = true;
         }
     }
-	//believe in Jakob
-	// but test
-	//on submit for events
+
+	//runs when submitting attendance/task acceptance to make sure logically correct
     if ((youHost&&anyTasks) || ((!youHost)&&!alreadyAttending&&anyTimes) || ((!youHost)&&alreadyAttending&&anyTasks)) {
         if (anyTimes && !alreadyAttending) {
-			//TODO: double check this stops time changes
             window.currentEvent.attendees.push(userObj);
         }
 
