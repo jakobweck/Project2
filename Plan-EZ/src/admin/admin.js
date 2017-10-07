@@ -335,7 +335,7 @@ export const ViewModel = DefineMap.extend({
         window.eventArray.push(eventObj);
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");
-        //window.location.href = "{{routeUrl page='adminList'}}";
+		window.location.href = '/eventList';
     }
   },
     addTask(){
