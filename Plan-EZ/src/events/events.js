@@ -37,6 +37,7 @@ window.selectEvent = function(){
             window.youHost = true;
         }
         else{
+			//TODO redirect to main page?
             document.getElementById("canAttend").innerText = "Can you attend?";
 
         }

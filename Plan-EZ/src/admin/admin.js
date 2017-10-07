@@ -29,19 +29,19 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
   }
-  
+
  function checkIfOverlap(timeStart, timeEnd) {
 	var m = month;
 	var d = day;
 	var ts = timeStart;
 	var te = timeEnd;
-	
+
 	var eventsArray = [];
-	
+
 	//Pass in month, day, timeStart, and timeEnd of new event when event is being created.
 	//Loop through existing events in event array, compare times, see if times conflict.
 	//Need datetimes first
-	
+
 	/*for(i=0,i<eventsArray.length, i++)
 	{
 		if(m == eventsArray[i].month)
@@ -54,9 +54,9 @@ function event(name, month, day, timeStart, timeEnd) {
 				}
 			}
 		}
-		
+
 	}*/
-  
+
   }
 
 function setupNewStartBox(){
@@ -180,14 +180,14 @@ window.setupNewEndBox = function(send) {
             }
 
             innerHtml += "<option value='" + time + "'>" + time;
-            if (i<11){
+            if (i<12){
                 innerHtml += "AM"  + "</option>";
             }
             else{
                 innerHtml += "PM"  + "</option>";
             }
             innerHtml += "<option value='" + time + ":30'>" + time + ":30";
-            if (i<11){
+            if (i<12){
                 innerHtml += "AM"  + "</option>";
             }
             else{
@@ -281,9 +281,9 @@ export const ViewModel = DefineMap.extend({
             unfilledSlot = true;
         }
     }
-	
+
 	var timeOverlap = false
-	
+
     for (i = 0; i < allStartDivs.length; i++) {
         var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
         var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
@@ -291,14 +291,14 @@ export const ViewModel = DefineMap.extend({
         var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
 
 		if (timeOverlap == false){
-            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
+            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);
         }
     }
-	
+
 	if (timeOverlap){
         window.alert("Entered time slots overlap with each other! Canceling event creation.");
        }
-	   
+
     if (nameConflict){
         window.alert("There is already an event with this name. Cancelling event creation.");
     }
@@ -394,7 +394,7 @@ export const ViewModel = DefineMap.extend({
 	  var repeatDay = document.getElementById("repeatEventDay");
       var repeatTextArea = document.getElementById("dayText");
 	  //repeatEventMonth = ConvertMeToWords(repeatEventMonth);
-	  
+
       var repeatString = repeatEventMonth.value + " " + repeatEventDay.value;
         if (!window.repeatArray) {
             window.repeatArray = [];

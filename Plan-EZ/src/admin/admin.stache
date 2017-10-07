@@ -258,20 +258,23 @@ This Component is linked to admin.js -->
 			}
 
 			innerHtml += "<option value='" + time + "'>" + time;
-			if (i<11){
+			if (i<12){
 			    innerHtml += "AM"  + "</option>";
 			}
 			else{
 			    innerHtml += "PM"  + "</option>";
 			}
 			innerHtml += "<option value='" + time + ":30'>" + time + ":30";
-			if (i<11){
+			if (i<12){
 			    innerHtml += "AM"  + "</option>";
 			}
 			else{
 			    innerHtml += "PM"  + "</option>";
 			}
 		      }
+          //last time not added in loop
+      innerHtml += "<option value='" + 12 + "'>" + 12 + "AM" + "</option>";
+
 		      innerHtml += "</select><input ";
 		    }
 
@@ -291,6 +294,8 @@ This Component is linked to admin.js -->
 			innerHtml += "<option value='" + i + "'>" + i + "</option>";
 			innerHtml += "<option value='" + i + ":30'>" + i + ":30</option>";
 		      }
+          //end time is the trailing end so 24 should always be available to end on that day.
+          innerHtml += "<option value='" + 24 + "'>" + 24 + "</option>";
 		      innerHtml += "</select><input ";
 		    }
 
@@ -349,8 +354,8 @@ This Component is linked to admin.js -->
 		window.tasksArray = [];
 	      </script>
        </div>
-	   
-	   
+
+
 	   <div class="col-sm-5" id = "repeatDiv">
 	     <h3>Repeat Event</h3>
 		<!-- onchange="repeatAddDay('repeatDayInput')checkRepeat()" -->
@@ -370,11 +375,11 @@ This Component is linked to admin.js -->
             <option value="dec">December</option>
           </select>
       <button type="button" id = "addRepeatDay" ($click)="addRepeater" disabled>Add Day</button>
-      
+
 	  <script>
         window.repeatDayArray = [];
       </script>
-	  
+
         <div id="repeatDayInput"></div>
           <select id="repeatEventDay"></select>
 
@@ -420,12 +425,12 @@ This Component is linked to admin.js -->
 			document.getElementById(divName).appendChild(newDiv);
 		}
           </script>
-		  
+
 	  <h3>Event Repeated On</h3>
 	  <div id = "dayText"><br></div>
-	  
+
       </div>
-	  
+
 	  </div>
     </div>
   </div>
