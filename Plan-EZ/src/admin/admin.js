@@ -30,7 +30,7 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeEnd = timeEnd;
   }
   
- function checkIfOverlap(month, day, timeStart, timeEnd) {
+ function checkIfOverlap(timeStart, timeEnd) {
 	var m = month;
 	var d = day;
 	var ts = timeStart;
@@ -268,6 +268,24 @@ export const ViewModel = DefineMap.extend({
             unfilledSlot = true;
         }
     }
+	
+	var timeOverlap = false
+	
+    for (i = 0; i < allStartDivs.length; i++) {
+        var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+        var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+        var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
+        var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
+
+		if (timeOverlap == false){
+            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
+        }
+    }
+	
+	if (timeOverlap){
+        window.alert("Entered time slots overlap with each other! Canceling event creation.");
+       }
+	   
     if (nameConflict){
         window.alert("There is already an event with this name. Cancelling event creation.");
     }
