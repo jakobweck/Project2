@@ -37,6 +37,25 @@ function event(name, month, day, timeStart, timeEnd) {
 	var te = timeEnd;
 	
 	var eventsArray = [];
+	
+	//Pass in month, day, timeStart, and timeEnd of new event when event is being created.
+	//Loop through existing events in event array, compare times, see if times conflict.
+	//Need datetimes first
+	
+	/*for(i=0,i<eventsArray.length, i++)
+	{
+		if(m == eventsArray[i].month)
+		{
+			if(d == eventsArray[i].day)
+			{
+				if( the times overlap )
+				{
+					stop the event from being created
+				}
+			}
+		}
+		
+	}*/
   
   }
 
