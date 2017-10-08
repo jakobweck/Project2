@@ -142,7 +142,10 @@ window.selectEvent = function(){
             attendeesString += "(";
             var j;
             for (j=0; j<window.attendeesArray[i].timeslots.length; j++){
-                attendeesString += window.attendeesArray[i].timeslots[j];
+                
+				attendeesString += window.attendeesArray[i].timeslots[j];
+				
+				
                 if (j != window.attendeesArray[i].timeslots.length - 1){
                     attendeesString+= ", ";
                 }
@@ -219,10 +222,59 @@ export const ViewModel = DefineMap.extend({
         name: window.currentUser,
         timeslots: []
       }
-    for(i = 0; i<window.checkboxes.length; i++){
+    
+	var currentBox = window.startTimeArray.length;
+	
+	for(i = 0; i<window.checkboxes.length; i++){
         if (window.checkboxes[i].checked){
             anyTimes = true;
-            userObj.timeslots.push(window.startTimeArray[i] + "-" +window.endTimeArray[i]);
+			
+			//normal days
+			if(i < (window.startTimeArray.length))
+			{
+				userObj.timeslots.push(window.startTimeArray[i] + "-" +window.endTimeArray[i] + " on " +
+												window.month + " " + window.day);
+			}							
+			//repeat days
+			else
+			{
+				if(window.repeat != null)
+				{
+					alert(window.repeat.length);
+					for(var a = 0; a < window.repeat.length; a++)
+					{
+						var repeatObj = window.repeat[a];
+						for(var u = 0; u < repeatObj.startTimes.length; u++)
+						{
+							
+							if(currentBox = i)
+							{
+								var addIt = true;
+
+								for(var t = 0; t < userObj.timeslots.length; t++)
+								{
+									if(userObj.timeslots[t] == repeatObj.startTimes[u] + "-" +repeatObj.endTimes[u] + " on " +
+													repeatObj.month + " " + repeatObj.day)
+									{
+										addIt = false;
+									}
+								}
+								
+								if(addIt)
+								{
+									alert("yess you got it");
+									userObj.timeslots.push(repeatObj.startTimes[u] + "-" +repeatObj.endTimes[u] + " on " +
+														repeatObj.month + " " + repeatObj.day);
+								}
+								break;
+							}
+							currentBox++;
+						}
+					}
+				}
+				currentBox = window.startTimeArray.length;
+			}
+			
         }
     }
     for(i = 0; i<window.taskChecks.length; i++){
