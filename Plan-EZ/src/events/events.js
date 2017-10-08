@@ -54,7 +54,7 @@ window.selectEvent = function(){
 				{
 					repeatDateString += window.repeat[j].month + " " + window.repeat[j].day + ", ";
 				}
-				else { repeatDateString += "and " + window.repeat[j].month + " " + window.repeat[j].day; }
+				else { repeatDateString += window.repeat[j].month + " " + window.repeat[j].day; }
 			}
 		}
 		
@@ -80,9 +80,8 @@ window.selectEvent = function(){
 		//All start times w/ dates
         for (i=0; i<window.startTimeArray.length; i++){
             window.checkboxes.splice(i, 1);
-            timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i] + " on " +
-											window.month + " " + window.day;
-          if (i != window.startTimeArray.length  && window.repeat.length > 0){
+            timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i];
+          if (i != window.startTimeArray.length){
             timeSlotString+= ", ";
           }
           if(!youHost) {
@@ -92,11 +91,11 @@ window.selectEvent = function(){
               box.setAttribute("id", "box" + i.toString());
               var label = document.createElement("label");
               label.htmlFor = "box" + i.toString();
-              label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] + " on " +
-											window.month + " " + window.day;
+              label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] +
+                  "(" + window.month + " " + window.day + ")";
               box.setAttribute("type", "checkbox");
-              checkDiv.appendChild(box);
               checkDiv.appendChild(label);
+              checkDiv.appendChild(box);
               window.checkboxes.push(box);
           }
           else{
@@ -110,25 +109,20 @@ window.selectEvent = function(){
 			for (j=0; j<window.repeat.length; j++)
 			{
 				var repeatObj = window.repeat[j];
-				for (i=0; i<repeatObj.startTimes.length; i++){
+				for (i=0; i<window.startTimeArray.length; i++){
 					//window.checkboxes.splice(i, 1);
-					timeSlotString += repeatObj.startTimes[i] + "-" +repeatObj.endTimes[i] + " on " +
-												repeatObj.month + " " + repeatObj.day;
-				  if (i != (repeatObj.startTimes.length - 1)  || j != (window.repeat.length - 1) ){
-					timeSlotString+= ", ";
-				  }
 				  if(!youHost) {
 					  document.getElementById("submitButton").disabled = false;
 					  var checkDiv = document.getElementById("checkBoxDiv");
 					  var box = document.createElement("input");
-					  box.setAttribute("id", "box" + i.toString());
+					  box.setAttribute("id", "rbox" + i.toString());
 					  var label = document.createElement("label");
-					  label.htmlFor = "box" + i.toString();
-					  label.innerHTML = repeatObj.startTimes[i] + "-" + repeatObj.endTimes[i] + " on " +
-												repeatObj.month + " " + repeatObj.day;
+					  label.htmlFor = "rbox" + i.toString();
+					  label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] +
+												"(" + repeatObj.month + " " + repeatObj.day + ")";
 					  box.setAttribute("type", "checkbox");
-					  checkDiv.appendChild(box);
-					  checkDiv.appendChild(label);
+                      checkDiv.appendChild(label);
+                      checkDiv.appendChild(box);
 					  window.checkboxes.push(box);
 					  
 				  }

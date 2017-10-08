@@ -383,8 +383,15 @@ export const ViewModel = DefineMap.extend({
 
             startTimeArray.push(startTime);
             endTimeArray.push(endTime);
-            hostUser.timeslots.push(startTime + "-" + endTime);
+            hostUser.timeslots.push(startTime+ "-" +endTime + "(" +
+                window.month + " " + window.day + ")");
         }
+        for (i=0; i<window.repeatArray.length; i++){
+            hostUser.timeslots.push(startTime+ "-" +endTime + "(" +
+                window.repeatArray[i].month + " " + window.repeatArray[i].day + ")");
+
+        }
+
 	console.log("6");
         window.attendeesArray = [hostUser];
 
