@@ -29,19 +29,19 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
   }
-
+  
  function checkIfOverlap(timeStart, timeEnd) {
 	var m = month;
 	var d = day;
 	var ts = timeStart;
 	var te = timeEnd;
-
+	
 	var eventsArray = [];
-
+	
 	//Pass in month, day, timeStart, and timeEnd of new event when event is being created.
 	//Loop through existing events in event array, compare times, see if times conflict.
 	//Need datetimes first
-
+	
 	/*for(i=0,i<eventsArray.length, i++)
 	{
 		if(m == eventsArray[i].month)
@@ -54,9 +54,9 @@ function event(name, month, day, timeStart, timeEnd) {
 				}
 			}
 		}
-
+		
 	}*/
-
+  
   }
 
 function setupNewStartBox(){
@@ -180,14 +180,14 @@ window.setupNewEndBox = function(send) {
             }
 
             innerHtml += "<option value='" + time + "'>" + time;
-            if (i<12){
+            if (i<11){
                 innerHtml += "AM"  + "</option>";
             }
             else{
                 innerHtml += "PM"  + "</option>";
             }
             innerHtml += "<option value='" + time + ":30'>" + time + ":30";
-            if (i<12){
+            if (i<11){
                 innerHtml += "AM"  + "</option>";
             }
             else{
@@ -271,40 +271,49 @@ export const ViewModel = DefineMap.extend({
     var name = document.getElementById(("eventName")).value;
     var nameConflict = false;
     var unfilledSlot = false;
+
+    //Checking if event with the same name exists
     for (i =0; i<window.eventArray.length; i++){
         if (window.eventArray[i].name === name){
             nameConflict = true;
         }
     }
+
+	console.log("1");
+
+    //Checking if there are unfilled slots
     for (i=0; i<allStartDivs.length; i++){
         if (allStartDivs[i].getElementsByTagName('select')[0].selectedIndex == 0 || allEndDivs[i].getElementsByTagName('select')[0].selectedIndex == 0){
             unfilledSlot = true;
         }
     }
-
+	console.log("2");
+	
 	var timeOverlap = false
-
+	
     for (i = 0; i < allStartDivs.length; i++) {
         var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
         var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
         var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
         var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
 
-		if (timeOverlap == false){
-            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);
-        }
+	/*if (timeOverlap == false){
+            timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
+        }*/
     }
-
+	console.log("3");
+	
 	if (timeOverlap){
         window.alert("Entered time slots overlap with each other! Canceling event creation.");
        }
-
+	   
     if (nameConflict){
         window.alert("There is already an event with this name. Cancelling event creation.");
     }
     if (unfilledSlot){
         window.alert("One of the time slots is not filled. Cancelling event creation.");
     }
+	console.log("4");
     if(!nameConflict && !unfilledSlot) {
         window.name = document.getElementById("eventName").value;
         window.month = document.getElementById("eventMonth").value;
@@ -318,6 +327,7 @@ export const ViewModel = DefineMap.extend({
             timeslots: []
         }
 
+	console.log("5");
 
         for (i = 0; i < allStartDivs.length; i++) {
             var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
@@ -329,6 +339,7 @@ export const ViewModel = DefineMap.extend({
             endTimeArray.push(endTime);
             hostUser.timeslots.push(startTime + "-" + endTime);
         }
+	console.log("6");
         window.attendeesArray = [hostUser];
 
         window.timeStart = document.getElementById("eventStart").value;
@@ -347,8 +358,10 @@ export const ViewModel = DefineMap.extend({
 
         };
         window.eventArray.push(eventObj);
+	console.log("7");
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");
+	console.log("8");
 		window.location.href = '/eventList';
     }
   },
@@ -394,7 +407,7 @@ export const ViewModel = DefineMap.extend({
 	  var repeatDay = document.getElementById("repeatEventDay");
       var repeatTextArea = document.getElementById("dayText");
 	  //repeatEventMonth = ConvertMeToWords(repeatEventMonth);
-
+	  
       var repeatString = repeatEventMonth.value + " " + repeatEventDay.value;
         if (!window.repeatArray) {
             window.repeatArray = [];
