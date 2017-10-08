@@ -403,11 +403,28 @@ export const ViewModel = DefineMap.extend({
     },
 	//repeation box shit
 	addRepeater(){
-      var repeatEventMonth = document.getElementById("repeatEventMonth");
-	  var repeatDay = document.getElementById("repeatEventDay");
-      var repeatTextArea = document.getElementById("dayText");
-	  
-	  //0----
+
+		//Getting html objects for the months and dates
+		var repeatEventMonth = document.getElementById("repeatEventMonth");
+		var repeatDay = document.getElementById("repeatEventDay");
+		var repeatTextArea = document.getElementById("dayText");
+		var eventMonth = document.getElementById("eventMonth");
+		var eventDate= document.getElementById("eventDay");
+
+		//Checkin if the main event date is null. Need to force the user to first enter the event date
+		if(eventMonth.value == "null" || eventDate.value == "null"){
+			window.alert("Please enter the event month and date first.");
+			return;
+		}
+
+		//Checking if the event date's month is same as the repeate date's month
+		if(repeatEventMonth.value == eventMonth.value){
+			if(repeatDay.value == eventDate.value){
+				window.alert("Date to be repeated on cannot be the same as your event date. Please re-enter.");
+				return;
+			}
+		}
+		  
 		//these are the start and end times
 		var allStartDivs = document.getElementById('startInput').getElementsByTagName('div');
 		var allEndDivs = document.getElementById('endInput').getElementsByTagName('div');
@@ -427,9 +444,9 @@ export const ViewModel = DefineMap.extend({
 			var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
 			var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
 
-			if (timeOverlap == false){
+			/*if (timeOverlap == false){
 				timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
-			}
+			}*/
 		}
 	
 		if (unfilledSlot){
