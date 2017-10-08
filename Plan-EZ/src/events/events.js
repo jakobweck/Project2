@@ -81,7 +81,7 @@ window.selectEvent = function(){
         for (i=0; i<window.startTimeArray.length; i++){
             window.checkboxes.splice(i, 1);
             timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i];
-          if (i != window.startTimeArray.length){
+          if (i != window.startTimeArray.length-1){
             timeSlotString+= ", ";
           }
           if(!youHost) {

@@ -325,7 +325,6 @@ export const ViewModel = DefineMap.extend({
         }
     }
 
-	console.log("1");
 
     //Checking if there are unfilled slots
     for (i=0; i<allStartDivs.length; i++){
@@ -333,8 +332,7 @@ export const ViewModel = DefineMap.extend({
             unfilledSlot = true;
         }
     }
-	console.log("2");
-	
+
 	var timeOverlap = false
 	
     for (i = 0; i < allStartDivs.length; i++) {
@@ -347,8 +345,7 @@ export const ViewModel = DefineMap.extend({
             timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
         }*/
     }
-	console.log("3");
-	
+
 	if (timeOverlap){
         window.alert("Entered time slots overlap with each other! Canceling event creation.");
        }
@@ -373,7 +370,6 @@ export const ViewModel = DefineMap.extend({
             timeslots: []
         }
 
-	console.log("5");
 
         for (i = 0; i < allStartDivs.length; i++) {
             var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
@@ -392,7 +388,6 @@ export const ViewModel = DefineMap.extend({
 
         }
 
-	console.log("6");
         window.attendeesArray = [hostUser];
 
         window.timeStart = document.getElementById("eventStart").value;
@@ -411,10 +406,8 @@ export const ViewModel = DefineMap.extend({
 
         };
         window.eventArray.push(eventObj);
-	console.log("7");
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");
-	console.log("8");
 		window.location.href = '/eventList';
     }
   },
@@ -477,63 +470,6 @@ export const ViewModel = DefineMap.extend({
 				return;
 			}
 		}
-		  
-		//these are the start and end times
-		var allStartDivs = document.getElementById('startInput').getElementsByTagName('div');
-		var allEndDivs = document.getElementById('endInput').getElementsByTagName('div');
-    
-		var unfilledSlot = false;
-		for (i=0; i<allStartDivs.length; i++){
-			if (allStartDivs[i].getElementsByTagName('select')[0].selectedIndex == 0 || allEndDivs[i].getElementsByTagName('select')[0].selectedIndex == 0){
-				unfilledSlot = true;
-			}
-		}
-	
-		var timeOverlap = false;
-	
-		for (i = 0; i < allStartDivs.length; i++) {
-			var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
-			var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
-			var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
-			var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
-
-			/*if (timeOverlap == false){
-				timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
-			}*/
-		}
-	
-		if (unfilledSlot){
-			window.alert("One of the time slots is not filled. Cancelling event creation.");
-		}
-		if(!unfilledSlot) {
-			window.startTimeArray = [];
-			window.endTimeArray = [];
-			var hostUser = {
-				name: window.currentUser,
-				timeslots: []
-			}
-
-
-			for (i = 0; i < allStartDivs.length; i++) {
-				var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
-				var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
-				var startTime = startTimeBox.options[startTimeBox.selectedIndex].text;
-				var endTime = endTimeBox.options[endTimeBox.selectedIndex].text;
-
-				startTimeArray.push(startTime);
-				endTimeArray.push(endTime);
-				hostUser.timeslots.push(startTime + "-" + endTime);
-			}
-			window.attendeesArray = [hostUser];
-
-			window.timeStart = document.getElementById("eventStart").value;
-			window.timeEnd = document.getElementById("eventEnd").value;
-			//window.eventArray.push(repeatObj);
-			//localStorage.setItem('events', JSON.stringify(window.eventArray));
-		}
-		//0----
-	    //repeatEventMonth = ConvertMeToWords(repeatEventMonth);
-	  
         var repeatString = repeatEventMonth.value + " " + repeatEventDay.value;
         if (!window.repeatArray) {
             window.repeatArray = [];
