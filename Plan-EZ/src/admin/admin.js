@@ -30,6 +30,52 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeEnd = timeEnd;
   }
   
+    function ConvertMeToWords(taskBox)
+	{
+		if(taskBox == "jan")
+		{
+			taskBox = "January";
+		}
+		else if(taskBox == "feb")
+		{
+			taskBox = "February";
+		}
+		else if(taskBox == "mar")
+		{
+			taskBox = "March";
+		}
+		else if(taskBox == "apr")
+		{
+			taskBox = "April";
+		}
+		else if(taskBox == "may")
+		{
+			taskBox = "May";
+		}else if(taskBox == "jun")
+		{
+			taskBox = "June";
+		}else if(taskBox == "jul")
+		{
+			taskBox = "July";
+		}else if(taskBox == "aug")
+		{
+			taskBox = "August";
+		}else if(taskBox == "sep")
+		{
+			taskBox = "Septmber";
+		}else if(taskBox == "oct")
+		{
+			taskBox = "October";
+		}else if(taskBox == "nov")
+		{
+			taskBox = "November";
+		}else if(taskBox == "dec")
+		{
+			taskBox = "December";
+		}
+		return taskBox;
+	}
+  
  function checkIfOverlap(timeStart, timeEnd) {
 	var m = month;
 	var d = day;
@@ -490,6 +536,8 @@ export const ViewModel = DefineMap.extend({
 
 			var repeat = {
             name: repeatString,
+			month: repeatEventMonth.value,
+			day: repeatEventDay.value,
             startTimes: window.startTimeArray,
 			endTimes: window.endTimeArray,
 			attendees: window.attendeesArray
@@ -546,52 +594,6 @@ export const ViewModel = DefineMap.extend({
 
   }
 });
-
-  /*ConvertMeToWords(taskBox)
-	{
-		if(taskBox == "jan")
-		{
-			taskBox = "January";
-		}
-		else if(taskBox == "feb")
-		{
-			taskBox = "February";
-		}
-		else if(taskBox == "mar")
-		{
-			taskBox = "March";
-		}
-		else if(taskBox == "apr")
-		{
-			taskBox = "April";
-		}
-		else if(taskBox == "may")
-		{
-			taskBox = "May";
-		}else if(taskBox == "jun")
-		{
-			taskBox = "June";
-		}else if(taskBox == "jul")
-		{
-			taskBox = "July";
-		}else if(taskBox == "aug")
-		{
-			taskBox = "August";
-		}else if(taskBox == "sep")
-		{
-			taskBox = "Septmber";
-		}else if(taskBox == "oct")
-		{
-			taskBox = "October";
-		}else if(taskBox == "nov")
-		{
-			taskBox = "November";
-		}else if(taskBox == "dec")
-		{
-			taskBox = "December";
-		}
-		return taskBox;
-	}*/
 
 export default Component.extend({
   tag: 'adminComponent-',

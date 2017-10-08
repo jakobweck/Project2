@@ -31,6 +31,7 @@ window.selectEvent = function(){
         window.attendeesArray = selectedEvent.attendees;
         window.tasksArray = selectedEvent.tasks;
         window.twentyFour = selectedEvent.twentyFour;
+		window.repeat = selectedEvent.repeat;
 		
         if (window.host == window.currentUser){
             document.getElementById("canAttend").innerText = "";
@@ -42,7 +43,22 @@ window.selectEvent = function(){
 
         }
 
-        var infoString = "Selected Event: " + window.name +" on " + window.month +" "+ window.day + ".<br> Host: " + window.host;
+		//find all of the different repeat dates
+		var repeatDateString = "";
+		if(window.repeat != null)
+		{
+			repeatDateString = ", ";
+			for(var j = 0; j < window.repeat.length; j++)
+			{
+				if(j != (window.repeat.length-1))
+				{
+					repeatDateString += window.repeat[j].month + " " + window.repeat[j].day + ", ";
+				}
+				else { repeatDateString += "and " + window.repeat[j].month + " " + window.repeat[j].day; }
+			}
+		}
+		
+        var infoString = "Selected Event: " + window.name +" on " + window.month +" "+ window.day + repeatDateString +".<br> Host: " + window.host;
         if (window.youHost){
             infoString += " (You)";
             document.getElementById("yourUserName").innerHTML = "";
@@ -51,20 +67,22 @@ window.selectEvent = function(){
         }
         var eventInfo = document.getElementById("eventInfo");
         eventInfo.innerHTML = infoString;
-        var timeSlotString = "Times ";
+        
+		var timeSlotString = "Times ";
         if (window.twentyFour) {
             timeSlotString += "(24 Hour):<br>";
         }
         else{
             timeSlotString += ":<br>";
-
         }
         document.getElementById('checkBoxDiv').innerHTML="";
 
+		//All start times w/ dates
         for (i=0; i<window.startTimeArray.length; i++){
             window.checkboxes.splice(i, 1);
-            timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i];
-          if (i != window.startTimeArray.length - 1){
+            timeSlotString += window.startTimeArray[i] + "-" +window.endTimeArray[i] + " on " +
+											window.month + " " + window.day;
+          if (i != window.startTimeArray.length  && window.repeat.length > 0){
             timeSlotString+= ", ";
           }
           if(!youHost) {
@@ -74,7 +92,8 @@ window.selectEvent = function(){
               box.setAttribute("id", "box" + i.toString());
               var label = document.createElement("label");
               label.htmlFor = "box" + i.toString();
-              label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i];
+              label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] + " on " +
+											window.month + " " + window.day;
               box.setAttribute("type", "checkbox");
               checkDiv.appendChild(box);
               checkDiv.appendChild(label);
@@ -84,6 +103,39 @@ window.selectEvent = function(){
               //document.getElementById("submitButton").disabled = true;
           }
         }
+		
+		//All repeat date start&end times w/ dates
+		if(window.repeat != null)
+		{
+			for (j=0; j<window.repeat.length; j++)
+			{
+				var repeatObj = window.repeat[j];
+				for (i=0; i<repeatObj.startTimes.length; i++){
+					//window.checkboxes.splice(i, 1);
+					timeSlotString += repeatObj.startTimes[i] + "-" +repeatObj.endTimes[i] + " on " +
+												repeatObj.month + " " + repeatObj.day;
+				  if (i != (repeatObj.startTimes.length - 1)  || j != (window.repeat.length - 1) ){
+					timeSlotString+= ", ";
+				  }
+				  if(!youHost) {
+					  document.getElementById("submitButton").disabled = false;
+					  var checkDiv = document.getElementById("checkBoxDiv");
+					  var box = document.createElement("input");
+					  box.setAttribute("id", "box" + i.toString());
+					  var label = document.createElement("label");
+					  label.htmlFor = "box" + i.toString();
+					  label.innerHTML = repeatObj.startTimes[i] + "-" + repeatObj.endTimes[i] + " on " +
+												repeatObj.month + " " + repeatObj.day;
+					  box.setAttribute("type", "checkbox");
+					  checkDiv.appendChild(box);
+					  checkDiv.appendChild(label);
+					  window.checkboxes.push(box);
+					  
+				  }
+				}
+			}
+		}
+		
         var attendeesString = "Attendees: ";
         for(i=0; i<window.attendeesArray.length; i++){
             attendeesString += window.attendeesArray[i].name;
