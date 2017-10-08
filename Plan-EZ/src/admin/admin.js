@@ -379,12 +379,20 @@ export const ViewModel = DefineMap.extend({
 
             startTimeArray.push(startTime);
             endTimeArray.push(endTime);
-            hostUser.timeslots.push(startTime+ "-" +endTime + "(" +
-                window.month + " " + window.day + ")");
+            hostUser.timeslots.push(startTime+ "-" +endTime + "[" +
+                window.month + " " + window.day + "]");
         }
         for (i=0; i<window.repeatArray.length; i++){
-            hostUser.timeslots.push(startTime+ "-" +endTime + "(" +
-                window.repeatArray[i].month + " " + window.repeatArray[i].day + ")");
+            var j;
+            for (j=0; j<allStartDivs.length; j++) {
+                var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+                var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+                var startTime = startTimeBox.options[startTimeBox.selectedIndex].text;
+                var endTime = endTimeBox.options[endTimeBox.selectedIndex].text;
+
+                hostUser.timeslots.push(startTime + "-" + endTime + "[" +
+                    window.repeatArray[i].month + " " + window.repeatArray[i].day + "]");
+            }
 
         }
 

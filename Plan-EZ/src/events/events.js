@@ -119,7 +119,7 @@ window.selectEvent = function(){
 					  var label = document.createElement("label");
 					  label.htmlFor = "rbox" + i.toString();
 					  label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] +
-												"(" + repeatObj.month + " " + repeatObj.day + ")";
+												"[" + repeatObj.month + " " + repeatObj.day + "]";
 					  box.setAttribute("type", "checkbox");
                       checkDiv.appendChild(label);
                       checkDiv.appendChild(box);
@@ -226,8 +226,8 @@ export const ViewModel = DefineMap.extend({
 			//normal days
 			if(i < (window.startTimeArray.length))
 			{
-				userObj.timeslots.push(window.startTimeArray[i] + "-" +window.endTimeArray[i] + " on " +
-												window.month + " " + window.day);
+				userObj.timeslots.push(window.startTimeArray[i] + "-" +window.endTimeArray[i] + "[" +
+												window.month + " " + window.day + "]");
 			}							
 			//repeat days
 			else
@@ -238,7 +238,7 @@ export const ViewModel = DefineMap.extend({
 					for(var a = 0; a < window.repeat.length; a++)
 					{
 						var repeatObj = window.repeat[a];
-						for(var u = 0; u < repeatObj.startTimes.length; u++)
+						for(var u = 0; u < window.startTimeArray.length; u++)
 						{
 							
 							if(currentBox = i)
@@ -247,8 +247,8 @@ export const ViewModel = DefineMap.extend({
 
 								for(var t = 0; t < userObj.timeslots.length; t++)
 								{
-									if(userObj.timeslots[t] == repeatObj.startTimes[u] + "-" +repeatObj.endTimes[u] + " on " +
-													repeatObj.month + " " + repeatObj.day)
+									if(userObj.timeslots[t] == window.startTimeArray[u] + "-" +window.endTimeArray[u] + "[" +
+													repeatObj.month + " " + repeatObj.day +"]")
 									{
 										addIt = false;
 									}
@@ -257,8 +257,8 @@ export const ViewModel = DefineMap.extend({
 								if(addIt)
 								{
 									alert("yess you got it");
-									userObj.timeslots.push(repeatObj.startTimes[u] + "-" +repeatObj.endTimes[u] + " on " +
-														repeatObj.month + " " + repeatObj.day);
+									userObj.timeslots.push(window.startTimeArray[u] + "-" +window.endTimeArray[u] + "[" +
+														repeatObj.month + " " + repeatObj.day + "]");
 								}
 								break;
 							}
