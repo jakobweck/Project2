@@ -377,7 +377,7 @@ export const ViewModel = DefineMap.extend({
             user: ""
 
         };
-        var index = window.tasksArray.map(function(e) { return e.name; }).indexOf(taskString);
+      var index = window.tasksArray.map(function(e) { return e.name; }).indexOf(taskString);
       if (taskString != "" && (index == -1)){
 
           window.tasksArray.push(task);
@@ -406,39 +406,97 @@ export const ViewModel = DefineMap.extend({
       var repeatEventMonth = document.getElementById("repeatEventMonth");
 	  var repeatDay = document.getElementById("repeatEventDay");
       var repeatTextArea = document.getElementById("dayText");
-	  //repeatEventMonth = ConvertMeToWords(repeatEventMonth);
 	  
-      var repeatString = repeatEventMonth.value + " " + repeatEventDay.value;
+	  //0----
+		//these are the start and end times
+		var allStartDivs = document.getElementById('startInput').getElementsByTagName('div');
+		var allEndDivs = document.getElementById('endInput').getElementsByTagName('div');
+    
+		var unfilledSlot = false;
+		for (i=0; i<allStartDivs.length; i++){
+			if (allStartDivs[i].getElementsByTagName('select')[0].selectedIndex == 0 || allEndDivs[i].getElementsByTagName('select')[0].selectedIndex == 0){
+				unfilledSlot = true;
+			}
+		}
+	
+		var timeOverlap = false;
+	
+		for (i = 0; i < allStartDivs.length; i++) {
+			var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+			var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+			var startTimeValue = startTimeBox.options[startTimeBox.selectedIndex].value;
+			var endTimeValue = endTimeBox.options[endTimeBox.selectedIndex].value;
+
+			if (timeOverlap == false){
+				timeOverlap = checkIfOverlap(startTimeValue, endTimeValue);       
+			}
+		}
+	
+		if (unfilledSlot){
+			window.alert("One of the time slots is not filled. Cancelling event creation.");
+		}
+		if(!unfilledSlot) {
+			window.startTimeArray = [];
+			window.endTimeArray = [];
+			var hostUser = {
+				name: window.currentUser,
+				timeslots: []
+			}
+
+
+			for (i = 0; i < allStartDivs.length; i++) {
+				var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
+				var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+				var startTime = startTimeBox.options[startTimeBox.selectedIndex].text;
+				var endTime = endTimeBox.options[endTimeBox.selectedIndex].text;
+
+				startTimeArray.push(startTime);
+				endTimeArray.push(endTime);
+				hostUser.timeslots.push(startTime + "-" + endTime);
+			}
+			window.attendeesArray = [hostUser];
+
+			window.timeStart = document.getElementById("eventStart").value;
+			window.timeEnd = document.getElementById("eventEnd").value;
+			//window.eventArray.push(repeatObj);
+			//localStorage.setItem('events', JSON.stringify(window.eventArray));
+		}
+		//0----
+	    //repeatEventMonth = ConvertMeToWords(repeatEventMonth);
+	  
+        var repeatString = repeatEventMonth.value + " " + repeatEventDay.value;
         if (!window.repeatArray) {
             window.repeatArray = [];
         }
-        var repeat = {
-            name: repeatString,
-            user: ""
-
-        };
         var index = window.repeatArray.map(function(e) { return e.name; }).indexOf(repeatString);
-      if (repeatString != "" && (index == -1)){
+		if (repeatString != "" && (index == -1)){
 
-          window.repeatArray.push(repeat);
-          var newRepeatDiv = document.createElement("div");
-          newRepeatDiv.innerHTML += "<br>" + repeatString + "   " ;
-          newRepeatDiv.style.display = 'inline';
-          var removeButton = document.createElement("button");
-          removeButton.innerText = "Remove";
-          var removeRepeat = function(){
-              window.repeatArray.splice(window.repeatArray.indexOf(repeat), 1);
-              this.parentNode.parentNode.removeChild(this.parentNode);
-          }
-          removeButton.addEventListener("click", removeRepeat)
-          newRepeatDiv.appendChild(removeButton);
-          repeatTextArea.appendChild(newRepeatDiv);
-          repeatDayBox.value = "";
-      }
-      else{
-          window.alert("Event Already On That Day!");
-          repeatDayBox.value = "";
-      }
+			var repeat = {
+            name: repeatString,
+            startTimes: window.startTimeArray,
+			endTimes: window.endTimeArray,
+			attendees: window.attendeesArray
+			};
+			
+			window.repeatArray.push(repeat);
+			var newRepeatDiv = document.createElement("div");
+			newRepeatDiv.innerHTML += "<br>" + repeatString + "   " ;
+			newRepeatDiv.style.display = 'inline';
+			var removeButton = document.createElement("button");
+			removeButton.innerText = "Remove";
+			var removeRepeat = function(){
+				window.repeatArray.splice(window.repeatArray.indexOf(repeat), 1);
+				this.parentNode.parentNode.removeChild(this.parentNode);
+			}
+			removeButton.addEventListener("click", removeRepeat)
+			newRepeatDiv.appendChild(removeButton);
+			repeatTextArea.appendChild(newRepeatDiv);
+			repeatDayBox.value = "";
+	    }
+	    else{
+		    window.alert("Event Already On That Day!");
+		    repeatDayBox.value = "";
+	    }
 
     },
     m_event: {
@@ -451,7 +509,28 @@ export const ViewModel = DefineMap.extend({
  * @method printItems
  * @return
  */
-  ConvertMeToWords(taskBox)
+  printItems () {
+    console.log(name);
+    console.log(month);
+    console.log(day);
+    console.log(hour);
+    console.log(timeStart);
+    console.log(timeEnd);
+  },
+  addTimeSlot(){
+      setupNewStartBox();
+      var endDiv = document.getElementById("endInput");
+      var newDiv = document.createElement('div');
+      newDiv.setAttribute("boxindex", window.numBoxes.toString());
+      var innerHtml = "<select onchange='check()'><option value='null' selected></option>";
+      newDiv.innerHTML = innerHtml;
+      endDiv.appendChild(newDiv);
+      document.getElementById("eventHour").disabled = true;
+
+  }
+});
+
+  /*ConvertMeToWords(taskBox)
 	{
 		if(taskBox == "jan")
 		{
@@ -495,27 +574,7 @@ export const ViewModel = DefineMap.extend({
 			taskBox = "December";
 		}
 		return taskBox;
-	},
-  printItems () {
-    console.log(name);
-    console.log(month);
-    console.log(day);
-    console.log(hour);
-    console.log(timeStart);
-    console.log(timeEnd);
-  },
-  addTimeSlot(){
-      setupNewStartBox();
-      var endDiv = document.getElementById("endInput");
-      var newDiv = document.createElement('div');
-      newDiv.setAttribute("boxindex", window.numBoxes.toString());
-      var innerHtml = "<select onchange='check()'><option value='null' selected></option>";
-      newDiv.innerHTML = innerHtml;
-      endDiv.appendChild(newDiv);
-      document.getElementById("eventHour").disabled = true;
-
-  }
-});
+	}*/
 
 export default Component.extend({
   tag: 'adminComponent-',
