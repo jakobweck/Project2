@@ -385,8 +385,8 @@ export const ViewModel = DefineMap.extend({
         for (i=0; i<window.repeatArray.length; i++){
             var j;
             for (j=0; j<allStartDivs.length; j++) {
-                var startTimeBox = allStartDivs[i].getElementsByTagName('select')[0];
-                var endTimeBox = allEndDivs[i].getElementsByTagName('select')[0];
+                var startTimeBox = allStartDivs[j].getElementsByTagName('select')[0];
+                var endTimeBox = allEndDivs[j].getElementsByTagName('select')[0];
                 var startTime = startTimeBox.options[startTimeBox.selectedIndex].text;
                 var endTime = endTimeBox.options[endTimeBox.selectedIndex].text;
 
@@ -400,6 +400,10 @@ export const ViewModel = DefineMap.extend({
 
         window.timeStart = document.getElementById("eventStart").value;
         window.timeEnd = document.getElementById("eventEnd").value;
+        for(i =0; i<window.repeatArray.length; i++){
+            window.repeatArray[i].startTimeArray = window.startTimeArray;
+            window.repeatArray[i].endTimeArray = window.endTimeArray;
+        }
         var eventObj = {
             name: window.name,
             month: window.month,
@@ -413,6 +417,7 @@ export const ViewModel = DefineMap.extend({
             twentyFour: ((window.hour=="24"))
 
         };
+
         window.eventArray.push(eventObj);
         localStorage.setItem('events', JSON.stringify(window.eventArray));
         window.alert("New event created!");

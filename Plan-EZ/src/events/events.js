@@ -130,7 +130,7 @@ window.selectEvent = function(){
 			}
 		}
 		
-        var attendeesString = "Attendees: ";
+        var attendeesString = "Attendees: <br>";
         for(i=0; i<window.attendeesArray.length; i++){
             attendeesString += window.attendeesArray[i].name;
             attendeesString += "(";
@@ -145,9 +145,8 @@ window.selectEvent = function(){
                 }
             }
             attendeesString += ")";
-            if (i != window.attendeesArray.length - 1){
-                attendeesString+= ", ";
-            }
+
+            attendeesString+="<br>";
         }
         if (window.tasksArray) {
             for (i = 0; i < window.tasksArray.length; i++) {
@@ -238,29 +237,28 @@ export const ViewModel = DefineMap.extend({
 					for(var a = 0; a < window.repeat.length; a++)
 					{
 						var repeatObj = window.repeat[a];
-						for(var u = 0; u < window.startTimeArray.length; u++)
+						for(var u = 0; u < repeatObj.startTimeArray.length; u++)
 						{
-							
+
 							if(currentBox = i)
 							{
 								var addIt = true;
 
 								for(var t = 0; t < userObj.timeslots.length; t++)
 								{
-									if(userObj.timeslots[t] == window.startTimeArray[u] + "-" +window.endTimeArray[u] + "[" +
+									if(userObj.timeslots[t] == repeatObj.startTimeArray[u] + "-" +repeatObj.endTimeArray[u] + "[" +
 													repeatObj.month + " " + repeatObj.day +"]")
 									{
 										addIt = false;
 									}
 								}
-								
+
 								if(addIt)
 								{
 									alert("yess you got it");
-									userObj.timeslots.push(window.startTimeArray[u] + "-" +window.endTimeArray[u] + "[" +
+									userObj.timeslots.push(repeatObj.startTimeArray[u] + "-" +repeatObj.endTimeArray[u] + "[" +
 														repeatObj.month + " " + repeatObj.day + "]");
 								}
-								break;
 							}
 							currentBox++;
 						}
