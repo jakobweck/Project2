@@ -94,6 +94,7 @@ window.selectEvent = function(){
               label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] +
                   "(" + window.month + " " + window.day + ")";
               box.setAttribute("type", "checkbox");
+              box.value = label.innerHTML;
               checkDiv.appendChild(label);
               checkDiv.appendChild(box);
               window.checkboxes.push(box);
@@ -121,6 +122,7 @@ window.selectEvent = function(){
 					  label.innerHTML = window.startTimeArray[i] + "-" + window.endTimeArray[i] +
 												"[" + repeatObj.month + " " + repeatObj.day + "]";
 					  box.setAttribute("type", "checkbox");
+					  box.value = label.innerHTML;
                       checkDiv.appendChild(label);
                       checkDiv.appendChild(box);
 					  window.checkboxes.push(box);
@@ -243,6 +245,8 @@ export const ViewModel = DefineMap.extend({
 			{
 				if(window.repeat != null)
 				{
+				    userObj.timeslots.push(window.checkboxes[i].value);
+/*
 					alert(window.repeat.length);
 					for(var a = 0; a < window.repeat.length; a++)
 					{
@@ -250,7 +254,7 @@ export const ViewModel = DefineMap.extend({
 						for(var u = 0; u < repeatObj.startTimeArray.length; u++)
 						{
 
-							if(currentBox = i)
+							if(currentBox == i)
 							{
 								var addIt = true;
 
@@ -273,6 +277,7 @@ export const ViewModel = DefineMap.extend({
 							currentBox++;
 						}
 					}
+*/
 				}
 				currentBox = window.startTimeArray.length;
 			}
