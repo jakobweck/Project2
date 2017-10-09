@@ -8,9 +8,9 @@ import DefineMap from 'can-define/map/';
 import './events.less';
 import view from './events.stache';
 
-function printTimeSlots(){
-
-}
+/**
+ * Function to populate the page when an event is selected in the dropdown.
+ */
 
 window.selectEvent = function(){
     window.youHost = false;
@@ -192,20 +192,30 @@ export const ViewModel = DefineMap.extend({
   message: {
     value: 'Event Page'
   },
-  callPopulate(){
+    /**
+     * Wrapper to call the populateEventBox function in events.stache.
+     */
+
+    callPopulate(){
       populateEventBox();
   },
 
   get attendees(){
     return window.people;
   },
-  get user(){
+    /**
+     * Getter for the username.
+     */
+
+    get user(){
 	  window.currentUser =  localStorage.getItem('username');
       return window.currentUser;
   },
 
-  // TODO: fix only refreshes when navigating away
-  // add name to the attendees list
+    /**
+     * On-click to submit a user's selections for attendance and tasks.
+     */
+
   submit() {
     window.people = (window.people +", "+window.a_name);
     var anyTimes = false;

@@ -10,7 +10,7 @@ import view from './admin.stache';
 import 'can-stache-bindings';
 
 /**
- * Sets "private variables" for new event objects
+ * DEPRECATED event constructor
  * @method event
  * @param {} name
  * @param {} month
@@ -29,8 +29,11 @@ function event(name, month, day, timeStart, timeEnd) {
     const m_timeStart = timeStart;
     const m_timeEnd = timeEnd;
   }
-  
-    function ConvertMeToWords(taskBox)
+/**
+ * Converts a short month name to a full name.
+ */
+
+function ConvertMeToWords(taskBox)
 	{
 		if(taskBox == "jan")
 		{
@@ -104,6 +107,9 @@ function event(name, month, day, timeStart, timeEnd) {
 	}*/
   
   }
+/**
+ * Function to add a new start time box on button click.
+ */
 
 function setupNewStartBox(){
     //0 for the init. boxes, 1 for the first additional start box
@@ -176,6 +182,9 @@ function setupNewStartBox(){
     startDiv.appendChild(newDiv);
 
 }
+/**
+ * Function to set up a corresponding end time box when an added start time box is filled.
+ */
 
 window.setupNewEndBox = function(send) {
     // create drop down menu framework
@@ -303,7 +312,7 @@ export const ViewModel = DefineMap.extend({
   },
 
 /**
- * Initializing variables as global variables
+ * Function to validate and save the event.
  * @method newEvent
  * @return
  */
@@ -424,6 +433,10 @@ export const ViewModel = DefineMap.extend({
 		window.location.href = '/eventList';
     }
   },
+    /**
+     * Function to add a task to the UI list and backend array of tasks.
+     */
+
     addTask(){
       var taskBox = document.getElementById("taskBox");
       var taskTextArea = document.getElementById("tasksText");

@@ -10,6 +10,10 @@ import view from './login.stache';
 
 
 export const ViewModel = DefineMap.extend({
+    /**
+     * On-click to save a user's name if the text field is not blank.
+     */
+
     saveLogin()
 	{
 	  if(document.getElementById("loginName").value == "")
